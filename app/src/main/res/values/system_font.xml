@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="title_style" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">22sp</item>
+        <item name="android:fontFamily">Roberto</item>
+        <item name="textInputStyle">Bold</item>
+    </style>
+    <style name="subtitle_style" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">Roberto</item>
+        <item name="textInputStyle">Bold</item>
+    </style>
+    <style name="body_1_style" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">Roberto</item>
+        <item name="textInputStyle">Bold</item>
+    </style>
+    <style name="body_2_style" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">Roberto</item>
+        <item name="textInputStyle">Normal</item>
+    </style>
+    <style name="body_3_style" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">Roberto</item>
+        <item name="textInputStyle">Bold</item>
+    </style>
+    <style name="body_4_style" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">Roberto</item>
+        <item name="textInputStyle">Normal</item>
+    </style>
+    <style name="caption_b_style" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">Roberto</item>
+        <item name="textInputStyle">Bold</item>
+    </style>
+    <style name="caption_n_style" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">Roberto</item>
+        <item name="textInputStyle">Normal</item>
+    </style>
+
+
+
+</resources>
