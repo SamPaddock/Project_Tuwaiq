@@ -3,21 +3,48 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_add_24.xml" value="0.39794871794871794" />
+        <entry key="app/src/main/res/drawable/ic_calender_n.xml" value="0.36944444444444446" />
+        <entry key="app/src/main/res/drawable/ic_collarname.xml" value="0.39794871794871794" />
+        <entry key="app/src/main/res/drawable/ic_color_picker.xml" value="0.38958333333333334" />
+        <entry key="app/src/main/res/drawable/ic_email_24.xml" value="0.39794871794871794" />
+        <entry key="app/src/main/res/drawable/ic_facebook.xml" value="0.39794871794871794" />
+        <entry key="app/src/main/res/drawable/ic_female.xml" value="0.38958333333333334" />
+        <entry key="app/src/main/res/drawable/ic_female_new.xml" value="0.36944444444444446" />
+        <entry key="app/src/main/res/drawable/ic_gender_new.xml" value="0.36944444444444446" />
+        <entry key="app/src/main/res/drawable/ic_instagram.xml" value="0.39794871794871794" />
+        <entry key="app/src/main/res/drawable/ic_male_new.xml" value="0.36944444444444446" />
+        <entry key="app/src/main/res/drawable/ic_pet_groom.xml" value="0.38958333333333334" />
+        <entry key="app/src/main/res/drawable/ic_whatsapp.xml" value="0.39794871794871794" />
         <entry key="app/src/main/res/drawable/login_ellipse_1.xml" value="0.4041666666666667" />
         <entry key="app/src/main/res/drawable/login_ellipse_2.xml" value="0.4041666666666667" />
         <entry key="app/src/main/res/drawable/login_ellipse_3.xml" value="0.4041666666666667" />
         <entry key="app/src/main/res/drawable/main_button_filled.xml" value="0.240625" />
         <entry key="app/src/main/res/drawable/splash_ellipse_1.xml" value="0.240625" />
+        <entry key="app/src/main/res/layout/activity_add_edit_animal.xml" value="0.3115942028985507" />
+        <entry key="app/src/main/res/layout/activity_add_edit_charity.xml" value="0.3115942028985507" />
+        <entry key="app/src/main/res/layout/activity_display_fun_facts.xml" value="0.2966485507246377" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.359375" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33106884057971014" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_view_animal_details.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/activity_view_charity_detail.xml" value="0.2966485507246377" />
+        <entry key="app/src/main/res/layout/fragment_add_edit_animal_page1.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_add_edit_animal_page2.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/fragment_add_edit_animal_page3.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_add_edit_charity_page1.xml" value="0.2966485507246377" />
+        <entry key="app/src/main/res/layout/fragment_add_edit_charity_page2.xml" value="0.2966485507246377" />
+        <entry key="app/src/main/res/layout/fragment_display_facts.xml" value="0.2966485507246377" />
+        <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.3734375" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.3115942028985507" />
         <entry key="app/src/main/res/layout/fragment_register_page1.xml" value="0.359375" />
         <entry key="app/src/main/res/layout/fragment_register_page2.xml" value="0.3641304347826087" />
         <entry key="app/src/main/res/layout/fragment_view_animals.xml" value="0.3115942028985507" />
+        <entry key="app/src/main/res/layout/fragment_view_charities.xml" value="0.3115942028985507" />
         <entry key="app/src/main/res/layout/list_item_animals.xml" value="0.55" />
+        <entry key="app/src/main/res/layout/list_item_charities.xml" value="0.45" />
       </map>
     </option>
   </component>

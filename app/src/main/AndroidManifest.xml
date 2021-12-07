@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.saraha.project_tuwaiq">
+    package="com.saraha.paws">
 
     <application
         android:allowBackup="true"
@@ -9,6 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Project_Tuwaiq">
+        <activity
+            android:name=".View.ShowFacts.DisplayFunFactsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".View.ViewCharityDetail.ViewCharityDetailActivity"
+            android:exported="true" />
+        <activity
+            android:name=".View.ViewAnimalDetail.ViewAnimalDetailsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".View.AddEditCharity.AddEditCharityActivity"
+            android:exported="true" />
+        <activity
+            android:name=".View.AddEditAnimal.AddEditAnimalActivity"
+            android:exported="true" />
         <activity
             android:name=".View.Home.HomeActivity"
             android:exported="true" />

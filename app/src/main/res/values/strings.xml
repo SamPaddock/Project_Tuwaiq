@@ -13,4 +13,23 @@
     <string name="name">Name</string>
     <string name="mobile">Mobile</string>
     <string name="charity_group">Charity Group</string>
+    <string name="charity">Charity</string>
+    <string name="save">Save</string>
+    <string name="age">Age</string>
+    <string name="gender">Gender</string>
+    <string name="breed">Breed</string>
+    <string name="color">Color</string>
+    <string name="personality">Personality</string>
+    <string name="type">Type</string>
+    <string name="statues">Statues</string>
+    <string name="location">Location</string>
+    <string name="grooming_needs">Grooming needs</string>
+    <string name="medical_needs">Medical needs</string>
+    <string name="founder">Founder</string>
+    <string name="stc_pay_mobile">STC Pay Mobile</string>
+    <string name="facebook">Facebook</string>
+    <string name="instagram">Instagram</string>
+    <string name="basic_information">Basic Information</string>
+    <string name="help_us_via_donations">Help us via donations</string>
+    <string name="charity_location">Charity Location</string>
 </resources>
