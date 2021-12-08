@@ -15,6 +15,8 @@
         <entry key="app/src/main/res/drawable/ic_instagram.xml" value="0.39794871794871794" />
         <entry key="app/src/main/res/drawable/ic_male_new.xml" value="0.36944444444444446" />
         <entry key="app/src/main/res/drawable/ic_pet_groom.xml" value="0.38958333333333334" />
+        <entry key="app/src/main/res/drawable/ic_pet_love.xml" value="0.39794871794871794" />
+        <entry key="app/src/main/res/drawable/ic_pets_type.xml" value="0.39794871794871794" />
         <entry key="app/src/main/res/drawable/ic_whatsapp.xml" value="0.39794871794871794" />
         <entry key="app/src/main/res/drawable/login_ellipse_1.xml" value="0.4041666666666667" />
         <entry key="app/src/main/res/drawable/login_ellipse_2.xml" value="0.4041666666666667" />
@@ -29,7 +31,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33106884057971014" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_view_animal_details.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/activity_view_animal_details.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_view_charity_detail.xml" value="0.2966485507246377" />
         <entry key="app/src/main/res/layout/fragment_add_edit_animal_page1.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_add_edit_animal_page2.xml" value="0.45" />
