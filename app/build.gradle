@@ -16,6 +16,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    viewBinding{
+            enabled = true
+        }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -37,6 +41,9 @@ dependencies {
 
     //Splash -> dot animation
     implementation 'com.eyalbira.loadingdots:loading-dots:1.0.2'
+
+    //Fragments -> step indicator
+    implementation 'com.kofigyan.stateprogressbar:stateprogressbar:1.0.0'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'

@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project_Tuwaiq">
         <activity
-            android:name=".View.ShowFacts.DisplayFunFactsActivity"
-            android:exported="true" />
-        <activity
             android:name=".View.ViewCharityDetail.ViewCharityDetailActivity"
             android:exported="true" />
         <activity
@@ -34,10 +31,10 @@
             android:name=".View.LoginAccount.LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".View.Splash.SplashActivity"
+            android:name=".View.Splash.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".View.MainSplash.MainActivity"
+            android:name=".View.MainSplash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
