@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.saraha.paws.Model.Charity
 import com.saraha.paws.Model.User
+import com.saraha.paws.Repository.UserRepository
 
 class RegisterViewModel: ViewModel() {
 
@@ -13,13 +14,23 @@ class RegisterViewModel: ViewModel() {
     var isPasswordCorrect = MutableLiveData<Boolean>()
     var isConfirmedPasswordCorrect = MutableLiveData<Boolean>()
     var emailLiveData = MutableLiveData<String>()
+    var passwordLiveData = MutableLiveData<String>()
     var nameLiveData = MutableLiveData<String>()
     var mobileLiveData = MutableLiveData<String>()
     var groupLiveData = MutableLiveData<String>()
 
+    //Variable to get liveData response from Firebase
+    var signInResponseLiveData = MutableLiveData<Boolean>()
+    var createAccountResponseLiveData = MutableLiveData<Boolean>()
+
     //Function to set data entered by user from RegisterPage1Fragment
     fun setEmailFromPage1(email: String){
         emailLiveData.postValue(email)
+    }
+
+    //Function to set data entered by user from RegisterPage1Fragment
+    fun setPasswordFromPage1(password: String){
+        passwordLiveData.postValue(password)
     }
 
     //Function to set name entered by user from RegisterPage2Fragment
@@ -52,5 +63,19 @@ class RegisterViewModel: ViewModel() {
         var list = mutableListOf<Charity>()
         //TODO: get list from firebaseStorage
         return list
+    }
+
+    //Function to handle firebase repository for signing up a user
+    fun signUpUserInFirebase(email: String, password: String){
+        UserRepository().signupUser(email, password).observeForever {
+            signInResponseLiveData.postValue(it)
+        }
+    }
+
+    //Function to handle firebase repository for creating an account for a user
+    fun createAnAccountInFirebase(newUser: HashMap<String, String?>){
+        UserRepository().createUserAccount(newUser).observeForever {
+            createAccountResponseLiveData.postValue(it)
+        }
     }
 }

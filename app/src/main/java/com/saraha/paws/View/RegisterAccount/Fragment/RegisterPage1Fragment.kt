@@ -1,31 +1,42 @@
 package com.saraha.paws.View.RegisterAccount.Fragment
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
+import com.saraha.paws.Model.User
 import com.saraha.paws.Util.UserHelper
+import com.saraha.paws.View.RegisterAccount.RegisterActivity
 import com.saraha.paws.View.RegisterAccount.RegisterViewModel
 import com.saraha.paws.databinding.FragmentRegisterPage1Binding
 
 class RegisterPage1Fragment : Fragment() {
 
-    val viewModel: RegisterViewModel by viewModels()
+    private lateinit var viewModel: RegisterViewModel
     lateinit var binding: FragmentRegisterPage1Binding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentRegisterPage1Binding.inflate(inflater, container, false)
+
+        viewModel = ViewModelProvider(requireActivity() as RegisterActivity)[RegisterViewModel::class.java]
+
+        //Get passed data from activity to set in fragment
+        val user = this.getArguments()?.getSerializable("user")
+        if (user != null) setValues(user as User)
 
         onFieldFocus()
 
         return binding.root
+    }
+
+    //Function to set User input when returning to fragment
+    private fun setValues(user: User) {
+        if (user.email.isNotEmpty()){  binding.editTextRegisterEmail.setText(user.email) }
     }
 
     //Set onOutOfFocus on textFields
@@ -39,27 +50,32 @@ class RegisterPage1Fragment : Fragment() {
         binding.editTextRegisterEmail.setOnFocusChangeListener { v, hasFocus ->
             if (!hasFocus) validateEmail()
         }
-
     }
 
     //Check email textField and handle use cases
     private fun validateEmail() {
-        val (result, isValid) = UserHelper().emailVerification(binding.editTextRegisterEmail)
-        handleTextFields(binding.editTextRegisterEmail,result.string,0,isValid)
+        val email = binding.editTextRegisterEmail
+        val (result, isValid) = UserHelper()
+            .emailVerification(email.text.toString())
+        handleTextFields(email,result.string,0,isValid)
     }
 
     //Check password textField and handle use cases
     private fun validatePassword() {
-        val (result, isValid) = UserHelper().passwordValidation(binding.edittextRegisterPassword,null)
-        handleTextFields(binding.edittextRegisterPassword,result.string,1,isValid)
+        val password = binding.edittextRegisterPassword
+        val (result, isValid) = UserHelper()
+            .passwordValidation(password.text.toString(),null)
+        handleTextFields(password,result.string,1,isValid)
     }
 
     //Check confirmed password textField and handle use cases
     private fun validateConfirmPassword() {
+        val confirmPassword = binding.edittextRegisterConfirmPassword
+        val password = binding.edittextRegisterPassword
         val (result, isValid) = UserHelper().passwordValidation(
-            binding.edittextRegisterConfirmPassword,
-            binding.edittextRegisterPassword)
-        handleTextFields(binding.edittextRegisterConfirmPassword,result.string,2,isValid)
+            confirmPassword.text.toString(),
+            password.text.toString())
+        handleTextFields(confirmPassword,result.string,2,isValid)
     }
 
     //Handle result of textField checks
@@ -70,12 +86,14 @@ class RegisterPage1Fragment : Fragment() {
             v.error = null
             when (index){
                 0 -> viewModel.setEmailFromPage1(v.text.toString())
-                1 -> viewModel.setPasswordValidation(isValid)
+                1 -> {
+                    viewModel.setPasswordValidation(isValid)
+                    viewModel.setPasswordFromPage1(v.text.toString())
+                }
                 2 -> viewModel.setConfirmedPasswordValidation(isValid)
                 else -> return
             }
         }
     }
-
 
 }

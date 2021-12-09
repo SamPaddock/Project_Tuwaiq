@@ -14,8 +14,8 @@ class UserHelper {
         Mismatch("Does not match password")
     }
 
-    fun fieldVerification(editText: TextInputEditText): Pair<inputHandler,Boolean>{
-        return if (editText.text?.isEmpty() == true){
+    fun fieldVerification(editText: String): Pair<inputHandler,Boolean>{
+        return if (editText.isEmpty() == true){
             Pair(inputHandler.Required, false)
         } else {
             Pair(inputHandler.Correct, true)
@@ -23,31 +23,36 @@ class UserHelper {
     }
 
     //Check email textField and handle use cases
-    fun emailVerification(email: TextInputEditText): Pair<inputHandler,Boolean> {
+    fun emailVerification(email: String): Pair<inputHandler,Boolean> {
         //verify email is not empty and the email is in a correct format
-        return if (email.text?.isEmpty() == true) {
+        return if (email.isEmpty() == true) {
             Pair(inputHandler.Required, false)
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()){
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             Pair(inputHandler.IncorrectEmail, false)
         } else {
             Pair(inputHandler.Correct, true)
         }
     }
 
-    fun passwordValidation(password: TextInputEditText, toMatchPassword: TextInputEditText?): Pair<inputHandler,Boolean>{
+    fun passwordValidation(
+        password: String,
+        toMatchPassword: String?)
+    : Pair<inputHandler,Boolean>{
         //Password rules:
         //A password must have at least eight characters.
         //A password consists of only letters and digits.
         //A password must contain at least two digits.
         return if (toMatchPassword == null){
-            if (password.text?.isEmpty() == true) {
+            if (password.isEmpty() == true) {
                 Pair(inputHandler.Required, false)
-            } else if (password.text?.matches("([A-Za-z0-9]*)(\\D*\\d){2,}".toRegex()) != true){
+            } else if (password.length!! >= 8
+                && !password.matches("([A-Za-z0-9]*)(\\D*\\d){2,}".toRegex())
+            ){
                 Pair(inputHandler.IncorrectPassword, false)
             } else {
                 Pair(inputHandler.Correct, true)
             }
-        }else if (!password.text?.toString().equals(toMatchPassword.text.toString())){
+        }else if (!password.equals(toMatchPassword.toString())){
             Pair(inputHandler.Mismatch, false)
         } else {
             Pair(inputHandler.Correct, true)
@@ -55,10 +60,10 @@ class UserHelper {
 
     }
 
-    fun mobileValidation(mobile: TextInputEditText): Pair<inputHandler,Boolean>{
-        return if (mobile.text?.isEmpty() == true) {
+    fun mobileValidation(mobile: String): Pair<inputHandler,Boolean>{
+        return if (mobile.isEmpty() == true) {
             Pair(inputHandler.Required, false)
-        } else if (mobile.text?.length in 9..12) {
+        } else if (mobile.length in 9..12) {
             Pair(inputHandler.Correct, true)
         } else {
             Pair(inputHandler.IncorrectMobile, false)

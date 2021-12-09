@@ -1,5 +1,7 @@
 package com.saraha.paws.Model
 
+import java.io.Serializable
+
 data class Charity (
     var cid: String,
     var name: String,
@@ -8,5 +10,4 @@ data class Charity (
     var mobile: String,
     var facebookUrl: String,
     var instagramUrl: String,
-
-)
+): Serializable
