@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "349161376406",
+    "project_id": "paws-9c577",
+    "storage_bucket": "paws-9c577.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349161376406:android:4fb763866a21d8c07990b7",
+        "android_client_info": {
+          "package_name": "com.saraha.project_tuwaiq"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "349161376406-5uligfcn4s15jovq66u7ren788pftkgm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbfHfYUz1hpMJXx1m5fsZBUkplfdUoIl8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "349161376406-5uligfcn4s15jovq66u7ren788pftkgm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
