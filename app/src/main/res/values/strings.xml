@@ -34,4 +34,6 @@
     <string name="required">Required</string>
     <string name="mobile_placeholder">966561231234</string>
     <string name="all_required">Verify all fields are correct</string>
+    <string name="login_warning">The email/password was incorrect</string>
+    <string name="login_required">Email and password are required to login</string>
 </resources>

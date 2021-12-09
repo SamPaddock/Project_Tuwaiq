@@ -2,14 +2,19 @@ package com.saraha.paws.Repository
 
 import android.content.ContentValues
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.saraha.paws.Model.User
 
 class UserRepository {
 
@@ -27,15 +32,34 @@ class UserRepository {
     fun createDBAuth(){dbFBAuth = Firebase.auth}
 
 
-    fun signupUser(email: String, password: String): LiveData<Boolean> {
+    fun signinUser(email: String, password: String): LiveData<Boolean>{
         if (dbFBAuth == null) createDBAuth()
 
         val liveDataUser = MutableLiveData<Boolean>()
 
-        Firebase.auth.createUserWithEmailAndPassword(email,password)
-            .addOnSuccessListener {
+        dbFBAuth?.signInWithEmailAndPassword(email, password)
+            ?.addOnCompleteListener { result ->
+                if (result.isSuccessful) {
+                    liveDataUser.postValue(true)
+                }
+            }?.addOnFailureListener {
+                liveDataUser.postValue(false)
+            }
+
+        return liveDataUser
+    }
+
+    fun signupUser(email: String, password: String, user: User?): LiveData<Boolean> {
+        if (dbFBAuth == null) createDBAuth()
+
+        val liveDataUser = MutableLiveData<Boolean>()
+
+
+        dbFBAuth?.createUserWithEmailAndPassword(email,password)
+            ?.addOnSuccessListener {
+
                 liveDataUser.postValue(true)
-            }.addOnFailureListener {
+            }?.addOnFailureListener {
                 liveDataUser.postValue(false)
             }
 
@@ -60,6 +84,4 @@ class UserRepository {
 
         return liveDataUser
     }
-
-
 }
