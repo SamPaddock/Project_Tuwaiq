@@ -23,7 +23,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="-130dp"
-            android:layout_marginTop="-50dp"
+            android:layout_marginTop="-180dp"
             android:background="@drawable/login_ellipse_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -36,7 +36,7 @@
             android:layout_height="570dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="-50dp"
+            android:layout_marginTop="-180dp"
             android:layout_marginEnd="-130dp"
             android:background="@drawable/login_ellipse_3"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,24 +50,13 @@
             android:layout_height="570dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="-70dp"
+            android:layout_marginTop="-200dp"
             android:background="@drawable/login_ellipse_2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarRegister"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayoutRegisterName"
@@ -78,10 +67,10 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/name"
-        app:startIconDrawable="@drawable/ic_person_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarRegister">
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+        app:startIconDrawable="@drawable/ic_person_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edittextRegisterName"

@@ -1,11 +1,12 @@
 package com.saraha.paws
 
-import com.google.android.material.textfield.TextInputEditText
+import android.util.Log
+import android.util.Patterns
+import androidx.core.util.PatternsCompat
 import com.saraha.paws.Util.UserHelper
-import junit.framework.Assert
 import org.junit.Test
-
 import org.junit.Assert.*
+import org.junit.runner.RunWith
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -13,19 +14,31 @@ import org.junit.Assert.*
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class ExampleUnitTest {
-//    @Test
-//    fun addition_isCorrect() {
-//        assertEquals(4, 2 + 2)
-//    }
 
+    fun emailVerification(email: String): Boolean {
+        var isValid: Boolean
+        if (email.isEmpty() == true) {
+            isValid = false
+        }
+        val matches = PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()
+        if (!matches){
+            isValid = false
+        } else {
+            isValid = true
+        }
+        return isValid
+    }
 
+    @Test
+    fun addition_isCorrect() {
+        assertEquals(4, 2 + 2)
+    }
 
     @Test
     fun emailVerification_isCorrect(){
-        //assertTrue(UserHelper().emailVerification("sam@gmail.com").second)
-        //Assert.assertFalse(UserHelper().emailVerification("sam@google.com").second)
-        //Assert.assertFalse(UserHelper().emailVerification("sam@google").second)
-
+        assertTrue(emailVerification("sam@gmail.com"))
+        assertTrue(emailVerification("sam@google.com"))
+        assertFalse(emailVerification("sam@google"))
     }
 
     @Test

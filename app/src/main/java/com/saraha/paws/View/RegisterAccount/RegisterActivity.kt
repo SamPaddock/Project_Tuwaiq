@@ -111,10 +111,10 @@ class RegisterActivity : AppCompatActivity() {
     private fun displayFragment(fragment: Fragment) {
         val bundle = Bundle()
         bundle.putSerializable("user", user)
-
+        fragment.arguments = bundle
         supportFragmentManager.beginTransaction().replace(
             binding.FragmentLayoutRegister.id,
-            fragment
+            fragment,
         ).commit()
     }
 

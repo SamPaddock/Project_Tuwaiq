@@ -1,6 +1,8 @@
 package com.saraha.paws.View.RegisterAccount.Fragment
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +28,8 @@ class RegisterPage1Fragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity() as RegisterActivity)[RegisterViewModel::class.java]
 
         //Get passed data from activity to set in fragment
-        val user = this.getArguments()?.getSerializable("user")
+        val user = this.arguments?.getSerializable("user")
+        Log.d(TAG,"RegisterPage1Fragment: - onCreateView: - : ${user.toString()}")
         if (user != null) setValues(user as User)
 
         onFieldFocus()
@@ -36,6 +39,7 @@ class RegisterPage1Fragment : Fragment() {
 
     //Function to set User input when returning to fragment
     private fun setValues(user: User) {
+        Log.d(TAG,"RegisterPage1Fragment: - setValues: - : ${user.email}")
         if (user.email.isNotEmpty()){  binding.editTextRegisterEmail.setText(user.email) }
     }
 
