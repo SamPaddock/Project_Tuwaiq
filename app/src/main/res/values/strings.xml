@@ -8,7 +8,6 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="reconfirm_password">Reconfirm Password</string>
-    <string name="register">Register</string>
     <string name="next">Next</string>
     <string name="name">Name</string>
     <string name="mobile">Mobile</string>
@@ -32,4 +31,6 @@
     <string name="basic_information">Basic Information</string>
     <string name="help_us_via_donations">Help us via donations</string>
     <string name="charity_location">Charity Location</string>
+    <string name="required">Required</string>
+    <string name="mobile_placeholder">966561231234</string>
 </resources>
