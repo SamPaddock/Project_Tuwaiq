@@ -1,14 +1,11 @@
 package com.saraha.paws.Repository
 
-import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
@@ -73,15 +70,39 @@ class UserRepository {
 
         val currentUser = Firebase.auth.currentUser?.uid
 
-        Firebase.firestore.collection("Users").document(currentUser.toString())
-            .set(newUser).addOnCompleteListener {
+        dbFirestore?.collection("Users")?.document(currentUser.toString())
+            ?.set(newUser)?.addOnCompleteListener {
                 if (it.isSuccessful){
                     liveDataUser.postValue(true)
                 }
-            }.addOnFailureListener {
+            }?.addOnFailureListener {
                 liveDataUser.postValue(false)
             }
 
+        return liveDataUser
+    }
+
+    fun getUserAccount(): LiveData<User>{
+        if (dbFirestore == null) createDBFirestore()
+
+        val liveDataUser = MutableLiveData<User>()
+
+        dbFirestore?.collection("Users")?.document(Firebase.auth.uid!!)?.get()
+            ?.addOnCompleteListener {
+                if (it.isSuccessful && it.result?.data?.isNotEmpty() == true){
+                    val userData = it.result!!.data
+                    Log.d(TAG,"UserRepository: - getUserAccount: - : ${userData}")
+                    val email = userData?.get("email") as String
+                    val name = userData.get("name") as String
+                    val mobile = userData.get("mobile") as String
+                    val group = userData.get("group") as String
+
+                    val user = User(Firebase.auth.uid!!,null,email,null,name,mobile,group)
+                    liveDataUser.postValue(user)
+                }
+            }?.addOnFailureListener {
+
+            }
         return liveDataUser
     }
 }

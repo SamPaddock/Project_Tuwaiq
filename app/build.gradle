@@ -39,12 +39,17 @@ android {
 dependencies {
     //Home -> Slider drawer
     implementation "com.mikepenz:materialdrawer:8.4.5"
+    //NavController support
+    implementation "com.mikepenz:materialdrawer-nav:8.4.5"
 
     //Splash -> dot animation
     implementation 'com.eyalbira.loadingdots:loading-dots:1.0.2'
 
     //Fragments -> step indicator
     implementation 'com.kofigyan.stateprogressbar:stateprogressbar:1.0.0'
+
+    // picasso dependencies
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     //ViewModel
     implementation 'androidx.fragment:fragment-ktx:1.4.0'

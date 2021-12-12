@@ -87,7 +87,4 @@
             android:visibility="gone" />
     </LinearLayout>
 
-
-    <!-- FragmentLayoutRegister -->
-
 </androidx.constraintlayout.widget.ConstraintLayout>

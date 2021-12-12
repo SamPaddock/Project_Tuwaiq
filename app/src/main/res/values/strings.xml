@@ -36,4 +36,12 @@
     <string name="all_required">Verify all fields are correct</string>
     <string name="login_warning">The email/password was incorrect</string>
     <string name="login_required">Email and password are required to login</string>
+    <string name="resuces_home">Rescues</string>
+    <string name="profile_home">Profile</string>
+    <string name="charity_home">Charities</string>
+    <string name="fun_fact_home">Fun Facts</string>
+    <string name="photo_album_home">Photo Album</string>
+    <string name="sign_out_home">Sign out</string>
+    <string name="previous">Previous</string>
+    <string name="add">Add</string>
 </resources>

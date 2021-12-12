@@ -19,7 +19,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/imageViewListCharityPhoto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -35,7 +35,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintStart_toEndOf="@+id/imageViewListCharityPhoto"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
@@ -68,7 +68,7 @@
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayoutCharityMobile"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintStart_toEndOf="@+id/imageViewListCharityPhoto"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayoutCharityName"
                 app:layout_constraintVertical_bias="1.0">
 
@@ -101,7 +101,7 @@
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView2">
+                app:layout_constraintStart_toEndOf="@+id/imageViewListCharityPhoto">
 
                 <ImageView
                     android:id="@+id/imageViewCharityMobile"

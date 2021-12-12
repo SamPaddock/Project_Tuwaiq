@@ -7,13 +7,6 @@
     tools:context=".View.Home.HomeActivity"
     tools:ignore="SpeakableTextPresentCheck">
 
-    <com.mikepenz.materialdrawer.widget.MaterialDrawerSliderView
-        android:id="@+id/homeSlider"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -30,6 +23,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <FrameLayout
+            android:id="@+id/HomeFrameLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -39,5 +33,13 @@
 
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.mikepenz.materialdrawer.widget.MaterialDrawerSliderView
+        android:id="@+id/homeSlider"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true" />
+
 
 </androidx.drawerlayout.widget.DrawerLayout>
