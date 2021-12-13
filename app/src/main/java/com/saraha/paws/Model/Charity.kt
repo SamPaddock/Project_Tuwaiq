@@ -8,6 +8,7 @@ data class Charity (
     var founder: String,
     var email: String,
     var mobile: String,
+    var stcPay: String,
     var photo: String,
     var facebookUrl: String,
     var instagramUrl: String,

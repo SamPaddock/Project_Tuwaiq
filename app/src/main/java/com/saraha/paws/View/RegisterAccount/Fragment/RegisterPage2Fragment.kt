@@ -21,7 +21,7 @@ class RegisterPage2Fragment : Fragment() {
 
     private lateinit var viewModel: RegisterViewModel
     lateinit var binding: FragmentRegisterPage2Binding
-    lateinit var list: MutableList<String>
+    lateinit var list: List<String>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,10 +37,12 @@ class RegisterPage2Fragment : Fragment() {
 
         onFieldFocus()
 
-        list = mutableListOf("Mercy Paws", "Paws EP")
-        //Set dropdown list adapter with list of charity groups
-        binding.autoCompleteRegisterGroup
-            .setAdapter(ArrayAdapter(context!!, android.R.layout.simple_list_item_1, list))
+        viewModel.setGroupData().observe(this){
+            //Set dropdown list adapter with list of charity groups
+            list = it
+            binding.autoCompleteRegisterGroup
+                .setAdapter(ArrayAdapter(context!!, android.R.layout.simple_list_item_1, list))
+        }
 
         return binding.root
     }

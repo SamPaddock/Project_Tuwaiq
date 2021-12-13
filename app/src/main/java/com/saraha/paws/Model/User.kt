@@ -9,5 +9,6 @@ data class User (
     var password: String? = null,
     var name: String,
     var mobile: String,
-    var group: String
+    var group: String,
+    var type: String = "User"
         ):Serializable

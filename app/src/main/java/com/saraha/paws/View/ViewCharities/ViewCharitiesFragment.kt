@@ -25,8 +25,7 @@ class ViewCharitiesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val binding = FragmentViewCharitiesBinding.inflate(inflater, container, false)
+        binding = FragmentViewCharitiesBinding.inflate(inflater, container, false)
 
         viewModel = ViewModelProvider(requireActivity() as HomeActivity)[ViewCharitiesViewModel::class.java]
 

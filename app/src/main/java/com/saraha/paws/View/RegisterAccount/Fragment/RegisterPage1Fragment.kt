@@ -29,7 +29,6 @@ class RegisterPage1Fragment : Fragment() {
 
         //Get passed data from activity to set in fragment
         val user = this.arguments?.getSerializable("user")
-        Log.d(TAG,"RegisterPage1Fragment: - onCreateView: - : ${user.toString()}")
         if (user != null) setValues(user as User)
 
         onFieldFocus()

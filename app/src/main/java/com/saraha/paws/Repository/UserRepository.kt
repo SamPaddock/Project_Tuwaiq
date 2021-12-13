@@ -54,7 +54,6 @@ class UserRepository {
 
         dbFBAuth?.createUserWithEmailAndPassword(email,password)
             ?.addOnSuccessListener {
-
                 liveDataUser.postValue(true)
             }?.addOnFailureListener {
                 liveDataUser.postValue(false)
