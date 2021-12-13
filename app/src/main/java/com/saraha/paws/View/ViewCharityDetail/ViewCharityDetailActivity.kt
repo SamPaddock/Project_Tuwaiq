@@ -29,6 +29,10 @@ class ViewCharityDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    private fun setMenu(){
+
+    }
+
     private fun setValues(charity: Charity) {
         //set values
         binding.textViewDisplayCharityEmail.text = charity.email
