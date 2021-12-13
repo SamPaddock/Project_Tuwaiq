@@ -17,6 +17,7 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
 import com.saraha.paws.View.AddEditCharity.AddEditCharityActivity
+import com.squareup.picasso.Picasso
 
 class AddEditCharityPage1Fragment : Fragment() {
 
@@ -64,6 +65,7 @@ class AddEditCharityPage1Fragment : Fragment() {
 
     //Function to set User input when returning to fragment
     private fun setValues(user: Charity) {
+        if (user.photo.isNotEmpty()){ Picasso.get().load(user.photo).into(binding.imageViewCharityPhoto)}
         if (user.email.isNotEmpty()){  binding.editTextAddCharityEmail.setText(user.email) }
         if (user.name.isNotEmpty()){  binding.editTextAddCharityName.setText(user.name) }
         if (user.founder.isNotEmpty()){  binding.editTextAddCharityFounder.setText(user.founder) }

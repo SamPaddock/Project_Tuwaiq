@@ -13,7 +13,6 @@
     <string name="mobile">Mobile</string>
     <string name="charity_group">Charity Group</string>
     <string name="charity">Charity</string>
-    <string name="save">Save</string>
     <string name="age">Age</string>
     <string name="gender">Gender</string>
     <string name="breed">Breed</string>
@@ -45,4 +44,9 @@
     <string name="previous">Previous</string>
     <string name="add">Add</string>
     <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <string name="successful_edit_charity">Charity successfully updated</string>
+    <string name="failure_edit_charity">Could not update the Charity</string>
+    <string name="successful_add_charity">Charity successfully added</string>
+    <string name="failure_add_charity">Could not add the Charity</string>
 </resources>

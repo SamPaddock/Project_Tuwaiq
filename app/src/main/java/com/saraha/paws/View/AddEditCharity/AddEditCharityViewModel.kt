@@ -25,6 +25,7 @@ class AddEditCharityViewModel: ViewModel() {
     //Variable to get liveData response from Firebase
     val postedPhotoLiveData = MutableLiveData<String>()
     val createdCharityLiveData = MutableLiveData<Boolean>()
+    val editCharityLiveData = MutableLiveData<Boolean>()
 
     //Function to set data entered by user and set live data variables
     fun setCharityEmail(email: String){ emailLiveData.postValue(email) }
@@ -45,6 +46,12 @@ class AddEditCharityViewModel: ViewModel() {
     fun createACharityInFirebase(charity: HashMap<String, String?>){
         CharityRepository().addCharity(charity).observeForever {
             createdCharityLiveData.postValue(it)
+        }
+    }
+
+    fun editACharityInFirebase(id: String, charity: HashMap<String, String?>){
+        CharityRepository().editCharity(id, charity).observeForever {
+            editCharityLiveData.postValue(it)
         }
     }
 }

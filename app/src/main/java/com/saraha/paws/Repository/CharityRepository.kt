@@ -104,4 +104,19 @@ class CharityRepository {
 
         return liveDataCharity
     }
+
+    fun editCharity(id: String, updateCharity: HashMap<String, String?>): LiveData<Boolean>{
+        if (dbFirestore == null) createDBFirestore()
+
+        val liveDataCharity = MutableLiveData<Boolean>()
+
+        dbFirestore?.collection("Charities")?.document(id)?.set(updateCharity)
+            ?.addOnCompleteListener {
+                if (it.isSuccessful) liveDataCharity.postValue(true)
+            }?.addOnFailureListener {
+                liveDataCharity.postValue(false)
+            }
+
+        return liveDataCharity
+    }
 }

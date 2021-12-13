@@ -8,29 +8,55 @@ import com.saraha.paws.databinding.ActivityViewCharityDetailBinding
 import com.squareup.picasso.Picasso
 import android.content.Intent
 import android.net.Uri
+import android.view.Menu
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
+import com.saraha.paws.View.AddEditCharity.AddEditCharityActivity
 import java.lang.Exception
 
 
 class ViewCharityDetailActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityViewCharityDetailBinding
+    lateinit var charity: Charity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityViewCharityDetailBinding.inflate(layoutInflater)
 
+        setupToolbar()
+
         val data = intent.getSerializableExtra("charity")
 
         if (data != null){
-            setValues(data as Charity)
+            charity = data as Charity
+            setValues(charity)
         }
 
         setContentView(binding.root)
     }
 
-    private fun setMenu(){
+    private fun setupToolbar() {
+        val mainToolbar = binding.toolbar2
+        mainToolbar.setNavigationIcon(R.drawable.ic_back_24)
+        setSupportActionBar(mainToolbar)
+    }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.edit_menu_item,menu)
+        menu?.findItem(R.id.edit_item)?.setOnMenuItemClickListener {
+            val intent = Intent(this, AddEditCharityActivity::class.java)
+            intent.putExtra("type", "Edit")
+            intent.putExtra("charity", charity)
+            startActivity(intent)
+            true
+        }
+        return super.onCreateOptionsMenu(menu)
     }
 
     private fun setValues(charity: Charity) {
