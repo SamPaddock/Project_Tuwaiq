@@ -4,14 +4,13 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <queries>
-        <package android:name="com.whatsapp"/>
-        <package android:name="com.facebook.katana"/>
-        <package android:name="com.instagram.android"/>
-        <package android:name="sa.com.stcpay"/>
+        <package android:name="com.whatsapp" />
+        <package android:name="com.facebook.katana" />
+        <package android:name="com.instagram.android" />
+        <package android:name="sa.com.stcpay" />
     </queries>
 
     <application
@@ -19,9 +18,12 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Project_Tuwaiq">
+        android:theme="@style/Theme.Project_Tuwaiq"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".View.EditProfile.EditProfileActivity"
+            android:exported="true" />
         <activity
             android:name=".View.ViewCharityDetail.ViewCharityDetailActivity"
             android:exported="true" />

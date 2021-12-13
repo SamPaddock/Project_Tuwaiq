@@ -2,14 +2,14 @@ package com.saraha.paws.View.Profile
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.saraha.paws.Model.User
 import com.saraha.paws.R
 import com.saraha.paws.View.AddEditCharity.AddEditCharityActivity
+import com.saraha.paws.View.EditProfile.EditProfileActivity
 import com.saraha.paws.View.Home.HomeActivity
 import com.saraha.paws.View.RegisterAccount.RegisterActivity
 import com.saraha.paws.View.RegisterAccount.RegisterViewModel
@@ -21,6 +21,7 @@ class ProfileFragment : Fragment() {
 
     private lateinit var viewModel: ProfileViewModel
     lateinit var binding: FragmentProfileBinding
+    lateinit var user: User
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +31,7 @@ class ProfileFragment : Fragment() {
 
         viewModel = ViewModelProvider(requireActivity() as HomeActivity)[ProfileViewModel::class.java]
 
-        getUserInformation()
+        setHasOptionsMenu(true)
 
         binding.fabCreatCharity.setOnClickListener {
             val intent = Intent(this.context, AddEditCharityActivity::class.java)
@@ -41,12 +42,30 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        getUserInformation()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.edit_menu_item,menu)
+        menu.findItem(R.id.edit_item)?.setOnMenuItemClickListener {
+            val intent = Intent(activity, EditProfileActivity::class.java)
+            intent.putExtra("user", user)
+            startActivity(intent)
+            true
+        }
+        super.onCreateOptionsMenu(menu,inflater)
+    }
+
     private fun getUserInformation(){
         viewModel.getUserDataFromFirebase()
 
         viewModel.livedataUser.observe(viewLifecycleOwner){
             if (it.email.isNotEmpty()){
-                setUserData(it)
+                user = it
+                setUserData(user)
             }
         }
     }
@@ -56,8 +75,10 @@ class ProfileFragment : Fragment() {
         binding.textViewProfileGroup.setText(user.group)
         binding.textViewProfileMobile.setText(user.mobile)
         binding.textViewProfileName.setText(user.name)
-        Picasso.get().load(user.photoUrl).placeholder(R.mipmap.ic_launcher)
-            .into(binding.imageViewUserProfile)
+        if (user.photoUrl?.trim()?.isNotEmpty() == true){
+            Picasso.get().load(user.photoUrl).placeholder(R.mipmap.ic_launcher)
+                .into(binding.imageViewUserProfile)
+        }
     }
 
 }

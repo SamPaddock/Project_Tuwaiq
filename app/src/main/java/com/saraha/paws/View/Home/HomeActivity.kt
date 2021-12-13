@@ -129,6 +129,7 @@ class HomeActivity : AppCompatActivity() {
                 }
             )
             onAccountHeaderListener = { view, profile, current ->
+                displayFragment(ProfileFragment())
                 false
             }
             withSavedInstance(savedInstanceState)

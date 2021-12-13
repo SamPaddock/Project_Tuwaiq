@@ -49,4 +49,6 @@
     <string name="failure_edit_charity">Could not update the Charity</string>
     <string name="successful_add_charity">Charity successfully added</string>
     <string name="failure_add_charity">Could not add the Charity</string>
+    <string name="successful_edit_user">Profile successfully updated</string>
+    <string name="failure_edit_user">Could not updated the Profile</string>
 </resources>

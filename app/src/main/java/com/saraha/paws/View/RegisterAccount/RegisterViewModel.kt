@@ -52,7 +52,7 @@ class RegisterViewModel: ViewModel() {
 
     //Function to handle firebase repository for signing up a user
     fun signUpUserInFirebase(email: String, password: String){
-        UserRepository().signupUser(email, password, null).observeForever {
+        UserRepository().signupUser(email, password).observeForever {
             signInResponseLiveData.postValue(it)
         }
     }
