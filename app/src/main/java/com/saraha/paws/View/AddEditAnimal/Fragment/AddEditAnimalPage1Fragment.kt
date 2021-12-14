@@ -5,16 +5,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.saraha.paws.R
+import com.saraha.paws.View.AddEditAnimal.AddEditAnimalActivity
+import com.saraha.paws.View.AddEditAnimal.AddEditAnimalViewModel
+import com.saraha.paws.databinding.FragmentAddEditAnimalPage1Binding
 
 class AddEditAnimalPage1Fragment : Fragment() {
+
+    private lateinit var viewModel: AddEditAnimalViewModel
+    lateinit var binding: FragmentAddEditAnimalPage1Binding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_edit_animal_page1, container, false)
+        binding = FragmentAddEditAnimalPage1Binding.inflate(inflater, container, false)
+
+        viewModel = ViewModelProvider(requireActivity() as AddEditAnimalActivity)[AddEditAnimalViewModel::class.java]
+
+        return binding.root
     }
 
 }

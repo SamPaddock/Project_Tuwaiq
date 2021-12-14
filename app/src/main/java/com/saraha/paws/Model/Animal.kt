@@ -1,7 +1,9 @@
 package com.saraha.paws.Model
 
-class Animal (
-    var aid: String,
+import java.io.Serializable
+
+data class Animal (
+    var aid: String? = null,
     var name: String,
     var type: String,
     var location: String,
@@ -9,6 +11,7 @@ class Animal (
     var gender: String,
     var color: String,
     var personality: String,
-    var gromming: String,
-    var medical: String
-        )
+    var grooming: String,
+    var medical: String,
+    var photoUrl: String
+        ): Serializable
