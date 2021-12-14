@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.saraha.paws.Model.Charity
 import com.saraha.paws.Repository.CharityRepository
+import com.saraha.paws.Repository.FirebaseRepository
 import java.util.HashMap
 
 class AddEditCharityViewModel: ViewModel() {
@@ -38,19 +39,19 @@ class AddEditCharityViewModel: ViewModel() {
     fun setCharityPhoto(imgData: Uri) {photoLiveData.postValue(imgData)}
 
     fun setPhotoInFireStorage(photo: String){
-        CharityRepository().setPhotoInStorage(Uri.parse(photo)).observeForever {
+        FirebaseRepository().setPhotoInStorage(Uri.parse(photo)).observeForever {
             if (it.isNotEmpty()) postedPhotoLiveData.postValue(it)
         }
     }
 
     fun createACharityInFirebase(charity: HashMap<String, String?>){
-        CharityRepository().addCharity(charity).observeForever {
+        FirebaseRepository().addDocument("Charities",charity).observeForever {
             createdCharityLiveData.postValue(it)
         }
     }
 
     fun editACharityInFirebase(id: String, charity: HashMap<String, String?>){
-        CharityRepository().editCharity(id, charity).observeForever {
+        FirebaseRepository().editDocument("Charities",id, charity).observeForever {
             editCharityLiveData.postValue(it)
         }
     }

@@ -19,8 +19,6 @@ import java.util.*
 class CharityRepository {
 
     var dbFirestore: FirebaseFirestore? = null
-    var dbFBStorage: FirebaseStorage? = null
-    var dbFBAuth: FirebaseAuth? = null
 
     fun createDBFirestore(){
         dbFirestore = Firebase.firestore
@@ -28,8 +26,6 @@ class CharityRepository {
             .setPersistenceEnabled(true).build()
         dbFirestore!!.firestoreSettings = settings
     }
-    fun createDBStorage(){dbFBStorage = Firebase.storage}
-    fun createDBAuth(){dbFBAuth = Firebase.auth}
 
     fun getAllCharities(): LiveData<List<Charity>>{
         if (dbFirestore == null) createDBFirestore()
@@ -59,63 +55,6 @@ class CharityRepository {
         }?.addOnFailureListener {
             Log.d(TAG,"CharityRepository: - getAllCharities: - : ${it.message}")
         }
-
-        return liveDataCharity
-    }
-
-    fun setPhotoInStorage(fileUri: Uri): LiveData<String>{
-        if (dbFBStorage == null) createDBStorage()
-
-        val fileName = UUID.randomUUID().toString() +".jpg"
-
-        val liveDataImage = MutableLiveData<String>()
-
-        var ref = dbFBStorage?.reference?.child(Firebase.auth.uid.toString())?.child(fileName)
-
-        val uploadTask = ref?.putFile(fileUri)
-        uploadTask?.continueWithTask { task ->
-            if (!task.isSuccessful) {
-                Log.d(TAG,"could not upload image: ${task.result?.error}")
-            }
-            ref?.downloadUrl
-        }?.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                val downloadUri = task.result
-                Log.d(TAG, downloadUri.toString())
-                liveDataImage.postValue(downloadUri.toString())
-            }
-        }?.addOnFailureListener{
-            Log.d(TAG,"could not upload image: ${it.message}")
-        }
-        return liveDataImage
-    }
-
-    fun addCharity(newCharity: HashMap<String, String?>): LiveData<Boolean>{
-        if (dbFirestore == null) createDBFirestore()
-
-        val liveDataCharity = MutableLiveData<Boolean>()
-
-        dbFirestore?.collection("Charities")?.add(newCharity)
-            ?.addOnCompleteListener {
-                if (it.isSuccessful) liveDataCharity.postValue(true)
-            }?.addOnFailureListener {
-                liveDataCharity.postValue(false)
-            }
-
-        return liveDataCharity
-    }
-
-    fun editCharity(id: String, updateCharity: HashMap<String, String?>): LiveData<Boolean>{
-        if (dbFirestore == null) createDBFirestore()
-
-        val liveDataCharity = MutableLiveData<Boolean>()
-
-        dbFirestore?.collection("Charities")?.document(id)?.set(updateCharity)
-            ?.addOnCompleteListener {
-                if (it.isSuccessful) liveDataCharity.postValue(true)
-            }?.addOnFailureListener {
-                liveDataCharity.postValue(false)
-            }
 
         return liveDataCharity
     }

@@ -17,5 +17,4 @@ class ViewCharitiesViewModel: ViewModel() {
         }
     }
 
-
 }

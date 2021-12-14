@@ -38,46 +38,39 @@ class RegisterPage1Fragment : Fragment() {
 
     //Function to set User input when returning to fragment
     private fun setValues(user: User) {
-        Log.d(TAG,"RegisterPage1Fragment: - setValues: - : ${user.email}")
         if (user.email.isNotEmpty()){  binding.editTextRegisterEmail.setText(user.email) }
     }
 
     //Set onOutOfFocus on textFields
     private fun onFieldFocus(){
-        binding.edittextRegisterConfirmPassword.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) validateConfirmPassword()
+        binding.edittextRegisterConfirmPassword.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) validateConfirmPassword(binding.edittextRegisterConfirmPassword)
         }
-        binding.edittextRegisterPassword.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) validatePassword()
+        binding.edittextRegisterPassword.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) validatePassword(binding.edittextRegisterPassword)
         }
-        binding.editTextRegisterEmail.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) validateEmail()
+        binding.editTextRegisterEmail.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) validateEmail(binding.editTextRegisterEmail)
         }
     }
 
     //Check email textField and handle use cases
-    private fun validateEmail() {
-        val email = binding.editTextRegisterEmail
-        val (result, isValid) = UserHelper()
-            .emailVerification(email.text.toString())
+    private fun validateEmail(email: TextInputEditText) {
+        val (result, isValid) = UserHelper().emailVerification(email.text.toString())
         handleTextFields(email,result.string,0,isValid)
     }
 
     //Check password textField and handle use cases
-    private fun validatePassword() {
-        val password = binding.edittextRegisterPassword
-        val (result, isValid) = UserHelper()
-            .passwordValidation(password.text.toString(),null)
+    private fun validatePassword(password: TextInputEditText) {
+        val (result, isValid) = UserHelper().passwordValidation(password.text.toString())
         handleTextFields(password,result.string,1,isValid)
     }
 
     //Check confirmed password textField and handle use cases
-    private fun validateConfirmPassword() {
-        val confirmPassword = binding.edittextRegisterConfirmPassword
+    private fun validateConfirmPassword(confirmPassword: TextInputEditText) {
         val password = binding.edittextRegisterPassword
         val (result, isValid) = UserHelper().passwordValidation(
-            confirmPassword.text.toString(),
-            password.text.toString())
+            confirmPassword.text.toString(), password.text.toString())
         handleTextFields(confirmPassword,result.string,2,isValid)
     }
 

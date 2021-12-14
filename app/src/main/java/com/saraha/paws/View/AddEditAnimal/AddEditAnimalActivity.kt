@@ -5,22 +5,27 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import com.google.android.material.textfield.TextInputEditText
 import com.kofigyan.stateprogressbar.StateProgressBar
 import com.saraha.paws.Model.Animal
+import com.saraha.paws.R
 import com.saraha.paws.View.AddEditAnimal.Fragment.AddEditAnimalPage1Fragment
 import com.saraha.paws.View.AddEditAnimal.Fragment.AddEditAnimalPage2Fragment
 import com.saraha.paws.View.AddEditAnimal.Fragment.AddEditAnimalPage3Fragment
 import com.saraha.paws.databinding.ActivityAddEditAnimalBinding
+import com.saraha.paws.databinding.FragmentAddEditAnimalPage3Binding
 
 class AddEditAnimalActivity : AppCompatActivity() {
 
     private val viewModel: AddEditAnimalViewModel by viewModels()
     lateinit var binding: ActivityAddEditAnimalBinding
 
+    private var actionType = ""
     var animal = Animal(null, "", "", "", "", "", "",
-    "", "", "", "")
+    "", "", "", "", "")
     var pageFragments = listOf(
         AddEditAnimalPage1Fragment(),
         AddEditAnimalPage2Fragment(),
@@ -37,6 +42,13 @@ class AddEditAnimalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAddEditAnimalBinding.inflate(layoutInflater)
 
+        actionType = intent.getStringExtra("type").toString()
+
+        if (actionType == "Edit"){
+            binding.buttonCreateCharity.setText(getString(R.string.save))
+            animal = intent.getSerializableExtra("animal") as Animal
+        }
+
         //Set fragment view when activity is created
         displayFragment(pageFragments[index])
 
@@ -52,18 +64,73 @@ class AddEditAnimalActivity : AppCompatActivity() {
         //set onClick listener for next button
 
         binding.buttonToAddEditAnimalNext.setOnClickListener {
-            Log.d(TAG,"AddEditAnimalActivity: - setButtonOnClickListener: - page number: ${index}")
             navigateBetweenFragments("Next")
         }
 
         //set onClick listener for previous button
         binding.buttonAddEditAnimalPrevious.setOnClickListener {
-            Log.d(TAG,"AddEditAnimalActivity: - setButtonOnClickListener: - page number: ${index}")
             navigateBetweenFragments("Pre")
         }
 
         binding.buttonCreateCharity.setOnClickListener {
-            //verifyCharityFormFields()
+            verifyAnimalFormFields()
+        }
+    }
+
+    private fun verifyAnimalFormFields() {
+        if (animal.isAllDataNotEmpty()) {
+            viewModel.setPhotoInFireStorage(animal.photoUrl)
+            viewModel.postedPhotoLiveData.observe(this) {
+                if (it.isNotEmpty()) {
+                    if (actionType == "Edit"){
+                        editAnimal(it)
+                    } else {
+                        addAnimal(it)
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(this, getString(R.string.all_required), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun editAnimal(photo: String){
+        viewModel.editAAnimalInFirebase(
+            animal.aid!!,
+            animal.getHashMap(photo)
+        )
+        viewModel.editAnimalLiveData.observe(this){
+            if (it) {
+                Toast.makeText(
+                    this,
+                    getString(R.string.successful_edit_animal), Toast.LENGTH_SHORT
+                ).show()
+                finish()
+            } else {
+                Toast.makeText(
+                    this,
+                    getString(R.string.failure_edit_animal), Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
+    private fun addAnimal(photo: String) {
+        viewModel.createAAnimalInFirebase(animal.getHashMap(photo))
+
+        viewModel.createdAnimalLiveData.observe(this) {
+            if (it) {
+                Toast.makeText(
+                    this,
+                    getString(R.string.successful_add_animal), Toast.LENGTH_SHORT
+                ).show()
+                finish()
+            } else {
+                Toast.makeText(
+                    this,
+                    getString(R.string.failure_add_animal), Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
@@ -106,7 +173,8 @@ class AddEditAnimalActivity : AppCompatActivity() {
         viewModel.nameLiveData.observe(this ,{ animal.name = it })
         viewModel.typeLiveData.observe(this ,{ animal.type = it })
         viewModel.locationLiveData.observe(this ,{ animal.location = it })
-        viewModel.ageLiveData.observe(this ,{ animal.age = it })
+        viewModel.ageLiveData.observe(this ,{ animal.age = it})
+        viewModel.statusLiveData.observe(this ,{ animal.states = it })
         viewModel.genderLiveData.observe(this ,{ animal.gender = it })
         viewModel.colorLiveData.observe(this ,{ animal.color = it })
         viewModel.personalityLiveData.observe(this ,{ animal.personality = it })
@@ -118,7 +186,7 @@ class AddEditAnimalActivity : AppCompatActivity() {
     //Function to add or replace a fragment view
     private fun displayFragment(fragment: Fragment) {
         val bundle = Bundle()
-        bundle.putSerializable("charity", animal)
+        bundle.putSerializable("animal", animal)
         fragment.arguments = bundle
         supportFragmentManager.beginTransaction().replace(
             binding.FrameLayoutAddEditAnimal.id,

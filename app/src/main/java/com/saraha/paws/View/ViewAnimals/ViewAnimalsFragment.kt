@@ -7,18 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import com.saraha.paws.Model.Animal
 import com.saraha.paws.R
 import com.saraha.paws.View.AddEditAnimal.AddEditAnimalActivity
 import com.saraha.paws.View.AddEditAnimal.AddEditAnimalViewModel
 import com.saraha.paws.View.AddEditCharity.AddEditCharityActivity
 import com.saraha.paws.View.AddEditCharity.AddEditCharityViewModel
+import com.saraha.paws.View.Home.HomeActivity
+import com.saraha.paws.View.ViewAnimalDetail.ViewAnimalDetailsActivity
 import com.saraha.paws.databinding.FragmentAddEditAnimalPage1Binding
 import com.saraha.paws.databinding.FragmentAddEditCharityPage1Binding
 import com.saraha.paws.databinding.FragmentViewAnimalsBinding
 
 class ViewAnimalsFragment : Fragment() {
 
-    //private lateinit var viewModel: AddEditAnimalViewModel
+    private lateinit var viewModel: ViewAnimalsViewModel
     lateinit var binding: FragmentViewAnimalsBinding
 
     override fun onCreateView(
@@ -27,13 +31,32 @@ class ViewAnimalsFragment : Fragment() {
     ): View? {
         binding = FragmentViewAnimalsBinding.inflate(inflater, container, false)
 
-        //viewModel = ViewModelProvider(requireActivity() as AddEditAnimalActivity)[AddEditAnimalViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity() as HomeActivity)[ViewAnimalsViewModel::class.java]
+
+        getAllAnimals()
 
         binding.floatingActionButton.setOnClickListener {
-            startActivity(Intent(this.context,AddEditAnimalActivity::class.java))
+            val intent = Intent(this.context, AddEditAnimalActivity::class.java)
+            intent.putExtra("type", "Add")
+            startActivity(intent)
         }
 
         return binding.root
+    }
+
+    private fun getAllAnimals(){
+        viewModel.getAllCharitiesFromFirebase()
+        viewModel.listOfAnimalsLiveData.observe(viewLifecycleOwner){
+            if (it.isNotEmpty()){
+                setRecyclerViewWithData(it)
+            }
+        }
+    }
+
+    private fun setRecyclerViewWithData(Animals: List<Animal>?) {
+        val recyclerView = binding.recyclerViewAnimalList
+        recyclerView.layoutManager = GridLayoutManager(this.context,2)
+        recyclerView.adapter = AnimalViewAdapter(this.context!!,Animals!!)
     }
 
 }

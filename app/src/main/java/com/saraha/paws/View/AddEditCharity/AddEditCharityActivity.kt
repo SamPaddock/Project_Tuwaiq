@@ -1,7 +1,10 @@
 package com.saraha.paws.View.AddEditCharity
 
+import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -69,39 +72,31 @@ class AddEditCharityActivity : AppCompatActivity() {
     }
 
     private fun verifyCharityFormFields() {
-        if (charity.name.isNotEmpty() && charity.email.isNotEmpty() && charity.mobile.isNotEmpty()
-            && charity.stcPay.isNotEmpty() && charity.facebookUrl.isNotEmpty()
-            && charity.instagramUrl.isNotEmpty() && charity.founder.isNotEmpty()
-            && charity.photo.isNotEmpty()) {
-            viewModel.setPhotoInFireStorage(charity.photo)
-            viewModel.postedPhotoLiveData.observe(this) {
-                if (it.isNotEmpty()) {
-                    if (actionType == "Edit"){
-                        editCharity(it)
-                    } else {
-                        addCharity(it)
-                    }
+        Log.d(TAG,"AddEditCharityActivity: - verifyCharityFormFields: - : ${charity.isAllDataNotEmpty()}")
+        if (charity.isAllDataNotEmpty()) {
+            if (!Patterns.WEB_URL.matcher(charity.photo).matches()){
+                viewModel.setPhotoInFireStorage(charity.photo)
+                viewModel.postedPhotoLiveData.observe(this) {
+                    checkActionToPerform(it)
                 }
+            } else {
+                checkActionToPerform()
             }
+
         } else {
             Toast.makeText(this, getString(R.string.all_required), Toast.LENGTH_SHORT).show()
         }
     }
 
+    private fun checkActionToPerform(it: String = charity.photo) {
+        if (it.isNotEmpty()) {
+            if (actionType == "Edit") { editCharity(it)
+            } else { addCharity(it) }
+        }
+    }
+
     private fun editCharity(photo: String){
-        viewModel.editACharityInFirebase(
-            charity.cid!!,
-            hashMapOf(
-                "name" to charity.name,
-                "email" to charity.email,
-                "mobile" to charity.mobile,
-                "photo" to photo,
-                "stcPay" to charity.stcPay,
-                "facebookUrl" to charity.facebookUrl,
-                "instagramUrl" to charity.instagramUrl,
-                "founder" to charity.founder,
-            )
-        )
+        viewModel.editACharityInFirebase(charity.cid!!, charity.getHashMap(photo))
         viewModel.editCharityLiveData.observe(this){
             if (it) {
                 Toast.makeText(
@@ -119,18 +114,7 @@ class AddEditCharityActivity : AppCompatActivity() {
     }
 
     private fun addCharity(photo: String) {
-        viewModel.createACharityInFirebase(
-            hashMapOf(
-                "name" to charity.name,
-                "email" to charity.email,
-                "mobile" to charity.mobile,
-                "photo" to photo,
-                "stcPay" to charity.stcPay,
-                "facebookUrl" to charity.facebookUrl,
-                "instagramUrl" to charity.instagramUrl,
-                "founder" to charity.founder,
-            )
-        )
+        viewModel.createACharityInFirebase(charity.getHashMap(photo))
 
         viewModel.createdCharityLiveData.observe(this) {
             if (it) {

@@ -1,17 +1,18 @@
 package com.saraha.paws.Repository
 
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
+import android.content.ContentValues
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.saraha.paws.Model.Animal
 
 class AnimalRepository {
 
     var dbFirestore: FirebaseFirestore? = null
-    //var dbFBStorage: FirebaseStorage? = null
-    var dbFBAuth: FirebaseAuth? = null
 
     fun createDBFirestore(){
         dbFirestore = Firebase.firestore
@@ -19,8 +20,39 @@ class AnimalRepository {
             .setPersistenceEnabled(true).build()
         dbFirestore!!.firestoreSettings = settings
     }
-    //fun createDBStorage(){dbFBStorage = Firebase.storage}
-    fun createDBAuth(){dbFBAuth = Firebase.auth}
 
+    fun getAllAnimals(): LiveData<List<Animal>> {
+        if (dbFirestore == null) createDBFirestore()
 
+        val liveDataAnimal = MutableLiveData<List<Animal>>()
+
+        dbFirestore?.collection("Animals")?.get()?.addOnCompleteListener {snapshot ->
+            if (snapshot.isSuccessful && snapshot.result != null) {
+                val listOfAnimals = mutableListOf<Animal>()
+                for (animal in snapshot.result!!) {
+                    if (animal.data.isNotEmpty()){
+                        val name = animal.get("name") as String
+                        val type = animal.get("type") as String
+                        val location = animal.get("location") as String
+                        val age = animal.get("age") as String
+                        val states = animal.get("states") as String
+                        val gender = animal.get("gender") as String
+                        val color = animal.get("color") as String
+                        val personality = animal.get("personality") as String
+                        val grooming = animal.get("grooming") as String
+                        val medical = animal.get("medical") as String
+                        val photoUrl = animal.get("photoUrl") as String
+                        val dbAnimal = Animal(animal.id, name, type, location, age, states,
+                            gender, color, personality, grooming, medical, photoUrl)
+                        listOfAnimals.add(dbAnimal)
+                    }
+                }
+                liveDataAnimal.postValue(listOfAnimals)
+            }
+        }?.addOnFailureListener {
+            Log.d(ContentValues.TAG,"CharityRepository: - getAllCharities: - : ${it.message}")
+        }
+
+        return liveDataAnimal
+    }
 }

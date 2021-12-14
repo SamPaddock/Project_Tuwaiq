@@ -57,9 +57,7 @@ class RegisterActivity : AppCompatActivity() {
 
     //Check all data is entered then send to firebase authentication
     private fun verifyRegistrationFormFields() {
-        if (isPasswordCorrect && isConfirmedPasswordCorrect && user.email.isNotEmpty()
-            && user.mobile.isNotEmpty() && user.name.isNotEmpty() && user.group.isNotEmpty()
-        ) {
+        if (isPasswordCorrect && isConfirmedPasswordCorrect && user.isRegistrationDataNotEmpty()) {
             viewModel.signUpUserInFirebase(user.email, user.password!!)
             viewModel.signInResponseLiveData.observe(this) {
                 createUserAccountAfterAuthentication(it)

@@ -34,6 +34,8 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
 
+        displayFragment(ViewAnimalsFragment())
+
         setupToolbarAndSliderDrawer(savedInstanceState)
 
         setContentView(binding.root)

@@ -48,7 +48,9 @@
         <entry key="app/src/main/res/layout/fragment_view_charities.xml" value="0.3115942028985507" />
         <entry key="app/src/main/res/layout/list_item_animals.xml" value="0.55" />
         <entry key="app/src/main/res/layout/list_item_charities.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/list_item_facts.xml" value="0.2341485507246377" />
         <entry key="app/src/main/res/menu/edit_menu_item.xml" value="0.21979166666666666" />
+        <entry key="app/src/main/res/menu/recycler_view_menu.xml" value="0.3880208333333333" />
       </map>
     </option>
   </component>

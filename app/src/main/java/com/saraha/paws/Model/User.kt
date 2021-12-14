@@ -11,4 +11,14 @@ data class User (
     var mobile: String,
     var group: String,
     var type: String = "User"
-        ):Serializable
+        ):Serializable {
+            fun isAllDataEmpty(): Boolean {
+                return email.isNotEmpty() && name.isNotEmpty() && mobile.isNotEmpty()
+                        && group.isNotEmpty() && photoUrl?.isNotEmpty() == true
+            }
+
+            fun isRegistrationDataNotEmpty(): Boolean{
+                return email.isNotEmpty() && mobile.isNotEmpty()
+                        && name.isNotEmpty() && group.isNotEmpty()
+            }
+        }

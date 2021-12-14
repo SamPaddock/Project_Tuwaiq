@@ -9,8 +9,11 @@
         android:id="@+id/cardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_margin="4dp"
+        android:padding="1dp"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -25,21 +28,24 @@
                 android:id="@+id/imageViewAnimalPhoto"
                 android:layout_width="170dp"
                 android:layout_height="170dp"
+                android:scaleType="centerCrop"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipAnimalStatues"
                 android:layout_width="wrap_content"
                 android:layout_height="38dp"
-                android:text="Statues"
+                android:text="@string/statues"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
-                android:id="@+id/AnimalName"
+                android:id="@+id/textViewAnimalName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:text="@string/name" />
+                android:text="@string/name"
+                android:textAlignment="center"
+                android:textAppearance="@style/body_2_style" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -53,21 +59,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_groups_24" />
+                    app:srcCompat="@drawable/ic_gender" />
+
+                <TextView
+                    android:id="@+id/textViewAnimalGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
 
                 <ImageView
                     android:id="@+id/imageView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_groups_24" />
+                    app:srcCompat="@drawable/ic_time_24" />
 
                 <TextView
                     android:id="@+id/textViewAnimalAge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Age" />
+                    android:layout_weight="1" />
 
             </LinearLayout>
         </LinearLayout>

@@ -1,7 +1,6 @@
 package com.saraha.paws.Util
 
 import android.util.Patterns
-import com.google.android.material.textfield.TextInputEditText
 
 class UserHelper {
 
@@ -36,7 +35,7 @@ class UserHelper {
 
     fun passwordValidation(
         password: String,
-        toMatchPassword: String?)
+        toMatchPassword: String? = null)
     : Pair<inputHandler,Boolean>{
         //Password rules:
         //A password must have at least eight characters.
@@ -45,7 +44,7 @@ class UserHelper {
         return if (toMatchPassword == null){
             if (password.isEmpty() == true) {
                 Pair(inputHandler.Required, false)
-            } else if (password.length!! >= 8
+            } else if (password.length >= 8
                 && !password.matches("([A-Za-z0-9]*)(\\D*\\d){2,}".toRegex())
             ){
                 Pair(inputHandler.IncorrectPassword, false)

@@ -54,8 +54,7 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     private fun verifyCharityFormFields() {
-        if (user.email.isNotEmpty() && user.name.isNotEmpty() && user.mobile.isNotEmpty()
-            && user.group.isNotEmpty() && user.photoUrl?.isNotEmpty() == true) {
+        if (user.isAllDataEmpty()) {
             viewModel.setPhotoInFireStorage(user.photoUrl!!)
             viewModel.postedPhotoLiveData.observe(this) {
                 if (it.isNotEmpty()) {

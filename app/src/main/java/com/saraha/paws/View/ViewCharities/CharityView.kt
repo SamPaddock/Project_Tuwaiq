@@ -1,16 +1,11 @@
 package com.saraha.paws.View.ViewCharities
 
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 import com.saraha.paws.Model.Charity
 import com.saraha.paws.View.ViewCharityDetail.ViewCharityDetailActivity
 import com.saraha.paws.databinding.ListItemCharitiesBinding
@@ -29,7 +24,7 @@ class CharityViewAdapter(var context: Context, var data: List<Charity>) :
 
     override fun onBindViewHolder(holder: CharityViewHolder, position: Int) {
         Picasso.get().load(Uri.parse(data[position].photo))
-            .fit().into(holder.binding.imageViewListCharityPhoto)
+            .into(holder.binding.imageViewListCharityPhoto)
         holder.binding.textViewCharityName.setText(data[position].name)
         holder.binding.textViewCharityEmail.setText(data[position].email)
         holder.binding.textViewCharityMobile.setText(data[position].mobile)
