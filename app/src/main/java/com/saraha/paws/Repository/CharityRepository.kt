@@ -18,21 +18,21 @@ import java.util.*
 
 class CharityRepository {
 
-    var dbFirestore: FirebaseFirestore? = null
+    var dbFirestore: FirebaseFirestore = Firebase.firestore
 
     fun createDBFirestore(){
         dbFirestore = Firebase.firestore
         val settings = FirebaseFirestoreSettings.Builder()
             .setPersistenceEnabled(true).build()
-        dbFirestore!!.firestoreSettings = settings
+        dbFirestore.firestoreSettings = settings
     }
 
     fun getAllCharities(): LiveData<List<Charity>>{
-        if (dbFirestore == null) createDBFirestore()
+        createDBFirestore()
 
         val liveDataCharity = MutableLiveData<List<Charity>>()
 
-        dbFirestore?.collection("Charities")?.get()?.addOnCompleteListener {snapshot ->
+        dbFirestore.collection("Charities").get().addOnCompleteListener {snapshot ->
             if (snapshot.isSuccessful && snapshot.result != null) {
                 val listOfCharities = mutableListOf<Charity>()
                 for (charity in snapshot.result!!) {
@@ -52,7 +52,7 @@ class CharityRepository {
                 }
                 liveDataCharity.postValue(listOfCharities)
             }
-        }?.addOnFailureListener {
+        }.addOnFailureListener {
             Log.d(TAG,"CharityRepository: - getAllCharities: - : ${it.message}")
         }
 

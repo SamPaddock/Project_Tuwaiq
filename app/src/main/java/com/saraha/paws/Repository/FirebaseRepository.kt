@@ -5,7 +5,6 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
@@ -19,8 +18,7 @@ import kotlin.collections.HashMap
 class FirebaseRepository {
 
     var dbFirestore: FirebaseFirestore = Firebase.firestore
-    var dbFBStorage: FirebaseStorage? = null
-    var dbFBAuth: FirebaseAuth? = null
+    var dbFBStorage: FirebaseStorage = Firebase.storage
 
     fun createDBFirestore(){
         dbFirestore = Firebase.firestore
@@ -29,37 +27,36 @@ class FirebaseRepository {
         dbFirestore.firestoreSettings = settings
     }
     fun createDBStorage(){dbFBStorage = Firebase.storage}
-    fun createDBAuth(){dbFBAuth = Firebase.auth}
 
     fun setPhotoInStorage(fileUri: Uri): LiveData<String> {
-        if (dbFBStorage == null) createDBStorage()
+        createDBStorage()
 
         val fileName = UUID.randomUUID().toString() +".jpg"
 
         val liveDataImage = MutableLiveData<String>()
 
-        val ref = dbFBStorage?.reference?.child(Firebase.auth.uid.toString())?.child(fileName)
+        val ref = dbFBStorage.reference.child(Firebase.auth.uid.toString()).child(fileName)
 
-        val uploadTask = ref?.putFile(fileUri)
-        uploadTask?.continueWithTask { task ->
+        val uploadTask = ref.putFile(fileUri)
+        uploadTask.continueWithTask { task ->
             if (!task.isSuccessful) {
                 Log.d(ContentValues.TAG,"could not upload image: ${task.result?.error}")
             }
             ref.downloadUrl
-        }?.addOnCompleteListener { task ->
+        }.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val downloadUri = task.result
                 Log.d(ContentValues.TAG, downloadUri.toString())
                 liveDataImage.postValue(downloadUri.toString())
             }
-        }?.addOnFailureListener{
+        }.addOnFailureListener{
             Log.d(ContentValues.TAG,"could not upload image: ${it.message}")
         }
         return liveDataImage
     }
 
     fun addDocument(collection: String, newDocument: HashMap<String, String?>): LiveData<Boolean> {
-        if (dbFirestore == null) createDBFirestore()
+        createDBFirestore()
 
         val liveDataCharity = MutableLiveData<Boolean>()
 
@@ -74,14 +71,14 @@ class FirebaseRepository {
     }
 
     fun editDocument(collection: String, id: String, updateDocument: HashMap<String, String?>): LiveData<Boolean> {
-        if (dbFirestore == null) createDBFirestore()
+        createDBFirestore()
 
         val liveDataCharity = MutableLiveData<Boolean>()
 
-        dbFirestore?.collection(collection)?.document(id)?.set(updateDocument)
-            ?.addOnCompleteListener {
+        dbFirestore.collection(collection).document(id).set(updateDocument)
+            .addOnCompleteListener {
                 if (it.isSuccessful) liveDataCharity.postValue(true)
-            }?.addOnFailureListener {
+            }.addOnFailureListener {
                 liveDataCharity.postValue(false)
             }
 

@@ -5,7 +5,7 @@
     android:id="@+id/RegisterPage2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.RegisterAccount.Fragment.RegisterPage2Fragment">
+    tools:context=".View.AccountViews.RegisterAccount.Fragment.RegisterPage2Fragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"

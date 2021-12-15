@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.EditProfile.EditProfileActivity">
+    tools:context=".View.AccountViews.EditProfile.EditProfileActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewEditToolbar"

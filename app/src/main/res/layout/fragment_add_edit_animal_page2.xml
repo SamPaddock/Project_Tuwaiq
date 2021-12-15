@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout6"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.AddEditAnimal.Fragment.AddEditAnimalPage2Fragment">
+    tools:context=".View.AnimalViews.AddEditAnimal.Fragment.AddEditAnimalPage2Fragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayoutAddAnimalAge"

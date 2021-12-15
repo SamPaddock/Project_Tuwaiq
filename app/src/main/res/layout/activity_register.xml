@@ -5,7 +5,7 @@
     android:id="@+id/constraintLayoutRegister"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.RegisterAccount.RegisterActivity">
+    tools:context=".View.AccountViews.RegisterAccount.RegisterActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarRegister"

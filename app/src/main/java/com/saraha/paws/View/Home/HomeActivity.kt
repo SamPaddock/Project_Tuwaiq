@@ -19,11 +19,11 @@ import com.mikepenz.materialdrawer.model.interfaces.nameRes
 import com.mikepenz.materialdrawer.widget.AccountHeaderView
 import com.mikepenz.materialdrawer.widget.MaterialDrawerSliderView
 import com.saraha.paws.R
-import com.saraha.paws.View.MainSplash.SplashActivity
-import com.saraha.paws.View.Profile.ProfileFragment
+import com.saraha.paws.View.SplashView.MainSplash.SplashActivity
+import com.saraha.paws.View.AccountViews.Profile.ProfileFragment
 import com.saraha.paws.View.ShowFacts.DisplayFactsFragment
-import com.saraha.paws.View.ViewAnimals.ViewAnimalsFragment
-import com.saraha.paws.View.ViewCharities.ViewCharitiesFragment
+import com.saraha.paws.View.AnimalViews.ViewAnimals.ViewAnimalsFragment
+import com.saraha.paws.View.CharityViews.ViewCharities.ViewCharitiesFragment
 import com.saraha.paws.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {

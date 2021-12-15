@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@color/dark_grey"
-    tools:context=".View.AddEditCharity.Fragment.AddEditCharityPage2Fragment">
+    tools:context=".View.CharityViews.AddEditCharity.Fragment.AddEditCharityPage2Fragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutAddCharityPay"

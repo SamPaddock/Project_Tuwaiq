@@ -5,7 +5,7 @@
     android:id="@+id/frameLayoutViewCharities"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.ViewCharities.ViewCharitiesFragment" >
+    tools:context=".View.CharityViews.ViewCharities.ViewCharitiesFragment" >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCharityList"

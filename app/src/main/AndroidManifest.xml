@@ -22,34 +22,34 @@
         android:theme="@style/Theme.Project_Tuwaiq"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".View.EditProfile.EditProfileActivity"
+            android:name="com.saraha.paws.View.AccountViews.EditProfile.EditProfileActivity"
             android:exported="true" />
         <activity
-            android:name=".View.ViewCharityDetail.ViewCharityDetailActivity"
+            android:name="com.saraha.paws.View.CharityViews.ViewCharityDetail.ViewCharityDetailActivity"
             android:exported="true" />
         <activity
-            android:name=".View.ViewAnimalDetail.ViewAnimalDetailsActivity"
+            android:name="com.saraha.paws.View.AnimalViews.ViewAnimalDetail.ViewAnimalDetailsActivity"
             android:exported="true" />
         <activity
-            android:name=".View.AddEditCharity.AddEditCharityActivity"
+            android:name="com.saraha.paws.View.CharityViews.AddEditCharity.AddEditCharityActivity"
             android:exported="true" />
         <activity
-            android:name=".View.AddEditAnimal.AddEditAnimalActivity"
+            android:name="com.saraha.paws.View.AnimalViews.AddEditAnimal.AddEditAnimalActivity"
             android:exported="true" />
         <activity
             android:name=".View.Home.HomeActivity"
             android:exported="true" />
         <activity
-            android:name=".View.RegisterAccount.RegisterActivity"
+            android:name="com.saraha.paws.View.AccountViews.RegisterAccount.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".View.LoginAccount.LoginActivity"
+            android:name="com.saraha.paws.View.AccountViews.LoginAccount.LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".View.Splash.MainActivity"
+            android:name="com.saraha.paws.View.SplashView.Splash.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".View.MainSplash.SplashActivity"
+            android:name="com.saraha.paws.View.SplashView.MainSplash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
