@@ -33,9 +33,7 @@ class ViewCharitiesFragment : Fragment() {
     private fun getAllCharities(){
         viewModel.getAllCharitiesFromFirebase()
         viewModel.listOfCharitiesLiveData.observe(viewLifecycleOwner){
-            if (it.isNotEmpty()){
-                setRecyclerViewWithData(it)
-            }
+            if (it.isNotEmpty()){ setRecyclerViewWithData(it) }
         }
     }
 

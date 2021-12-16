@@ -2,13 +2,14 @@ package com.saraha.paws.View.AnimalViews.AddEditAnimal
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.kofigyan.stateprogressbar.StateProgressBar
 import com.saraha.paws.Model.Animal
 import com.saraha.paws.R
+import com.saraha.paws.Util.toast
 import com.saraha.paws.View.AnimalViews.AddEditAnimal.Fragment.AddEditAnimalPage1Fragment
 import com.saraha.paws.View.AnimalViews.AddEditAnimal.Fragment.AddEditAnimalPage2Fragment
 import com.saraha.paws.View.AnimalViews.AddEditAnimal.Fragment.AddEditAnimalPage3Fragment
@@ -49,7 +50,7 @@ class AddEditAnimalActivity : AppCompatActivity() {
         displayFragment(pageFragments[index])
 
         //Get data coming from viewModel that is sent from fragment
-        getCharityLiveData()
+        getAnimalLiveData()
 
         setButtonOnClickListener()
 
@@ -68,45 +69,36 @@ class AddEditAnimalActivity : AppCompatActivity() {
             navigateBetweenFragments("Pre")
         }
 
-        binding.buttonCreateCharity.setOnClickListener {
-            verifyAnimalFormFields()
-        }
+        binding.buttonCreateCharity.setOnClickListener { verifyAnimalFormFields() }
     }
 
     private fun verifyAnimalFormFields() {
         if (animal.isAllDataNotEmpty()) {
-            viewModel.setPhotoInFireStorage(animal.photoUrl)
-            viewModel.postedPhotoLiveData.observe(this) {
-                if (it.isNotEmpty()) {
-                    if (actionType == "Edit"){
-                        editAnimal(it)
-                    } else {
-                        addAnimal(it)
-                    }
-                }
+            if (!Patterns.WEB_URL.matcher(animal.photoUrl).matches()){
+                viewModel.setPhotoInFireStorage(animal.photoUrl)
+                viewModel.postedPhotoLiveData.observe(this) { checkActionToPerform(it) }
+            } else {
+                checkActionToPerform()
             }
         } else {
-            Toast.makeText(this, getString(R.string.all_required), Toast.LENGTH_SHORT).show()
+            this.toast(getString(R.string.all_required))
+        }
+    }
+
+    private fun checkActionToPerform(it: String = animal.photoUrl) {
+        if (it.isNotEmpty()) {
+            if (actionType == "Edit") { editAnimal(it) } else { addAnimal(it) }
         }
     }
 
     private fun editAnimal(photo: String){
-        viewModel.editAAnimalInFirebase(
-            animal.aid!!,
-            animal.getHashMap(photo)
-        )
+        viewModel.editAAnimalInFirebase(animal.aid!!, animal.getHashMap(photo))
         viewModel.editAnimalLiveData.observe(this){
             if (it) {
-                Toast.makeText(
-                    this,
-                    getString(R.string.successful_edit_animal), Toast.LENGTH_SHORT
-                ).show()
+                this.toast(getString(R.string.successful_edit_animal))
                 finish()
             } else {
-                Toast.makeText(
-                    this,
-                    getString(R.string.failure_edit_animal), Toast.LENGTH_SHORT
-                ).show()
+                this.toast(getString(R.string.failure_edit_animal))
             }
         }
     }
@@ -116,16 +108,10 @@ class AddEditAnimalActivity : AppCompatActivity() {
 
         viewModel.createdAnimalLiveData.observe(this) {
             if (it) {
-                Toast.makeText(
-                    this,
-                    getString(R.string.successful_add_animal), Toast.LENGTH_SHORT
-                ).show()
+                this.toast(getString(R.string.successful_add_animal))
                 finish()
             } else {
-                Toast.makeText(
-                    this,
-                    getString(R.string.failure_add_animal), Toast.LENGTH_SHORT
-                ).show()
+                this.toast(getString(R.string.failure_add_animal))
             }
         }
     }
@@ -148,11 +134,7 @@ class AddEditAnimalActivity : AppCompatActivity() {
             }
         }
         //set fragment in activity
-        setFragmentView(
-            isNextVisible, isPreVisible, isBtnVisible,
-            pageProgress[index],
-            pageFragments[index]
-        )
+        setFragmentView(isNextVisible, isPreVisible, isBtnVisible, pageProgress[index], pageFragments[index])
     }
 
     private fun setFragmentView(
@@ -165,7 +147,7 @@ class AddEditAnimalActivity : AppCompatActivity() {
         displayFragment(fragment)
     }
 
-    private fun getCharityLiveData() {
+    private fun getAnimalLiveData() {
         viewModel.nameLiveData.observe(this ,{ animal.name = it })
         viewModel.typeLiveData.observe(this ,{ animal.type = it })
         viewModel.locationLiveData.observe(this ,{ animal.location = it })

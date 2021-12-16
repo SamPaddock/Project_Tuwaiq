@@ -31,4 +31,13 @@ data class User (
             "photoUrl" to photo
         )
     }
+
+    fun getRegistrationHashMap(): HashMap<String, String?>{
+        return hashMapOf(
+            "name" to name,
+            "email" to email,
+            "mobile" to mobile,
+            "group" to group
+        )
+    }
 }

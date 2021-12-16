@@ -12,6 +12,10 @@ import androidx.fragment.app.Fragment
 import com.kofigyan.stateprogressbar.StateProgressBar
 import com.saraha.paws.Model.Charity
 import com.saraha.paws.R
+import com.saraha.paws.Util.toast
+import com.saraha.paws.View.AnimalViews.AddEditAnimal.Fragment.AddEditAnimalPage1Fragment
+import com.saraha.paws.View.AnimalViews.AddEditAnimal.Fragment.AddEditAnimalPage2Fragment
+import com.saraha.paws.View.AnimalViews.AddEditAnimal.Fragment.AddEditAnimalPage3Fragment
 import com.saraha.paws.View.CharityViews.AddEditCharity.Fragment.AddEditCharityPage1Fragment
 import com.saraha.paws.View.CharityViews.AddEditCharity.Fragment.AddEditCharityPage2Fragment
 import com.saraha.paws.databinding.ActivityAddEditCharityBinding
@@ -24,6 +28,14 @@ class AddEditCharityActivity : AppCompatActivity() {
     private var actionType = ""
     private var charity = Charity(null,"","","",
         "","","","", "")
+    var pageFragments = listOf(
+        AddEditCharityPage1Fragment(),
+        AddEditCharityPage2Fragment()
+    )
+    var pageProgress = listOf(
+        StateProgressBar.StateNumber.ONE,
+        StateProgressBar.StateNumber.TWO
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,48 +62,34 @@ class AddEditCharityActivity : AppCompatActivity() {
     private fun setButtonOnClickListener() {
         //set onClick listener for next button
         binding.buttonToAddEditCharityPage2.setOnClickListener {
-            setFragmentView(
-                false,
-                StateProgressBar.StateNumber.TWO,
-                AddEditCharityPage2Fragment()
-            )
+            setFragmentView(false, pageProgress[1], pageFragments[1])
         }
 
         //set onClick listener for previous button
         binding.buttonAddEditCharityPage1.setOnClickListener {
-            setFragmentView(
-                true,
-                StateProgressBar.StateNumber.ONE,
-                AddEditCharityPage1Fragment()
-            )
+            setFragmentView(true, pageProgress[0], pageFragments[0])
         }
 
-        binding.buttonCreateCharity.setOnClickListener {
-            verifyCharityFormFields()
-        }
+        binding.buttonCreateCharity.setOnClickListener { verifyCharityFormFields() }
     }
 
     private fun verifyCharityFormFields() {
-        Log.d(TAG,"AddEditCharityActivity: - verifyCharityFormFields: - : ${charity.isAllDataNotEmpty()}")
         if (charity.isAllDataNotEmpty()) {
             if (!Patterns.WEB_URL.matcher(charity.photo).matches()){
                 viewModel.setPhotoInFireStorage(charity.photo)
-                viewModel.postedPhotoLiveData.observe(this) {
-                    checkActionToPerform(it)
-                }
+                viewModel.postedPhotoLiveData.observe(this) { checkActionToPerform(it) }
             } else {
                 checkActionToPerform()
             }
 
         } else {
-            Toast.makeText(this, getString(R.string.all_required), Toast.LENGTH_SHORT).show()
+            this.toast(getString(R.string.all_required))
         }
     }
 
     private fun checkActionToPerform(it: String = charity.photo) {
         if (it.isNotEmpty()) {
-            if (actionType == "Edit") { editCharity(it)
-            } else { addCharity(it) }
+            if (actionType == "Edit") { editCharity(it) } else { addCharity(it) }
         }
     }
 
@@ -99,16 +97,10 @@ class AddEditCharityActivity : AppCompatActivity() {
         viewModel.editACharityInFirebase(charity.cid!!, charity.getHashMap(photo))
         viewModel.editCharityLiveData.observe(this){
             if (it) {
-                Toast.makeText(
-                    this,
-                    getString(R.string.successful_edit_charity), Toast.LENGTH_SHORT
-                ).show()
+                this.toast(getString(R.string.successful_edit_charity))
                 finish()
             } else {
-                Toast.makeText(
-                    this,
-                    getString(R.string.failure_edit_charity), Toast.LENGTH_SHORT
-                ).show()
+                this.toast(getString(R.string.failure_edit_charity))
             }
         }
     }
@@ -118,16 +110,10 @@ class AddEditCharityActivity : AppCompatActivity() {
 
         viewModel.createdCharityLiveData.observe(this) {
             if (it) {
-                Toast.makeText(
-                    this,
-                    getString(R.string.successful_add_charity), Toast.LENGTH_SHORT
-                ).show()
+                this.toast(getString(R.string.successful_add_charity))
                 finish()
             } else {
-                Toast.makeText(
-                    this,
-                    getString(R.string.failure_add_charity), Toast.LENGTH_SHORT
-                ).show()
+                this.toast(getString(R.string.failure_add_charity))
             }
         }
     }

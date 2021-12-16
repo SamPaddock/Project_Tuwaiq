@@ -131,7 +131,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:lines="2"
-        android:textAppearance="@style/body_1_style"
+        android:textAppearance="@style/caption_n_style"
         android:textColor="#A30A0A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

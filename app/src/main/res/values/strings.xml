@@ -69,5 +69,6 @@
     <string name="failure_add_animal">Could not add the Animal</string>
     <string name="successful_edit_user">Profile successfully updated</string>
     <string name="failure_edit_user">Could not updated the Profile</string>
+    <string name="link_error">could not open link</string>
 
 </resources>

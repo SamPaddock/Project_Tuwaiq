@@ -78,43 +78,28 @@ class HomeActivity : AppCompatActivity() {
         mainSliderHeader(mainSlider, savedInstance)
 
         val itemHome = PrimaryDrawerItem().apply {
-            nameRes = R.string.resuces_home
-            iconRes = R.drawable.ic_pets_type
-            identifier = 0
+            nameRes = R.string.resuces_home; iconRes = R.drawable.ic_pets_type; identifier = 0
         }
         val itemProfile = PrimaryDrawerItem().apply {
-            nameRes = R.string.profile_home
-            iconRes = R.drawable.ic_person_24
-            identifier = 1
+            nameRes = R.string.profile_home; iconRes = R.drawable.ic_person_24; identifier = 1
         }
         val itemCharity = PrimaryDrawerItem().apply {
-            nameRes = R.string.charity_home
-            iconRes = R.drawable.ic_charity_24
-            identifier = 2
+            nameRes = R.string.charity_home; iconRes = R.drawable.ic_charity_24; identifier = 2
         }
         val itemFacts = SecondaryDrawerItem().apply {
-            nameRes = R.string.fun_fact_home
-            iconRes = R.drawable.ic_fact_24
-            identifier = 3
+            nameRes = R.string.fun_fact_home; iconRes = R.drawable.ic_fact_24; identifier = 3
         }
         val itemAlbum = SecondaryDrawerItem().apply {
-            nameRes = R.string.photo_album_home
-            iconRes = R.drawable.ic_album_24
-            identifier = 4
+            nameRes = R.string.photo_album_home; iconRes = R.drawable.ic_album_24; identifier = 4
         }
         val itemSignOut = SecondaryDrawerItem().apply {
-            nameRes = R.string.sign_out_home
-            iconRes = R.drawable.ic_exit_24
-            identifier = 7
+            nameRes = R.string.sign_out_home; iconRes = R.drawable.ic_exit_24; identifier = 7
         }
 
         mainSlider.itemAdapter.add(
-            itemHome,
-            itemProfile,
-            itemCharity,
+            itemHome, itemProfile, itemCharity,
             DividerDrawerItem(),
-            itemFacts,
-            itemAlbum,
+            itemFacts, itemAlbum,
             DividerDrawerItem(),
             itemSignOut
         )
@@ -126,8 +111,7 @@ class HomeActivity : AppCompatActivity() {
             attachToSliderView(mainSlider) // attach to the slider
             addProfiles(
                 ProfileDrawerItem().apply {
-                    descriptionText = currentUser?.email ?: ""
-                    identifier = 102
+                    descriptionText = currentUser?.email ?: ""; identifier = 102
                 }
             )
             onAccountHeaderListener = { view, profile, current ->

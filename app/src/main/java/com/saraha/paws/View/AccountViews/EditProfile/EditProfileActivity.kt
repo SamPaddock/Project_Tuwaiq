@@ -1,20 +1,17 @@
 package com.saraha.paws.View.AccountViews.EditProfile
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.activity.viewModels
 import com.google.android.material.textfield.TextInputEditText
 import com.saraha.paws.Model.User
 import com.saraha.paws.R
 import com.saraha.paws.Util.UserHelper
-import com.saraha.paws.Util.toast
+import com.saraha.paws.Util.*
 import com.saraha.paws.databinding.ActivityEditProfileBinding
 import com.squareup.picasso.Picasso
 

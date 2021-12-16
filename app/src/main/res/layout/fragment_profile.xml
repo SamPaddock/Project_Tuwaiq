@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="@string/name"
-                android:textAppearance="@style/title_style"
+                android:textAppearance="@style/title_n_style"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageViewProfileName"
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="@string/test_string"
-            android:textAppearance="@style/subtitle_style" />
+            android:textAppearance="@style/subtitle_n_style" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutProfileEmail"
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="@string/email"
-                android:textAppearance="@style/title_style"
+                android:textAppearance="@style/title_n_style"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageViewProfileEmail"
@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:text="@string/test_string"
             android:layout_margin="8dp"
-            android:textAppearance="@style/subtitle_style" />
+            android:textAppearance="@style/subtitle_n_style" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutProfileMobile"
@@ -141,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="@string/mobile"
-                android:textAppearance="@style/title_style"
+                android:textAppearance="@style/title_n_style"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageViewProfileMobile"
@@ -155,7 +155,7 @@
             android:layout_height="wrap_content"
             android:text="@string/test_string"
             android:layout_margin="8dp"
-            android:textAppearance="@style/subtitle_style"  />
+            android:textAppearance="@style/subtitle_n_style"  />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutProfileGroup"
@@ -179,7 +179,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="@string/charity_group"
-                android:textAppearance="@style/title_style"
+                android:textAppearance="@style/title_n_style"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageViewProfileGroup"
@@ -192,7 +192,7 @@
             android:layout_height="wrap_content"
             android:text="@string/test_string"
             android:layout_margin="8dp"
-            android:textAppearance="@style/subtitle_style"  />
+            android:textAppearance="@style/subtitle_n_style"  />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton

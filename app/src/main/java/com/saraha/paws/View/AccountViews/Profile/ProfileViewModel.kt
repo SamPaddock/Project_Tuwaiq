@@ -11,9 +11,7 @@ class ProfileViewModel: ViewModel() {
 
     fun getUserDataFromFirebase(){
         UserRepository().getUserAccount().observeForever {
-            if (it.email.isNotEmpty()){
-                livedataUser.postValue(it)
-            }
+            if (it.email.isNotEmpty()){ livedataUser.postValue(it) }
         }
     }
 

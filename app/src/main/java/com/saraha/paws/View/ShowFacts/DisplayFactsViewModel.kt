@@ -28,15 +28,15 @@ class DisplayFactsViewModel: ViewModel() {
     //Database and shared preference variables
     var dbClient: DatabaseClient? = null
     var db: AppDatabase? = null
-    //val sharedPref = AppSharedPreference()
+    val sharedPref = AppSharedPreference()
 
     val factsLiveData = MutableLiveData<Pair<CatFacts?,DataStatus>>()
 
     fun checkIfRoomIsEmpty(){
         val roomData = db?.catFactsDao()?.get()
-        //val factTime = sharedPref.read(SharedConst.PrefsFactDate.string, (-1).toLong())
+        val factTime = sharedPref.read(SharedConst.PrefsFactDate.string, (-1).toLong())
 
-        if (roomData?.isNotEmpty() == true){ //&& factTime != (-1).toLong()){
+        if (roomData?.isNotEmpty() == true && factTime != (-1).toLong()){
 
             val currentDateTime = Calendar.getInstance().timeInMillis
 

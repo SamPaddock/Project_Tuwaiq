@@ -21,7 +21,7 @@ class ViewAnimalsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentViewAnimalsBinding.inflate(inflater, container, false)
 
         viewModel = ViewModelProvider(requireActivity() as HomeActivity)[ViewAnimalsViewModel::class.java]
@@ -40,9 +40,7 @@ class ViewAnimalsFragment : Fragment() {
     private fun getAllAnimals(){
         viewModel.getAllCharitiesFromFirebase()
         viewModel.listOfAnimalsLiveData.observe(viewLifecycleOwner){
-            if (it.isNotEmpty()){
-                setRecyclerViewWithData(it)
-            }
+            if (it.isNotEmpty()){ setRecyclerViewWithData(it) }
         }
     }
 

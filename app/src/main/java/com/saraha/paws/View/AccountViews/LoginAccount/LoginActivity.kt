@@ -17,9 +17,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
 
-        binding.buttonLogin.setOnClickListener {
-            if (checkFields()) onLoginButtonClick()
-        }
+        binding.buttonLogin.setOnClickListener { if (checkFields()) onLoginButtonClick() }
 
         setContentView(binding.root)
     }

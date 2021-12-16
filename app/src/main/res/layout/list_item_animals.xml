@@ -36,6 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="38dp"
                 android:text="@string/statues"
+                android:textAppearance="@style/caption_n_style"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
@@ -45,7 +46,7 @@
                 android:layout_margin="4dp"
                 android:text="@string/name"
                 android:textAlignment="center"
-                android:textAppearance="@style/body_2_style" />
+                android:textAppearance="@style/body_6n_style" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -65,7 +66,8 @@
                     android:id="@+id/textViewAnimalGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textAppearance="@style/caption_n_style" />
 
                 <ImageView
                     android:id="@+id/imageView5"
@@ -78,7 +80,8 @@
                     android:id="@+id/textViewAnimalAge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textAppearance="@style/caption_n_style" />
 
             </LinearLayout>
         </LinearLayout>

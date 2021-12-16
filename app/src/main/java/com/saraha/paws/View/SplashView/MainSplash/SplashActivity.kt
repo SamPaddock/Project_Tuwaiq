@@ -17,20 +17,16 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //AppSharedPreference().init(applicationContext)
+        AppSharedPreference.init(applicationContext)
 
         Handler(Looper.getMainLooper()).postDelayed({
             if (Firebase.auth.currentUser?.uid?.isNotEmpty() == true){
-                val intent = Intent(this, HomeActivity::class.java)
-                startActivity(intent)
-                finish()
+                startActivity(Intent(this, HomeActivity::class.java))
             } else {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+                startActivity(Intent(this, MainActivity::class.java))
             }
-
-        }, 3000)
+            finish()
+        }, 2000)
 
     }
 }

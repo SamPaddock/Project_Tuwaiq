@@ -11,9 +11,7 @@ class ViewCharitiesViewModel: ViewModel() {
 
     fun getAllCharitiesFromFirebase(){
         CharityRepository().getAllCharities().observeForever {
-            if (it.isNotEmpty()){
-                listOfCharitiesLiveData.postValue(it)
-            }
+            if (it.isNotEmpty()){ listOfCharitiesLiveData.postValue(it) }
         }
     }
 

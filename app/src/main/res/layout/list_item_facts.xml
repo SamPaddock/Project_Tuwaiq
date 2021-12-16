@@ -21,6 +21,7 @@
             android:layout_margin="8dp"
             android:hint="@string/lorem_ipsum"
             android:padding="16dp"
-            android:textAppearance="@style/body_6i_style" />
+            android:textAppearance="@style/body_6i_style"
+            app:drawableTopCompat="@drawable/ic_story" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,7 @@ import android.content.Intent
 import android.net.Uri
 import android.view.Menu
 import android.widget.Toast
+import com.saraha.paws.Util.toast
 import com.saraha.paws.View.CharityViews.AddEditCharity.AddEditCharityActivity
 import java.lang.Exception
 
@@ -95,7 +96,7 @@ class ViewCharityDetailActivity : AppCompatActivity() {
                 intent.data = Uri.parse(Url)
                 startActivity(intent)
             } catch (e: Exception){
-                Toast.makeText(this, "could not open link", Toast.LENGTH_SHORT).show()
+                this.toast(getString(R.string.link_error))
             }
         }else {
             val i = Intent(Intent.ACTION_VIEW, Uri.parse(Url))
@@ -113,7 +114,7 @@ class ViewCharityDetailActivity : AppCompatActivity() {
                 intent.data = Uri.parse(Url)
                 startActivity(intent)
             } catch (e: Exception){
-                Toast.makeText(this, "could not open link", Toast.LENGTH_SHORT).show()
+                this.toast(getString(R.string.link_error))
             }
         }else {
             val i = Intent(Intent.ACTION_VIEW, Uri.parse(Url))

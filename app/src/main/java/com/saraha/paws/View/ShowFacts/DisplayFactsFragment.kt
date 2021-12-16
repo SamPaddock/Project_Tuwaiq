@@ -5,11 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.saraha.paws.Database.DatabaseClient
 import com.saraha.paws.Model.Facts.CatFacts
+import com.saraha.paws.Util.AppSharedPreference
+import com.saraha.paws.Util.SharedConst
 import com.saraha.paws.Util.toast
 import com.saraha.paws.View.Home.HomeActivity
 import com.saraha.paws.databinding.FragmentDisplayFactsBinding
@@ -20,7 +21,7 @@ class DisplayFactsFragment : Fragment() {
     private lateinit var viewModel: DisplayFactsViewModel
     lateinit var binding: FragmentDisplayFactsBinding
 
-    //val sharedPref = AppSharedPreference()
+    val sharedPref = AppSharedPreference()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,7 +58,9 @@ class DisplayFactsFragment : Fragment() {
     }
 
     private fun setNewFacts(data: CatFacts?) {
-        //sharedPref.write(SharedConst.PrefsFactDate.string, Calendar.getInstance().timeInMillis)
+        val instance = Calendar.getInstance()
+        instance.add(Calendar.HOUR,24)
+        sharedPref.write(SharedConst.PrefsFactDate.string, instance.timeInMillis)
         setNextFacts(data)
     }
 

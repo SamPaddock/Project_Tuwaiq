@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/basic_information"
-            android:textAppearance="@style/subtitle_style" />
+            android:textAppearance="@style/subtitle_b_style" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -91,14 +91,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/founder"
-                    android:textAppearance="@style/body_1_style" />
+                    android:textAppearance="@style/body_6b_style" />
 
                 <TextView
                     android:id="@+id/textViewDisplayCharityFounder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/test_string"
-                    android:textAppearance="@style/body_2_style" />
+                    android:layout_weight="3"
+                    android:textAppearance="@style/body_6n_style" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -133,14 +134,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/email"
-                    android:textAppearance="@style/body_1_style" />
+                    android:textAppearance="@style/body_6b_style" />
 
                 <TextView
                     android:id="@+id/textViewDisplayCharityEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="@string/test_string"
-                    android:textAppearance="@style/body_2_style" />
+                    android:textAppearance="@style/body_6n_style" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -175,14 +177,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/mobile"
-                    android:textAppearance="@style/body_1_style" />
+                    android:textAppearance="@style/body_6b_style" />
 
                 <TextView
                     android:id="@+id/textViewDisplayCharityMobile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:text="@string/test_string"
-                    android:textAppearance="@style/body_2_style" />
+                    android:textAppearance="@style/body_6n_style" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -207,7 +210,7 @@
             android:layout_margin="8dp"
             android:text="@string/help_us_via_donations"
             android:textAlignment="center"
-            android:textAppearance="@style/body_3_style" />
+            android:textAppearance="@style/body_6b_style" />
 
         <ImageView
             android:id="@+id/imageViewSTCPayLink"

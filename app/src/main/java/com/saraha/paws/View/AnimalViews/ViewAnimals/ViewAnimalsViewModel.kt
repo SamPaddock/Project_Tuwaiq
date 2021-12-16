@@ -11,9 +11,7 @@ class ViewAnimalsViewModel: ViewModel() {
 
     fun getAllCharitiesFromFirebase(){
         AnimalRepository().getAllAnimals().observeForever {
-            if (it.isNotEmpty()){
-                listOfAnimalsLiveData.postValue(it)
-            }
+            if (it.isNotEmpty()){ listOfAnimalsLiveData.postValue(it) }
         }
     }
 

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.kofigyan.stateprogressbar.StateProgressBar
 import com.saraha.paws.Model.User
 import com.saraha.paws.R
+import com.saraha.paws.Util.toast
 import com.saraha.paws.View.Home.HomeActivity
 import com.saraha.paws.View.AccountViews.RegisterAccount.Fragment.RegisterPage1Fragment
 import com.saraha.paws.View.AccountViews.RegisterAccount.Fragment.RegisterPage2Fragment
@@ -36,21 +37,15 @@ class RegisterActivity : AppCompatActivity() {
 
         //set onClick listener for next button
         binding.buttonToRegistrationPage2.setOnClickListener {
-            setFragmentView(false,
-                StateProgressBar.StateNumber.TWO,
-                RegisterPage2Fragment())
+            setFragmentView(false, StateProgressBar.StateNumber.TWO, RegisterPage2Fragment())
         }
 
         //set onClick listener for previous button
         binding.buttonRegistrationPage1.setOnClickListener {
-            setFragmentView(true,
-                StateProgressBar.StateNumber.ONE,
-                RegisterPage1Fragment())
+            setFragmentView(true, StateProgressBar.StateNumber.ONE, RegisterPage1Fragment())
         }
 
-        binding.buttonCreateAccount.setOnClickListener {
-            verifyRegistrationFormFields()
-        }
+        binding.buttonCreateAccount.setOnClickListener { verifyRegistrationFormFields() }
 
         setContentView(binding.root)
     }
@@ -63,19 +58,14 @@ class RegisterActivity : AppCompatActivity() {
                 createUserAccountAfterAuthentication(it)
             }
         } else {
-            Toast.makeText(this, getString(R.string.all_required), Toast.LENGTH_SHORT).show()
+            this.toast(getString(R.string.all_required))
         }
     }
 
     //after firebase authentication is complete, send the rest of the data to firebase firestorm
     private fun createUserAccountAfterAuthentication(it: Boolean) {
         if (it) {
-            viewModel.createAnAccountInFirebase(hashMapOf(
-                "name" to user.name,
-                "email" to user.email,
-                "mobile" to user.mobile,
-                "group" to user.group
-            ))
+            viewModel.createAnAccountInFirebase(user.getRegistrationHashMap())
             viewModel.createAccountResponseLiveData.observe(this) {
                 if (it){
                     this.startActivity(Intent(this, HomeActivity::class.java))
