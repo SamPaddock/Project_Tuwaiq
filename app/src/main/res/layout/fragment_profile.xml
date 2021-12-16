@@ -56,12 +56,12 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_person_24"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textViewProfileHintName"
+                app:layout_constraintEnd_toStartOf="@+id/textViewProfileName"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textViewProfileHintName"
+                android:id="@+id/textViewProfileName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -73,14 +73,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/textViewProfileName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/test_string"
-            android:textAppearance="@style/subtitle_n_style" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutProfileEmail"
@@ -94,11 +86,11 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_email_24"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textViewProfileHintEmail"
+                app:layout_constraintEnd_toStartOf="@+id/textViewProfileEmail"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/textViewProfileHintEmail"
+                android:id="@+id/textViewProfileEmail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -109,14 +101,6 @@
                 app:layout_constraintStart_toEndOf="@+id/imageViewProfileEmail"
                 app:layout_constraintTop_toTopOf="@+id/imageViewProfileEmail" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/textViewProfileEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/test_string"
-            android:layout_margin="8dp"
-            android:textAppearance="@style/subtitle_n_style" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutProfileMobile"
@@ -130,13 +114,13 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_smartphone_24"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textViewProfileHintMobile"
+                app:layout_constraintEnd_toStartOf="@+id/textViewProfileMobile"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textViewProfileHintMobile"
+                android:id="@+id/textViewProfileMobile"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -148,14 +132,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/textViewProfileMobile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/test_string"
-            android:layout_margin="8dp"
-            android:textAppearance="@style/subtitle_n_style"  />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutProfileGroup"
@@ -169,12 +145,12 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_groups_24"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textViewProfileHintGroup"
+                app:layout_constraintEnd_toStartOf="@+id/textViewProfileGroup"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textViewProfileHintGroup"
+                android:id="@+id/textViewProfileGroup"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -186,17 +162,10 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/textViewProfileGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/test_string"
-            android:layout_margin="8dp"
-            android:textAppearance="@style/subtitle_n_style"  />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/fabCreatCharity"
+        android:id="@+id/fabCreateCharity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"

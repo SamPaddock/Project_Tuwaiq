@@ -29,7 +29,7 @@ class ProfileFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
-        binding.fabCreatCharity.setOnClickListener {
+        binding.fabCreateCharity.setOnClickListener {
             val intent = Intent(this.context, AddEditCharityActivity::class.java)
             intent.putExtra("type", "Add")
             this.context?.startActivity(intent)

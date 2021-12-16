@@ -42,7 +42,7 @@ class AddEditAnimalActivity : AppCompatActivity() {
         actionType = intent.getStringExtra("type").toString()
 
         if (actionType == "Edit"){
-            binding.buttonCreateCharity.setText(getString(R.string.save))
+            binding.buttonAnimalCharity.setText(getString(R.string.save))
             animal = intent.getSerializableExtra("animal") as Animal
         }
 
@@ -69,7 +69,7 @@ class AddEditAnimalActivity : AppCompatActivity() {
             navigateBetweenFragments("Pre")
         }
 
-        binding.buttonCreateCharity.setOnClickListener { verifyAnimalFormFields() }
+        binding.buttonAnimalCharity.setOnClickListener { verifyAnimalFormFields() }
     }
 
     private fun verifyAnimalFormFields() {
@@ -174,7 +174,7 @@ class AddEditAnimalActivity : AppCompatActivity() {
 
     //Function to show or hide buttons in the activity depending on the fragment
     private fun showNavButton(isNextVisible: Boolean, isPreVisible: Boolean, isBtnVisible: Boolean){
-        binding.buttonCreateCharity.visibility = isVisible(isBtnVisible)
+        binding.buttonAnimalCharity.visibility = isVisible(isBtnVisible)
         binding.buttonAddEditAnimalPrevious.visibility = isVisible(isPreVisible)
         binding.buttonToAddEditAnimalNext.visibility = isVisible(isNextVisible)
     }
