@@ -17,11 +17,9 @@ class EditProfileViewModel: ViewModel() {
     fun setGroupData(): MutableLiveData<List<String>> {
         val listOfCharitiesLiveData = MutableLiveData<List<String>>()
 
-        CharityRepository().getAllCharities().observeForever {
+        CharityRepository().getAllCharities().observeForever { result ->
             val listOfCharities = mutableListOf<String>()
-            it.forEach {
-                listOfCharities.add(it.name)
-            }
+            result.forEach { listOfCharities.add(it.name) }
             listOfCharitiesLiveData.postValue(listOfCharities)
         }
 

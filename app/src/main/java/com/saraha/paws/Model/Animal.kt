@@ -21,17 +21,6 @@ data class Animal (
 {
 
     fun isAllDataNotEmpty(): Boolean {
-        Log.d(TAG,"Animal: - isAllDataNotEmpty: - name: ${name}")
-        Log.d(TAG,"Animal: - isAllDataNotEmpty: - type: ${type}")
-        Log.d(TAG,"Animal: - isAllDataNotEmpty: - location: ${location}")
-        Log.d(TAG,"Animal: - isAllDataNotEmpty: - age: ${age}")
-        Log.d(TAG,"Animal: - isAllDataNotEmpty: - states: ${states}")
-        Log.d(TAG,"Animal: - isAllDataNotEmpty: - gender: ${gender}")
-        Log.d(TAG,"Animal: - isAllDataNotEmpty: - color: ${color}")
-        Log.d(TAG,"Animal: - isAllDataNotEmpty: - personality: ${personality}")
-        Log.d(TAG,"Animal: - isAllDataNotEmpty: - grooming: ${grooming}")
-        Log.d(TAG,"Animal: - isAllDataNotEmpty: - medical: ${medical}")
-        Log.d(TAG,"Animal: - isAllDataNotEmpty: - photoUrl: ${photoUrl}")
         return (name.isNotEmpty() && type.isNotEmpty() && location.isNotEmpty() && age.isNotEmpty()
                 && gender.isNotEmpty() && color.isNotEmpty() && personality.isNotEmpty()
                 && grooming.isNotEmpty() && medical.isNotEmpty() && photoUrl.isNotEmpty()

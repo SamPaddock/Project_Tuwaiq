@@ -1,7 +1,6 @@
 package com.saraha.paws.Network
 
-import com.saraha.paws.Model.Facts.catFacts
-import retrofit2.Call
+import com.saraha.paws.Model.Facts.CatFacts
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -11,10 +10,10 @@ import retrofit2.http.Query
 interface FactsService {
 
     @GET("/facts?limit=10")
-    suspend fun getFact(): Response<catFacts>
+    suspend fun getFact(): Response<CatFacts>
 
     @GET("/facts")
-    suspend fun getNextFact(@Query("page")page: Int): Response<catFacts>
+    suspend fun getNextFact(@Query("page")page: Int): Response<CatFacts>
 
     companion object{
         val base_url = "https://catfact.ninja"

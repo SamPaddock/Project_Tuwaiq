@@ -14,6 +14,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.saraha.paws.Model.User
 import com.saraha.paws.R
 import com.saraha.paws.Util.UserHelper
+import com.saraha.paws.Util.toast
 import com.saraha.paws.databinding.ActivityEditProfileBinding
 import com.squareup.picasso.Picasso
 
@@ -30,10 +31,8 @@ class EditProfileActivity : AppCompatActivity() {
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
 
         val data = intent.getSerializableExtra("user")
-        Log.d(TAG,"EditProfileActivity: - onCreate: - : ${data}")
         if (data != null) {
             user = data as User
-            Log.d(TAG,"EditProfileActivity: - onCreate: - : ${data.email}")
             setValue(user)
         }
 
@@ -57,40 +56,22 @@ class EditProfileActivity : AppCompatActivity() {
         if (user.isAllDataEmpty()) {
             viewModel.setPhotoInFireStorage(user.photoUrl!!)
             viewModel.postedPhotoLiveData.observe(this) {
-                if (it.isNotEmpty()) {
-                    updateUserInformation(it)
-                }
+                if (it.isNotEmpty()) { updateUserInformation(it) }
             }
         } else {
-            Toast.makeText(this, getString(R.string.all_required), Toast.LENGTH_SHORT).show()
+            this.toast(getString(R.string.all_required))
         }
     }
 
     private fun updateUserInformation(photo: String) {
-        viewModel.editUserInFirebase(
-            hashMapOf(
-                "name" to user.name,
-                "email" to user.email,
-                "mobile" to user.mobile,
-                "group" to user.group,
-                "photoUrl" to photo
-            )
-        )
+        viewModel.editUserInFirebase(user.getHashMap(photo))
 
         viewModel.editUserLiveData.observe(this){
             if (it){
-                Toast.makeText(
-                    this,
-                    getString(R.string.successful_edit_user),
-                    Toast.LENGTH_SHORT
-                ).show()
+                this.toast(getString(R.string.successful_edit_user))
                 finish()
             } else {
-                Toast.makeText(
-                    this,
-                    getString(R.string.failure_edit_user),
-                    Toast.LENGTH_SHORT
-                ).show()
+                this.toast(getString(R.string.failure_edit_user))
                 finish()
             }
         }
@@ -168,7 +149,6 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     private fun setValue(user: User) {
-        Log.d(TAG,"EditProfileActivity: - onCreate: - : ${user.email}")
         binding.editTextEditProfileEmail.setText(user.email)
         binding.editTextEditProfileName.setText(user.name)
         binding.editTextLayoutEditProfileMobile.setText(user.mobile)
