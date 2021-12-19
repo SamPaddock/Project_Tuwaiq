@@ -1,10 +1,8 @@
 package com.saraha.paws.View.Home
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -23,7 +21,6 @@ import com.saraha.paws.R
 import com.saraha.paws.Util.AppSharedPreference
 import com.saraha.paws.View.SplashView.MainSplash.SplashActivity
 import com.saraha.paws.View.AccountViews.Profile.ProfileFragment
-import com.saraha.paws.View.AccountViews.Profile.ProfileViewModel
 import com.saraha.paws.View.ShowFacts.DisplayFactsFragment
 import com.saraha.paws.View.AnimalViews.ViewAnimals.ViewAnimalsFragment
 import com.saraha.paws.View.CharityViews.ViewCharities.ViewCharitiesFragment
@@ -84,7 +81,6 @@ class HomeActivity : AppCompatActivity() {
 
         mainSliderContent(mainSlider, savedInstanceState)
         mainSlider.onDrawerItemClickListener = { _, drawerItem, _ ->
-            Log.d(TAG,"HomeActivity: - setSlider: - : ${drawerItem.identifier}")
             when(drawerItem.identifier){
                 0.toLong() -> displayFragment(ViewAnimalsFragment())
                 1.toLong() -> displayFragment(ProfileFragment())

@@ -25,9 +25,12 @@ class ViewCharitiesFragment : Fragment() {
 
         viewModel = ViewModelProvider(requireActivity() as HomeActivity)[ViewCharitiesViewModel::class.java]
 
-        getAllCharities()
-
         return binding.root
+    }
+
+    override fun onResume() {
+        getAllCharities()
+        super.onResume()
     }
 
     //Function to get all charities from Firestore

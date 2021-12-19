@@ -43,6 +43,9 @@ data class Animal (
             "grooming" to grooming,
             "medical" to medical,
             "photoUrl" to photo,
+            "volunteerID" to volunteerID,
+            "volunteerName" to volunteerName,
+            "groupName" to groupName
         )
     }
 

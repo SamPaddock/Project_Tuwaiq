@@ -100,8 +100,10 @@ class UserRepository {
                     val photoUrl = userData.get("photoUrl") ?: " "
                     val mobile = userData.get("mobile") as String
                     val group = userData.get("group") as String
+                    val type = userData.get("type") as String
 
-                    val user = User(Firebase.auth.uid!!,photoUrl.toString(),email,null,name,mobile,group)
+                    val user = User(Firebase.auth.uid!!, photoUrl.toString() ,email, null,
+                        name, mobile, group, type)
                     liveDataUser.postValue(user)
                 }
             }?.addOnFailureListener {

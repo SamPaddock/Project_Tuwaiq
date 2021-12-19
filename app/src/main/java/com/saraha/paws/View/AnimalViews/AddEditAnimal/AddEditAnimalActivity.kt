@@ -6,9 +6,12 @@ import android.util.Patterns
 import android.view.View
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.kofigyan.stateprogressbar.StateProgressBar
 import com.saraha.paws.Model.Animal
 import com.saraha.paws.R
+import com.saraha.paws.Util.AppSharedPreference
 import com.saraha.paws.Util.toast
 import com.saraha.paws.View.AnimalViews.AddEditAnimal.Fragment.AddEditAnimalPage1Fragment
 import com.saraha.paws.View.AnimalViews.AddEditAnimal.Fragment.AddEditAnimalPage2Fragment
@@ -20,10 +23,12 @@ class AddEditAnimalActivity : AppCompatActivity() {
     private val viewModel: AddEditAnimalViewModel by viewModels()
     lateinit var binding: ActivityAddEditAnimalBinding
 
+    val sharedPref = AppSharedPreference()
+
     private var actionType = ""
-    var animal = Animal(null, "", "", "", "", "", ""
-        , "", "", "", "", ""
-        , "", "", "")
+    var animal = Animal(null, "", "", "", "", "", "",
+        "", "", "", "", "",
+        Firebase.auth.currentUser?.uid!!, sharedPref.read("uName","")!!, sharedPref.read("gName","")!!)
     var pageFragments = listOf(
         AddEditAnimalPage1Fragment(),
         AddEditAnimalPage2Fragment(),
@@ -77,6 +82,8 @@ class AddEditAnimalActivity : AppCompatActivity() {
     //Function to check all data is entered then send photo to FireStorage
     private fun verifyAnimalFormFields() {
         if (animal.isAllDataNotEmpty()) {
+            binding.layoutAddEditAnimal.visibility = View.VISIBLE
+            binding.buttonAnimalCharity.isClickable = false
             if (!Patterns.WEB_URL.matcher(animal.photoUrl).matches()){
                 viewModel.setPhotoInFireStorage(animal.photoUrl)
                 viewModel.postedPhotoLiveData.observe(this) { checkActionToPerform(it) }
@@ -84,6 +91,8 @@ class AddEditAnimalActivity : AppCompatActivity() {
                 checkActionToPerform()
             }
         } else {
+            binding.layoutAddEditAnimal.visibility = View.GONE
+            binding.buttonAnimalCharity.isClickable = true
             this.toast(getString(R.string.all_required))
         }
     }
@@ -99,6 +108,8 @@ class AddEditAnimalActivity : AppCompatActivity() {
     private fun editAnimal(photo: String){
         viewModel.editAAnimalInFirebase(animal.aid!!, animal.getHashMap(photo))
         viewModel.editAnimalLiveData.observe(this){
+            binding.layoutAddEditAnimal.visibility = View.GONE
+            binding.buttonAnimalCharity.isClickable = true
             if (it) {
                 this.toast(getString(R.string.successful_edit_animal))
                 finish()
@@ -113,6 +124,8 @@ class AddEditAnimalActivity : AppCompatActivity() {
         viewModel.createAAnimalInFirebase(animal.getHashMap(photo))
 
         viewModel.createdAnimalLiveData.observe(this) {
+            binding.layoutAddEditAnimal.visibility = View.GONE
+            binding.buttonAnimalCharity.isClickable = true
             if (it) {
                 this.toast(getString(R.string.successful_add_animal))
                 finish()

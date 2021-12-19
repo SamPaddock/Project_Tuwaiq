@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
 import com.saraha.paws.Model.Animal
+import com.saraha.paws.Util.Helper
 import com.saraha.paws.Util.UserHelper
 import com.saraha.paws.View.AnimalViews.AddEditAnimal.AddEditAnimalActivity
 import com.saraha.paws.View.AnimalViews.AddEditAnimal.AddEditAnimalViewModel
@@ -48,9 +49,9 @@ class AddEditAnimalPage1Fragment : Fragment() {
     //Function to set data in dropdown menus
     private fun prepareDropdownMenus() {
         binding.edittextAddAnimalStatues.setAdapter(
-            ArrayAdapter(context!!, R.layout.simple_list_item_1, viewModel.getStatusList()))
+            ArrayAdapter(context!!, R.layout.simple_list_item_1, Helper().getStatusList()))
         binding.edittextAddAnimalType.setAdapter(
-            ArrayAdapter(context!!, R.layout.simple_list_item_1, viewModel.getTypeList()))
+            ArrayAdapter(context!!, R.layout.simple_list_item_1, Helper().getTypeList()))
 
     }
 
@@ -90,10 +91,10 @@ class AddEditAnimalPage1Fragment : Fragment() {
             if (!hasFocus) validateText(binding.editTextAddAnimalLocation,1)
         }
         binding.edittextAddAnimalType.setOnItemClickListener { _, _, position, _ ->
-            viewModel.setAnimalType(viewModel.getTypeList().get(position))
+            viewModel.setAnimalType(Helper().getTypeList().get(position))
         }
         binding.edittextAddAnimalStatues.setOnItemClickListener { _, _, position, _ ->
-            viewModel.setAnimalStatus(viewModel.getStatusList().get(position))
+            viewModel.setAnimalStatus(Helper().getStatusList().get(position))
         }
     }
 

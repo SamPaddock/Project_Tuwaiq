@@ -1,8 +1,10 @@
 package com.saraha.paws.View.AnimalViews.ViewAnimals
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
@@ -16,9 +18,9 @@ import com.squareup.picasso.Picasso
 class AnimalViewAdapter(var context: Context, var data: List<Animal>) :
     RecyclerView.Adapter<AnimalViewHolder>(), Filterable {
 
-    var animalFilterList = ArrayList<Animal>()
+    var animalFilterList = data
 
-    override fun getItemCount() = data.size
+    override fun getItemCount() = animalFilterList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimalViewHolder {
         val binding =
@@ -27,16 +29,16 @@ class AnimalViewAdapter(var context: Context, var data: List<Animal>) :
     }
 
     override fun onBindViewHolder(holder: AnimalViewHolder, position: Int) {
-        Picasso.get().load(Uri.parse(data[position].photoUrl))
+        Picasso.get().load(Uri.parse(animalFilterList[position].photoUrl))
             .into(holder.binding.imageViewAnimalPhoto)
-        holder.binding.textViewAnimalName.setText(data[position].name)
-        holder.binding.textViewAnimalGender.setText(data[position].gender)
-        holder.binding.textViewAnimalAge.setText(data[position].age)
-        holder.binding.chipAnimalStatues.setText(data[position].states)
+        holder.binding.textViewAnimalName.setText(animalFilterList[position].name)
+        holder.binding.textViewAnimalGender.setText(animalFilterList[position].gender)
+        holder.binding.textViewAnimalAge.setText(animalFilterList[position].age)
+        holder.binding.chipAnimalStatues.setText(animalFilterList[position].states)
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, ViewAnimalDetailsActivity::class.java)
-            intent.putExtra("animal", data[position])
+            intent.putExtra("animal", animalFilterList[position])
             context.startActivity(intent)
         }
     }
@@ -49,12 +51,16 @@ class AnimalViewAdapter(var context: Context, var data: List<Animal>) :
                     animalFilterList = data as ArrayList<Animal>
                 } else {
                     val resultList = ArrayList<Animal>()
-                    for (row in data) {
-                        if (row.states.lowercase().contains(constraint.toString().lowercase())){
+                    for (row in animalFilterList) {
+                        if (row.type.lowercase().contains(constraint.toString().lowercase())){
+                            Log.d(TAG,"AnimalViewAdapter: - performFiltering: - : ${row.type}")
+                            resultList.add(row)
+                        } else if (row.states.lowercase().contains(constraint.toString().lowercase())){
+                            Log.d(TAG,"AnimalViewAdapter: - performFiltering: - : ${row.states}")
                             resultList.add(row)
                         }
                     }
-                animalFilterList = resultList
+                    animalFilterList = resultList
                 }
                 val filterResults = FilterResults()
                 filterResults.values = animalFilterList

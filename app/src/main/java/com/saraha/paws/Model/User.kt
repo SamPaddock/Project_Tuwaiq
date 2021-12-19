@@ -28,6 +28,7 @@ data class User (
             "email" to email,
             "mobile" to mobile,
             "group" to group,
+            "type" to type,
             "photoUrl" to photo
         )
     }

@@ -5,6 +5,8 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Patterns
+import android.view.View
 import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import com.google.android.material.textfield.TextInputEditText
@@ -54,20 +56,31 @@ class EditProfileActivity : AppCompatActivity() {
     //Function the verifies data inputted by user, then uploading image in FireStorage
     private fun verifyCharityFormFields() {
         if (user.isAllDataEmpty()) {
-            viewModel.setPhotoInFireStorage(user.photoUrl!!)
-            viewModel.postedPhotoLiveData.observe(this) {
-                if (it.isNotEmpty()) { updateUserInformation(it) }
+            binding.layoutEditView.visibility = View.VISIBLE
+            binding.buttonSaveProfileEdit.isClickable = false
+            if (!Patterns.WEB_URL.matcher(user.photoUrl).matches()){
+                viewModel.setPhotoInFireStorage(user.photoUrl!!)
+                viewModel.postedPhotoLiveData.observe(this) {
+                    if (it.isNotEmpty()) { updateUserInformation(it) }
+                }
+            } else {
+                updateUserInformation()
             }
+
         } else {
+            binding.layoutEditView.visibility = View.GONE
+            binding.buttonSaveProfileEdit.isClickable = true
             this.toast(getString(R.string.all_required))
         }
     }
 
     //Function to update user data in FireStore
-    private fun updateUserInformation(photo: String) {
-        viewModel.editUserInFirebase(user.getHashMap(photo))
+    private fun updateUserInformation(photo: String? = user.photoUrl) {
+        viewModel.editUserInFirebase(user.getHashMap(photo!!))
 
         viewModel.editUserLiveData.observe(this){
+            binding.layoutEditView.visibility = View.GONE
+            binding.buttonSaveProfileEdit.isClickable = true
             if (it){
                 sharedPref.write("uName", user.name)
                 sharedPref.write("eName", user.email)

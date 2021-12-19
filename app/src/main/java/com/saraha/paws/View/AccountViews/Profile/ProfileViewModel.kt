@@ -7,14 +7,4 @@ import com.saraha.paws.Repository.UserRepository
 
 class ProfileViewModel: ViewModel() {
 
-    //Variable to get liveData response from Firebase
-    val livedataUser = MutableLiveData<User>()
-
-    //Function to handle firebase repository response to retrieving user data
-    fun getUserDataFromFirebase(){
-        UserRepository().getUserAccount().observeForever {
-            if (it.email.isNotEmpty()){ livedataUser.postValue(it) }
-        }
-    }
-
 }

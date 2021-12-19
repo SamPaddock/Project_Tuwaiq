@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import com.saraha.paws.Model.Animal
 import com.saraha.paws.R
+import com.saraha.paws.View.AnimalViews.AddEditAnimal.AddEditAnimalActivity
 import com.saraha.paws.View.CharityViews.AddEditCharity.AddEditCharityActivity
 import com.saraha.paws.databinding.ActivityViewAnimalDetailsBinding
 import com.squareup.picasso.Picasso
@@ -45,7 +46,7 @@ class ViewAnimalDetailsActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.edit_menu_item,menu)
         menu?.findItem(R.id.edit_item)?.setOnMenuItemClickListener {
-            val intent = Intent(this, AddEditCharityActivity::class.java)
+            val intent = Intent(this, AddEditAnimalActivity::class.java)
             intent.putExtra("type", "Edit")
             intent.putExtra("animal", animal)
             startActivity(intent)

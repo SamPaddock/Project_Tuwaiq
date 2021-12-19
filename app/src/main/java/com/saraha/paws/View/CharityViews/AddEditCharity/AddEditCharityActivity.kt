@@ -77,6 +77,8 @@ class AddEditCharityActivity : AppCompatActivity() {
     //Function to check all data is entered then send photo to FireStorage
     private fun verifyCharityFormFields() {
         if (charity.isAllDataNotEmpty()) {
+            binding.layoutAddEditCharity.visibility = View.VISIBLE
+            binding.buttonCreateCharity.isClickable = false
             if (!Patterns.WEB_URL.matcher(charity.photo).matches()){
                 viewModel.setPhotoInFireStorage(charity.photo)
                 viewModel.postedPhotoLiveData.observe(this) { checkActionToPerform(it) }
@@ -85,6 +87,8 @@ class AddEditCharityActivity : AppCompatActivity() {
             }
 
         } else {
+            binding.layoutAddEditCharity.visibility = View.GONE
+            binding.buttonCreateCharity.isClickable = true
             this.toast(getString(R.string.all_required))
         }
     }
@@ -100,6 +104,8 @@ class AddEditCharityActivity : AppCompatActivity() {
     private fun editCharity(photo: String){
         viewModel.editACharityInFirebase(charity.cid!!, charity.getHashMap(photo))
         viewModel.editCharityLiveData.observe(this){
+            binding.layoutAddEditCharity.visibility = View.GONE
+            binding.buttonCreateCharity.isClickable = true
             if (it) {
                 this.toast(getString(R.string.successful_edit_charity))
                 finish()
@@ -114,6 +120,8 @@ class AddEditCharityActivity : AppCompatActivity() {
         viewModel.createACharityInFirebase(charity.getHashMap(photo))
 
         viewModel.createdCharityLiveData.observe(this) {
+            binding.layoutAddEditCharity.visibility = View.GONE
+            binding.buttonCreateCharity.isClickable = true
             if (it) {
                 this.toast(getString(R.string.successful_add_charity))
                 finish()
