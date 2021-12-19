@@ -39,29 +39,34 @@ class AddEditAnimalViewModel: ViewModel() {
     fun setAnimalMedical(medical: String){ medicalLiveData.postValue(medical) }
     fun setAnimalPhoto(photo: Uri){ photoLiveData.postValue(photo) }
 
+    //Function to handle firebase repository for uploading photo
     fun setPhotoInFireStorage(photo: String){
         FirebaseRepository().setPhotoInStorage(Uri.parse(photo)).observeForever {
             if (it.isNotEmpty()) postedPhotoLiveData.postValue(it)
         }
     }
 
+    //Function to handle firebase repository for creating an animal document
     fun createAAnimalInFirebase(animal: HashMap<String, String?>){
         FirebaseRepository().addDocument("Animals", animal).observeForever {
             createdAnimalLiveData.postValue(it)
         }
     }
 
+    //Function to handle firebase repository for updating an animal document
     fun editAAnimalInFirebase(id: String, animal: HashMap<String, String?>){
         FirebaseRepository().editDocument("Animals", id, animal).observeForever {
             editAnimalLiveData.postValue(it)
         }
     }
 
+    //Function returns static dropdown menu list
     fun getStatusList(): List<String>{
         return listOf("Adopted", "Fostered", "For Adoption", "Vet: pre-check"
             , "Vet: post-check", "Vet: post-surgery", "Action: Rescue")
     }
 
+    //Function returns static dropdown menu list
     fun getTypeList(): List<String>{
         return listOf("Cat", "Dog", "Bird", "Aqua", "Rabbit", "Farm Animal", "Other")
     }

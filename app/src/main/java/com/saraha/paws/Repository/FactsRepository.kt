@@ -6,8 +6,8 @@ class FactsRepository {
 
     private val retrofitService = FactsService.getInstance()
 
-    suspend fun getAllFacts() = retrofitService.getFact()
+    suspend fun getAllFacts() = retrofitService.get()
 
-    suspend fun getNextFacts(page: Int) = retrofitService.getNextFact(page)
+    suspend fun getNextFacts(page: Int) = retrofitService.getNext(page)
 
 }

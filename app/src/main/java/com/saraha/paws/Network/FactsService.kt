@@ -10,10 +10,10 @@ import retrofit2.http.Query
 interface FactsService {
 
     @GET("/facts?limit=10")
-    suspend fun getFact(): Response<CatFacts>
+    suspend fun get(): Response<CatFacts>
 
     @GET("/facts")
-    suspend fun getNextFact(@Query("page")page: Int): Response<CatFacts>
+    suspend fun getNext(@Query("page")page: Int): Response<CatFacts>
 
     companion object{
         val base_url = "https://catfact.ninja"
@@ -25,6 +25,6 @@ interface FactsService {
                 .baseUrl(base_url).build()
         }
 
-        fun getInstance() = retrofit.create(FactsService::class.java)
+        fun getInstance(): FactsService = retrofit.create(FactsService::class.java)
     }
 }

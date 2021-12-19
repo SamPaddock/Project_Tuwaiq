@@ -30,6 +30,7 @@ class ViewCharitiesFragment : Fragment() {
         return binding.root
     }
 
+    //Function to get all charities from Firestore
     private fun getAllCharities(){
         viewModel.getAllCharitiesFromFirebase()
         viewModel.listOfCharitiesLiveData.observe(viewLifecycleOwner){
@@ -37,6 +38,7 @@ class ViewCharitiesFragment : Fragment() {
         }
     }
 
+    //Function to set data into recyclerview
     private fun setRecyclerViewWithData(charities: List<Charity>?) {
         val recyclerView = binding.recyclerViewCharityList
         recyclerView.layoutManager = LinearLayoutManager(this.context)

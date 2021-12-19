@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import com.saraha.paws.Model.Animal
-import com.saraha.paws.Model.Charity
 import com.saraha.paws.R
 import com.saraha.paws.View.CharityViews.AddEditCharity.AddEditCharityActivity
 import com.saraha.paws.databinding.ActivityViewAnimalDetailsBinding
-import com.saraha.paws.databinding.ActivityViewCharityDetailBinding
 import com.squareup.picasso.Picasso
 
 class ViewAnimalDetailsActivity : AppCompatActivity() {
@@ -56,17 +54,19 @@ class ViewAnimalDetailsActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+    //Function to set data in textviews
     private fun setValues(animal: Animal) {
         //set main values
         binding.textViewDisplayAnimalName.setText(animal.name)
-        binding.textViewDisplayAnimalVolunteer.setText(animal.name)
-        binding.textViewDisplayAnimalCharity.setText(animal.name)
+        binding.textViewDisplayAnimalVolunteer.setText(animal.volunteerName)
+        binding.textViewDisplayAnimalCharity.setText(animal.groupName)
         //set image
         Picasso.get().load(animal.photoUrl).into(binding.imageViewDisplayAnimalPhoto)
         //set secondary values
         binding.textViewDisplayAnimalType.setText(animal.type)
         binding.textViewDisplayAnimalGender.setText(animal.gender)
         binding.textViewDisplayAnimalAge.setText(animal.age)
+        binding.textViewDisplayAnimalColor.setText(animal.color)
         binding.textViewDisplayAnimalPersonality.setText(animal.personality)
         binding.textViewDisplayAnimalGrooming.setText(animal.grooming)
         binding.textViewDisplayAnimalMedical.setText(animal.medical)

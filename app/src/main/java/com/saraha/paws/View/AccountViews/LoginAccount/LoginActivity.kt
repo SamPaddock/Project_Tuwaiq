@@ -22,6 +22,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    //Function the verifies login input
     private fun checkFields(): Boolean {
         val email = binding.editTextLoginEmail
         val password = binding.editTextLoginPassword
@@ -35,6 +36,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    //Function the verifies login credentials then login to application
     private fun onLoginButtonClick(){
         val email = binding.editTextLoginEmail.text.toString()
         val password = binding.editTextLoginPassword.text.toString()

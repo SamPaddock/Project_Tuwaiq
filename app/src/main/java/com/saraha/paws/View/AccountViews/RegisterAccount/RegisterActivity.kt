@@ -75,6 +75,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    //Function to handle fragment change
     private fun setFragmentView(
         isVisible: Boolean,
         progress: StateProgressBar.StateNumber,
@@ -85,6 +86,7 @@ class RegisterActivity : AppCompatActivity() {
         displayFragment(fragment)
     }
 
+    //Function to handle live data from viewModel
     private fun getRegistrationLiveData() {
         viewModel.emailLiveData.observe(this ,{ user.email = it })
         viewModel.mobileLiveData.observe(this ,{ user.mobile = it })

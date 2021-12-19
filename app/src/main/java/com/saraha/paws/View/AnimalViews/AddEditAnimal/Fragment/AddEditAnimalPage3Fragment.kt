@@ -51,6 +51,7 @@ class AddEditAnimalPage3Fragment : Fragment() {
         }
     }
 
+    //Check text from textField and handle use cases
     private fun validateText(edittext: TextInputEditText, index: Int) {
         val (result, isValid) = UserHelper().fieldVerification(edittext.text.toString())
         handleTextFields(edittext,result.string,index,isValid)

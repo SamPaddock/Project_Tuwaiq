@@ -1,6 +1,8 @@
 package com.saraha.paws.View.AccountViews.RegisterAccount.Fragment
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -41,13 +43,16 @@ class RegisterPage1Fragment : Fragment() {
 
     //Set onOutOfFocus on textFields
     private fun onFieldFocus(){
-        binding.edittextRegisterConfirmPassword.setOnFocusChangeListener { _, hasFocus ->
+        binding.edittextRegisterConfirmPassword.setOnFocusChangeListener { v, hasFocus ->
+            Log.d(TAG,"RegisterPage1Fragment: - onFieldFocus: - : ${v.id}")
             if (!hasFocus) validateConfirmPassword(binding.edittextRegisterConfirmPassword)
         }
-        binding.edittextRegisterPassword.setOnFocusChangeListener { _, hasFocus ->
+        binding.edittextRegisterPassword.setOnFocusChangeListener { v, hasFocus ->
+            Log.d(TAG,"RegisterPage1Fragment: - onFieldFocus: - : ${v.id}")
             if (!hasFocus) validatePassword(binding.edittextRegisterPassword)
         }
-        binding.editTextRegisterEmail.setOnFocusChangeListener { _, hasFocus ->
+        binding.editTextRegisterEmail.setOnFocusChangeListener { v, hasFocus ->
+            Log.d(TAG,"RegisterPage1Fragment: - onFieldFocus: - : ${v.id}")
             if (!hasFocus) validateEmail(binding.editTextRegisterEmail)
         }
     }

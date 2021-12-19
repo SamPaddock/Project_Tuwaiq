@@ -64,12 +64,14 @@ class RegisterPage2Fragment : Fragment() {
         }
     }
 
+    //Check mobile textField and handle use cases
     private fun validateMobile() {
         val mobile = binding.edittextRegisterMobile
         val (result, isValid) = UserHelper().mobileValidation(mobile.text.toString())
         handleTextFields(mobile,result.string,1 ,isValid)
     }
 
+    //Check name textField and handle use cases
     private fun validateName() {
         val name = binding.edittextRegisterName
         val (result, isValid) = UserHelper().fieldVerification(name.text.toString())

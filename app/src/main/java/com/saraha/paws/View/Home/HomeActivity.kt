@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.ktx.auth
@@ -19,8 +20,10 @@ import com.mikepenz.materialdrawer.model.interfaces.nameRes
 import com.mikepenz.materialdrawer.widget.AccountHeaderView
 import com.mikepenz.materialdrawer.widget.MaterialDrawerSliderView
 import com.saraha.paws.R
+import com.saraha.paws.Util.AppSharedPreference
 import com.saraha.paws.View.SplashView.MainSplash.SplashActivity
 import com.saraha.paws.View.AccountViews.Profile.ProfileFragment
+import com.saraha.paws.View.AccountViews.Profile.ProfileViewModel
 import com.saraha.paws.View.ShowFacts.DisplayFactsFragment
 import com.saraha.paws.View.AnimalViews.ViewAnimals.ViewAnimalsFragment
 import com.saraha.paws.View.CharityViews.ViewCharities.ViewCharitiesFragment
@@ -28,11 +31,16 @@ import com.saraha.paws.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
 
+    private val viewModel: HomeViewModel by viewModels()
     lateinit var binding: ActivityHomeBinding
+
+    val sharedPref = AppSharedPreference()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
+
+        getUserInformation()
 
         displayFragment(ViewAnimalsFragment())
 
@@ -41,6 +49,23 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    //Function to get user information from Firestore and save in SharedPref
+    private fun getUserInformation(){
+        viewModel.getUserDataFromFirebase()
+
+        viewModel.livedataUser.observe(this){
+            if (it.email.isNotEmpty()){
+                sharedPref.write("uName", it.name)
+                sharedPref.write("eName", it.email)
+                sharedPref.write("mName", it.mobile)
+                sharedPref.write("tName", it.type)
+                sharedPref.write("gName", it.group)
+                it.photoUrl?.let { photo -> sharedPref.write("pName", photo) }
+            }
+        }
+    }
+
+    //Function to setup Toolbar and Slider Menu
     private fun setupToolbarAndSliderDrawer(savedInstanceState: Bundle?) {
         val mainToolbar = binding.toolbarHome
         setSupportActionBar(mainToolbar)
@@ -53,6 +78,7 @@ class HomeActivity : AppCompatActivity() {
         setSlider(savedInstanceState, mainToolbar)
     }
 
+    //Function to set Slider menu properties
     private fun setSlider(savedInstanceState: Bundle?, mainToolbar: Toolbar) {
         val mainSlider = binding.homeSlider
 
@@ -74,6 +100,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    //Function to set Slider menu content
     private fun mainSliderContent(mainSlider: MaterialDrawerSliderView, savedInstance: Bundle?) {
         mainSliderHeader(mainSlider, savedInstance)
 
@@ -105,6 +132,7 @@ class HomeActivity : AppCompatActivity() {
         )
     }
 
+    //Function to set slider menu header content
     private fun mainSliderHeader(mainSlider: MaterialDrawerSliderView, savedInstanceState: Bundle?){
         val currentUser = Firebase.auth.currentUser
         mainSlider.headerView = AccountHeaderView(this).apply {
@@ -129,6 +157,7 @@ class HomeActivity : AppCompatActivity() {
         finish()
     }
 
+    //Function to replace a fragment view
     private fun displayFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.HomeFrameLayout, fragment).commit()
     }

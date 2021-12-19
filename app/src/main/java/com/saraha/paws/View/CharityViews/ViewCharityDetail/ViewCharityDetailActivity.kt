@@ -59,6 +59,7 @@ class ViewCharityDetailActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+    //Function to set data in textviews
     private fun setValues(charity: Charity) {
         //set values
         binding.textViewDisplayCharityEmail.text = charity.email
@@ -73,6 +74,7 @@ class ViewCharityDetailActivity : AppCompatActivity() {
         binding.imageViewWhatsappLink.setOnClickListener { openWhatsapp(charity.mobile) }
     }
 
+    //Function to handle to whatsapp icon click
     private fun openWhatsapp(mobile: String){
         // create an Intent to send data to the whatsapp
         val intent = Intent(Intent.ACTION_VIEW)
@@ -87,6 +89,7 @@ class ViewCharityDetailActivity : AppCompatActivity() {
         }
     }
 
+    //Function to handle to facebook icon click
     private fun openFacebook(Url: String){
         // create an Intent to send data to the Facebook
         val intent = Intent(Intent.ACTION_VIEW)
@@ -105,6 +108,7 @@ class ViewCharityDetailActivity : AppCompatActivity() {
 
     }
 
+    //Function to handle to instagram icon click
     private fun openInstagram(Url: String){
         // create an Intent to send data to the Instagram
         val intent = Intent(Intent.ACTION_VIEW)
@@ -122,6 +126,7 @@ class ViewCharityDetailActivity : AppCompatActivity() {
         }
     }
 
+    //Function to handle to stcPay icon click
     private fun openSTCPay(mobile: String){
         // create an Intent to send data to the whatsapp
         val intent = getPackageManager().getLaunchIntentForPackage("sa.com.stcpay")

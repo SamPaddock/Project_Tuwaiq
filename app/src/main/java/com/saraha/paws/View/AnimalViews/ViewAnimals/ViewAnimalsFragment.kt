@@ -37,13 +37,15 @@ class ViewAnimalsFragment : Fragment() {
         return binding.root
     }
 
+    //Function to get all animals from Firestore
     private fun getAllAnimals(){
-        viewModel.getAllCharitiesFromFirebase()
+        viewModel.getAllAnimalsFromFirebase()
         viewModel.listOfAnimalsLiveData.observe(viewLifecycleOwner){
             if (it.isNotEmpty()){ setRecyclerViewWithData(it) }
         }
     }
 
+    //Function to set data into recyclerview
     private fun setRecyclerViewWithData(Animals: List<Animal>?) {
         val recyclerView = binding.recyclerViewAnimalList
         recyclerView.layoutManager = GridLayoutManager(this.context,2)

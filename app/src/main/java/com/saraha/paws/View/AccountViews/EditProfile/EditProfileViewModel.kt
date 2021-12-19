@@ -17,7 +17,7 @@ class EditProfileViewModel: ViewModel() {
     fun setGroupData(): MutableLiveData<List<String>> {
         val listOfCharitiesLiveData = MutableLiveData<List<String>>()
 
-        CharityRepository().getAllCharities().observeForever { result ->
+        CharityRepository().getAll().observeForever { result ->
             val listOfCharities = mutableListOf<String>()
             result.forEach { listOfCharities.add(it.name) }
             listOfCharitiesLiveData.postValue(listOfCharities)
@@ -26,12 +26,14 @@ class EditProfileViewModel: ViewModel() {
         return listOfCharitiesLiveData
     }
 
+    //Function to handle firebase repository for uploading photo
     fun setPhotoInFireStorage(photo: String){
         UserRepository().setPhotoInStorage(Uri.parse(photo)).observeForever {
             if (it.isNotEmpty()) postedPhotoLiveData.postValue(it)
         }
     }
 
+    //Function to handle firebase repository for updating user info
     fun editUserInFirebase(user: HashMap<String, String?>){
         UserRepository().updateUserAccount(user).observeForever {
             if (it) editUserLiveData.postValue(it)

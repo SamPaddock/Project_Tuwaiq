@@ -13,9 +13,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
 
+        //Handle on login click
         binding.buttonRedirectToLogin.setOnClickListener {
             startActivity(Intent(this,LoginActivity::class.java))
         }
+
+        //Handle on register click
         binding.buttonRedirectToRegister.setOnClickListener {
             startActivity(Intent(this,RegisterActivity::class.java))
         }

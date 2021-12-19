@@ -419,7 +419,8 @@
                     android:id="@+id/imageViewDisplayAnimalPhoto"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:srcCompat="@mipmap/ic_launcher_round"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@mipmap/ic_launcher"
                     tools:ignore="ImageContrastCheck" />
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>

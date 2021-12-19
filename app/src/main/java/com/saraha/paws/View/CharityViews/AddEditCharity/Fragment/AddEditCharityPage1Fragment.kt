@@ -44,6 +44,7 @@ class AddEditCharityPage1Fragment : Fragment() {
         return binding.root
     }
 
+    //Function to select a photo from device
     fun selectPhoto(){
         binding.floatingActionButtonAddCharityPhoto.setOnClickListener {
             val takePictureIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
@@ -51,6 +52,7 @@ class AddEditCharityPage1Fragment : Fragment() {
         }
     }
 
+    //Function to handle response from action result
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
@@ -95,18 +97,21 @@ class AddEditCharityPage1Fragment : Fragment() {
         handleTextFields(email,result.string,0,isValid)
     }
 
+    //Check mobile textField and handle use cases
     private fun validateMobile() {
         val mobile = binding.editTextAddCharityMobile
         val (result, isValid) = UserHelper().mobileValidation(mobile.text.toString())
         handleTextFields(mobile,result.string,1,isValid)
     }
 
+    //Check name textField and handle use cases
     private fun validateName() {
         val string = binding.editTextAddCharityName
         val (result, isValid) = UserHelper().fieldVerification(string.text.toString())
         handleTextFields(string,result.string,2,isValid)
     }
 
+    //Check founder textField and handle use cases
     private fun validateFounder() {
         val string = binding.editTextAddCharityFounder
         val (result, isValid) = UserHelper().fieldVerification(string.text.toString())

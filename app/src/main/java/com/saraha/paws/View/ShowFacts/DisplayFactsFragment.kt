@@ -39,6 +39,7 @@ class DisplayFactsFragment : Fragment() {
         return binding.root
     }
 
+    //Function to handle response of Data statues from viewModel
     private fun checkContentInRoom(){
         viewModel.checkIfRoomIsEmpty()
         viewModel.factsLiveData.observe(this){
@@ -47,16 +48,13 @@ class DisplayFactsFragment : Fragment() {
                 DataStatus.New -> setNewFacts(data)
                 DataStatus.Next -> setNextFacts(data)
                 DataStatus.Room -> setRecyclerViewWithData(data)
-                DataStatus.Error -> showErrorToast(response)
-                else -> showErrorToast(response)
+                DataStatus.Error -> this.requireContext().toast(response.string)
+                else -> this.requireContext().toast(response.string)
             }
         }
     }
 
-    private fun showErrorToast(response: DataStatus) {
-        this.requireContext().toast(response.string)
-    }
-
+    //Function to set New data from Api
     private fun setNewFacts(data: CatFacts?) {
         val instance = Calendar.getInstance()
         instance.add(Calendar.HOUR,24)
@@ -64,18 +62,13 @@ class DisplayFactsFragment : Fragment() {
         setNextFacts(data)
     }
 
+    //Function to set data from next page of Api
     private fun setNextFacts(data: CatFacts?) {
         viewModel.saveFactIntoRoom(data)
         setRecyclerViewWithData(data)
     }
 
-    private fun saveFactIntoRoom(catFacts: CatFacts?){
-        if (catFacts != null) {
-            viewModel.db?.catFactsDao()?.delete()
-            viewModel.db?.catFactsDao()?.insert(catFacts)
-        }
-    }
-
+    //Function to set data into recyclerview
     private fun setRecyclerViewWithData(catFacts: CatFacts?) {
         val recyclerView = binding.recyclerViewDisplayfacts
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())

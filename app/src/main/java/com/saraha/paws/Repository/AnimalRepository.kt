@@ -21,7 +21,7 @@ class AnimalRepository {
         dbFirestore!!.firestoreSettings = settings
     }
 
-    fun getAllAnimals(): LiveData<List<Animal>> {
+    fun getAll(): LiveData<List<Animal>> {
         if (dbFirestore == null) createDBFirestore()
 
         val liveDataAnimal = MutableLiveData<List<Animal>>()
@@ -42,8 +42,13 @@ class AnimalRepository {
                         val grooming = animal.get("grooming") as String
                         val medical = animal.get("medical") as String
                         val photoUrl = animal.get("photoUrl") as String
+                        val volunteerID = animal.get("volunteerID") as String
+                        val volunteerName = animal.get("volunteerName") as String
+                        val groupName = animal.get("groupName") as String
                         val dbAnimal = Animal(animal.id, name, type, location, age, states,
-                            gender, color, personality, grooming, medical, photoUrl)
+                            gender, color, personality, grooming, medical, photoUrl,
+                            volunteerID, volunteerName, groupName
+                        )
                         listOfAnimals.add(dbAnimal)
                     }
                 }

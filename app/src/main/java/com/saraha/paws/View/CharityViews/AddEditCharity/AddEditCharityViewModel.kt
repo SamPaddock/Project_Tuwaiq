@@ -33,18 +33,21 @@ class AddEditCharityViewModel: ViewModel() {
     fun setCharityInstagramLink(link: String){ instagramLinkLiveData.postValue(link) }
     fun setCharityPhoto(imgData: Uri) {photoLiveData.postValue(imgData)}
 
+    //Function to handle firebase repository for uploading photo
     fun setPhotoInFireStorage(photo: String){
         FirebaseRepository().setPhotoInStorage(Uri.parse(photo)).observeForever {
             if (it.isNotEmpty()) postedPhotoLiveData.postValue(it)
         }
     }
 
+    //Function to handle firebase repository for creating a charity document
     fun createACharityInFirebase(charity: HashMap<String, String?>){
         FirebaseRepository().addDocument("Charities",charity).observeForever {
             createdCharityLiveData.postValue(it)
         }
     }
 
+    //Function to handle firebase repository for updating a charity document
     fun editACharityInFirebase(id: String, charity: HashMap<String, String?>){
         FirebaseRepository().editDocument("Charities",id, charity).observeForever {
             editCharityLiveData.postValue(it)

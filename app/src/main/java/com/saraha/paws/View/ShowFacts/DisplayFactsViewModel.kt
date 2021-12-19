@@ -30,8 +30,10 @@ class DisplayFactsViewModel: ViewModel() {
     var db: AppDatabase? = null
     val sharedPref = AppSharedPreference()
 
+    //Variable to get liveData response from Api
     val factsLiveData = MutableLiveData<Pair<CatFacts?,DataStatus>>()
 
+    //Function to check if database Room is empty, then check data save time, if save time is more than 24 hours old, then get new data
     fun checkIfRoomIsEmpty(){
         val roomData = db?.catFactsDao()?.get()
         val factTime = sharedPref.read(SharedConst.PrefsFactDate.string, (-1).toLong())
@@ -52,6 +54,7 @@ class DisplayFactsViewModel: ViewModel() {
         }
     }
 
+    //Function to get data from Api
     fun getFacts(){
         CoroutineScope(Dispatchers.IO).launch {
             val response = FactsRepository().getAllFacts()
@@ -69,6 +72,7 @@ class DisplayFactsViewModel: ViewModel() {
         }
     }
 
+    //Function to get data from the next page of Api
     fun getNextPageOfFacts(page: Int){
         CoroutineScope(Dispatchers.IO).launch {
             val response = FactsRepository().getNextFacts(page)
@@ -86,6 +90,7 @@ class DisplayFactsViewModel: ViewModel() {
         }
     }
 
+    //Function to clean and save new data into database Room
     fun saveFactIntoRoom(catFacts: CatFacts?){
         if (catFacts != null) {
             db?.catFactsDao()?.delete()

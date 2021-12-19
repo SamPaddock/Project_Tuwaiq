@@ -59,6 +59,7 @@ class AddEditCharityActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    //Function to set button onClick listener
     private fun setButtonOnClickListener() {
         //set onClick listener for next button
         binding.buttonToAddEditCharityPage2.setOnClickListener {
@@ -73,6 +74,7 @@ class AddEditCharityActivity : AppCompatActivity() {
         binding.buttonCreateCharity.setOnClickListener { verifyCharityFormFields() }
     }
 
+    //Function to check all data is entered then send photo to FireStorage
     private fun verifyCharityFormFields() {
         if (charity.isAllDataNotEmpty()) {
             if (!Patterns.WEB_URL.matcher(charity.photo).matches()){
@@ -87,12 +89,14 @@ class AddEditCharityActivity : AppCompatActivity() {
         }
     }
 
+    //Function to check type of activity and call action
     private fun checkActionToPerform(it: String = charity.photo) {
         if (it.isNotEmpty()) {
             if (actionType == "Edit") { editCharity(it) } else { addCharity(it) }
         }
     }
 
+    //Function to update a charity information
     private fun editCharity(photo: String){
         viewModel.editACharityInFirebase(charity.cid!!, charity.getHashMap(photo))
         viewModel.editCharityLiveData.observe(this){
@@ -105,6 +109,7 @@ class AddEditCharityActivity : AppCompatActivity() {
         }
     }
 
+    //Function to add a charity information
     private fun addCharity(photo: String) {
         viewModel.createACharityInFirebase(charity.getHashMap(photo))
 
@@ -118,6 +123,7 @@ class AddEditCharityActivity : AppCompatActivity() {
         }
     }
 
+    //Function to handle fragment change
     private fun setFragmentView(
         isVisible: Boolean,
         progress: StateProgressBar.StateNumber,
@@ -128,6 +134,7 @@ class AddEditCharityActivity : AppCompatActivity() {
         displayFragment(fragment)
     }
 
+    //Function to handle live data from viewModel
     private fun getCharityLiveData() {
         viewModel.emailLiveData.observe(this ,{ charity.email = it })
         viewModel.mobileLiveData.observe(this ,{ charity.mobile = it })

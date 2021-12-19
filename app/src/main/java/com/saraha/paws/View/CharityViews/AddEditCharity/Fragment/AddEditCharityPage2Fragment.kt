@@ -56,18 +56,21 @@ class AddEditCharityPage2Fragment : Fragment() {
         }
     }
 
+    //Check mobile from textField and handle use cases
     private fun validateMobile() {
         val mobile = binding.editTextAddCharityPay
         val (result, isValid) = UserHelper().mobileValidation(mobile.text.toString())
         handleTextFields(mobile,result.string,0,isValid)
     }
 
+    //Check facebook link from textField and handle use cases
     private fun validateFacebookLink() {
         val string = binding.editTextAddCharityFacebook
         val (result, isValid) = UserHelper().fieldVerification(string.text.toString())
         handleTextFields(string,result.string,1,isValid)
     }
 
+    //Check insta link from textField and handle use cases
     private fun validateInstaLink() {
         val string = binding.editTextAddCharityInstagram
         val (result, isValid) = UserHelper().fieldVerification(string.text.toString())

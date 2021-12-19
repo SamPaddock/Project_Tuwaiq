@@ -45,6 +45,7 @@ class AddEditAnimalPage1Fragment : Fragment() {
         return binding.root
     }
 
+    //Function to set data in dropdown menus
     private fun prepareDropdownMenus() {
         binding.edittextAddAnimalStatues.setAdapter(
             ArrayAdapter(context!!, R.layout.simple_list_item_1, viewModel.getStatusList()))
@@ -53,6 +54,7 @@ class AddEditAnimalPage1Fragment : Fragment() {
 
     }
 
+    //Function to select a photo from device
     fun selectPhoto(){
         binding.fabAddAnimalPhoto.setOnClickListener {
             val takePictureIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
@@ -60,6 +62,7 @@ class AddEditAnimalPage1Fragment : Fragment() {
         }
     }
 
+    //Function to handle response from action result
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
@@ -94,6 +97,7 @@ class AddEditAnimalPage1Fragment : Fragment() {
         }
     }
 
+    //Check text from textField and handle use cases
     private fun validateText(edittext: TextInputEditText, index: Int) {
         val (result, isValid) = UserHelper().fieldVerification(edittext.text.toString())
         handleTextFields(edittext,result.string,index,isValid)

@@ -35,7 +35,7 @@ class RegisterViewModel: ViewModel() {
     fun setGroupData(): MutableLiveData<List<String>>{
         val listOfCharitiesLiveData = MutableLiveData<List<String>>()
 
-        CharityRepository().getAllCharities().observeForever { list ->
+        CharityRepository().getAll().observeForever { list ->
             val listOfCharities = mutableListOf<String>()
             list.forEach { listOfCharities.add(it.name) }
             listOfCharitiesLiveData.postValue(listOfCharities)

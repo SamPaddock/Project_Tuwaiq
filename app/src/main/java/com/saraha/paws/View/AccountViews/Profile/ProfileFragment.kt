@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.saraha.paws.Model.User
 import com.saraha.paws.R
+import com.saraha.paws.Util.AppSharedPreference
 import com.saraha.paws.View.CharityViews.AddEditCharity.AddEditCharityActivity
 import com.saraha.paws.View.AccountViews.EditProfile.EditProfileActivity
 import com.saraha.paws.View.Home.HomeActivity
@@ -18,6 +21,8 @@ class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
     lateinit var binding: FragmentProfileBinding
     lateinit var user: User
+
+    val sharedPref = AppSharedPreference()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,10 +45,15 @@ class ProfileFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
-        getUserInformation()
+        user = User(Firebase.auth.currentUser?.uid, sharedPref.read("pName",""),
+            sharedPref.read("eName","")!!, null, sharedPref.read("uName","")!!,
+            sharedPref.read("mName","")!!, sharedPref.read("gName","")!!,
+            sharedPref.read("tName","")!!
+        )
+        setUserData(user)
     }
 
+    //Function for an toolbar content and handler
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.edit_menu_item,menu)
         menu.findItem(R.id.edit_item)?.setOnMenuItemClickListener {
@@ -55,17 +65,7 @@ class ProfileFragment : Fragment() {
         super.onCreateOptionsMenu(menu,inflater)
     }
 
-    private fun getUserInformation(){
-        viewModel.getUserDataFromFirebase()
-
-        viewModel.livedataUser.observe(viewLifecycleOwner){
-            if (it.email.isNotEmpty()){
-                user = it
-                setUserData(user)
-            }
-        }
-    }
-
+    //Function to set data from Firestore to textFields
     private fun setUserData(user: User) {
         binding.textViewProfileEmail.setText(user.email)
         binding.textViewProfileGroup.setText(user.group)

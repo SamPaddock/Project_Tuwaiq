@@ -7,10 +7,12 @@ import com.saraha.paws.Repository.AnimalRepository
 
 class ViewAnimalsViewModel: ViewModel() {
 
+    //Variable to get liveData response from Firebase
     var listOfAnimalsLiveData = MutableLiveData<List<Animal>>()
 
-    fun getAllCharitiesFromFirebase(){
-        AnimalRepository().getAllAnimals().observeForever {
+    //Function to handle firebase repository for retrieving all data for charities
+    fun getAllAnimalsFromFirebase(){
+        AnimalRepository().getAll().observeForever {
             if (it.isNotEmpty()){ listOfAnimalsLiveData.postValue(it) }
         }
     }

@@ -20,6 +20,7 @@
             android:id="@+id/imageViewCharityPhoto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scaleType="fitCenter"
             android:src="@mipmap/ic_launcher_round" />
 
     </androidx.cardview.widget.CardView>

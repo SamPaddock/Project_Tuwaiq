@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="next">التالي</string>
+    <string name="previous">سابق</string>
+    <string name="add">أضاف</string>
+    <string name="edit">تعديل</string>
+    <string name="save">حفظ</string>
+    <string name="search">بحث</string>
+
+    <!-- Home title -->
+    <string name="resuces_home">الحيوانات الأليفة</string>
+    <string name="profile_home">الملف الشخصي</string>
+    <string name="charity_home">مؤسسات خيرية</string>
+    <string name="fun_fact_home">حقائق ممتعة</string>
+    <string name="photo_album_home">صورة</string>
+    <string name="sign_out_home">تسجيل الخروج</string>
+
+    <!-- User title -->
+    <string name="login">تسجيل الدخول</string>
+    <string name="register">تسجيل</string>
+    <string name="email">بريد الالكتروني</string>
+    <string name="password">كلمة المرور</string>
+    <string name="reconfirm_password">أعد التأكيد</string>
+    <string name="name">اسم</string>
+    <string name="mobile">رقم الهاتف</string>
+    <string name="charity_group">مجموعة خيرية</string>
+
+    <!-- Group title -->
+    <string name="charity">مؤسسة خيرية</string>
+    <string name="founder">مؤسس</string>
+    <string name="stc_pay_mobile">STC Pay موبايل</string>
+    <string name="facebook" translatable="false">Facebook</string>
+    <string name="instagram" translatable="false">Instagram</string>
+    <string name="basic_information">معلومات اساسية</string>
+    <string name="help_us_via_donations">ساعدنا عن طريق التبرعات</string>
+    <string name="charity_location">موقع مؤسسة خيري</string>
+
+    <!-- Animal title -->
+    <string name="age">عمر</string>
+    <string name="gender">جنس</string>
+    <string name="breed">تصنيف</string>
+    <string name="color">اللون</string>
+    <string name="personality">شخصية</string>
+    <string name="type">نوع</string>
+    <string name="statues">حالة</string>
+    <string name="location">موقع</string>
+    <string name="grooming_needs">العناية</string>
+    <string name="medical_needs">الاحتياجات الطبية</string>
+
+    <!-- Toast message -->
+    <string name="required">مطلوب</string>
+    <string name="all_required">تحقق من صحة جميع الحقول</string>
+    <string name="login_warning">البريد الإلكتروني / كلمة المرور غير صحيحة</string>
+    <string name="login_required">مطلوب البريد الإلكتروني وكلمة المرور لتسجيل الدخول</string>
+    <string name="successful_edit_charity">تم تحديث المؤسسة الخيرية بنجاح</string>
+    <string name="failure_edit_charity">تعذر تحديث المؤسسة الخيرية</string>
+    <string name="successful_add_charity">تمت إضافة المؤسسة الخيرية بنجاح</string>
+    <string name="failure_add_charity">تعذرت إضافة المؤسسة الخيرية</string>
+    <string name="successful_edit_animal">تم تحديث حيوان أليف بنجاح</string>
+    <string name="failure_edit_animal">لا يمكن تحديث الحيوان الأليف</string>
+    <string name="successful_add_animal">تمت إضافة حيوان أليف بنجاح</string>
+    <string name="failure_add_animal">لا يمكن إضافة الحيوان الأليف</string>
+    <string name="successful_edit_user">تم تحديث الملف الشخصي بنجاح</string>
+    <string name="failure_edit_user">تعذر تحديث الملف الشخصي</string>
+    <string name="link_error">لا يمكن فتح الرابط</string>
+    <string name="or_connect_with">أو تسجيل مع</string>
+</resources>

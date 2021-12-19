@@ -16,7 +16,10 @@ data class Animal (
     var personality: String,
     var grooming: String,
     var medical: String,
-    var photoUrl: String
+    var photoUrl: String,
+    var volunteerID: String,
+    var volunteerName: String,
+    var groupName: String
     ): Serializable
 {
 

@@ -21,8 +21,9 @@ class AddEditAnimalActivity : AppCompatActivity() {
     lateinit var binding: ActivityAddEditAnimalBinding
 
     private var actionType = ""
-    var animal = Animal(null, "", "", "", "", "", "",
-    "", "", "", "", "")
+    var animal = Animal(null, "", "", "", "", "", ""
+        , "", "", "", "", ""
+        , "", "", "")
     var pageFragments = listOf(
         AddEditAnimalPage1Fragment(),
         AddEditAnimalPage2Fragment(),
@@ -57,6 +58,7 @@ class AddEditAnimalActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    //Function to set button onClick listener
     private fun setButtonOnClickListener() {
         //set onClick listener for next button
 
@@ -72,6 +74,7 @@ class AddEditAnimalActivity : AppCompatActivity() {
         binding.buttonAnimalCharity.setOnClickListener { verifyAnimalFormFields() }
     }
 
+    //Function to check all data is entered then send photo to FireStorage
     private fun verifyAnimalFormFields() {
         if (animal.isAllDataNotEmpty()) {
             if (!Patterns.WEB_URL.matcher(animal.photoUrl).matches()){
@@ -85,12 +88,14 @@ class AddEditAnimalActivity : AppCompatActivity() {
         }
     }
 
+    //Function to check type of activity and call action
     private fun checkActionToPerform(it: String = animal.photoUrl) {
         if (it.isNotEmpty()) {
             if (actionType == "Edit") { editAnimal(it) } else { addAnimal(it) }
         }
     }
 
+    //Function to update an animal information
     private fun editAnimal(photo: String){
         viewModel.editAAnimalInFirebase(animal.aid!!, animal.getHashMap(photo))
         viewModel.editAnimalLiveData.observe(this){
@@ -103,6 +108,7 @@ class AddEditAnimalActivity : AppCompatActivity() {
         }
     }
 
+    //Function to add an animal information
     private fun addAnimal(photo: String) {
         viewModel.createAAnimalInFirebase(animal.getHashMap(photo))
 
@@ -137,6 +143,7 @@ class AddEditAnimalActivity : AppCompatActivity() {
         setFragmentView(isNextVisible, isPreVisible, isBtnVisible, pageProgress[index], pageFragments[index])
     }
 
+    //Function to handle fragment change
     private fun setFragmentView(
         isNextVisible: Boolean, isPreVisible: Boolean, isBtnVisible: Boolean,
         progress: StateProgressBar.StateNumber,
@@ -147,6 +154,7 @@ class AddEditAnimalActivity : AppCompatActivity() {
         displayFragment(fragment)
     }
 
+    //Function to handle live data from viewModel
     private fun getAnimalLiveData() {
         viewModel.nameLiveData.observe(this ,{ animal.name = it })
         viewModel.typeLiveData.observe(this ,{ animal.type = it })

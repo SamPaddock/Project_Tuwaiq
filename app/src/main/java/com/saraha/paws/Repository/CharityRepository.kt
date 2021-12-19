@@ -27,7 +27,7 @@ class CharityRepository {
         dbFirestore.firestoreSettings = settings
     }
 
-    fun getAllCharities(): LiveData<List<Charity>>{
+    fun getAll(): LiveData<List<Charity>>{
         createDBFirestore()
 
         val liveDataCharity = MutableLiveData<List<Charity>>()
