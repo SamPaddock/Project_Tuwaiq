@@ -36,6 +36,8 @@ class ProfileFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
+        checkIfAdmin()
+
         binding.fabCreateCharity.setOnClickListener {
             val intent = Intent(this.context, AddEditCharityActivity::class.java)
             intent.putExtra("type", "Add")
@@ -43,6 +45,14 @@ class ProfileFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun checkIfAdmin() {
+        if (sharedPref.read("tName","")!! == "Admin"){
+            binding.fabCreateCharity.visibility = View.VISIBLE
+        } else {
+            binding.fabCreateCharity.visibility = View.GONE
+        }
     }
 
     override fun onResume() {

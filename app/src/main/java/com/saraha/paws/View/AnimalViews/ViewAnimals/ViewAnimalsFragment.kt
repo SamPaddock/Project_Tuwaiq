@@ -6,10 +6,8 @@ import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,6 +16,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.mikepenz.fastadapter.dsl.genericFastAdapter
 import com.saraha.paws.Model.Animal
 import com.saraha.paws.Util.Helper
+import com.saraha.paws.View.AccountViews.EditProfile.EditProfileActivity
 import com.saraha.paws.View.AnimalViews.AddEditAnimal.AddEditAnimalActivity
 import com.saraha.paws.View.Home.HomeActivity
 import com.saraha.paws.databinding.FragmentViewAnimalsBinding
@@ -38,6 +37,8 @@ class ViewAnimalsFragment : Fragment() {
 
         viewModel = ViewModelProvider(requireActivity() as HomeActivity)[ViewAnimalsViewModel::class.java]
 
+        setHasOptionsMenu(true)
+
         binding.floatingActionButton.setOnClickListener {
             val intent = Intent(this.context, AddEditAnimalActivity::class.java)
             intent.putExtra("type", "Add")
@@ -54,6 +55,21 @@ class ViewAnimalsFragment : Fragment() {
     override fun onResume() {
         getAllAnimals()
         super.onResume()
+    }
+
+    //Function for an toolbar content and handler
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(com.saraha.paws.R.menu.recycler_view_menu,menu)
+        menu.findItem(com.saraha.paws.R.id.filter_item_menu)?.setOnMenuItemClickListener {
+            var isFilterVisible = binding.constraintLayoutFilterContent.visibility
+            if (isFilterVisible == View.VISIBLE) {
+                binding.constraintLayoutFilterContent.visibility = View.GONE
+            } else {
+                binding.constraintLayoutFilterContent.visibility = View.VISIBLE
+            }
+            true
+        }
+        super.onCreateOptionsMenu(menu,inflater)
     }
 
     //Function to get all animals from Firestore
