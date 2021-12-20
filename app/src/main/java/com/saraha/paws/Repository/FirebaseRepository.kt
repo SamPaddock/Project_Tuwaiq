@@ -58,31 +58,46 @@ class FirebaseRepository {
     fun addDocument(collection: String, newDocument: HashMap<String, String?>): LiveData<Boolean> {
         createDBFirestore()
 
-        val liveDataCharity = MutableLiveData<Boolean>()
+        val liveDataResponse = MutableLiveData<Boolean>()
 
         dbFirestore.collection(collection).add(newDocument)
             .addOnCompleteListener {
-                if (it.isSuccessful) liveDataCharity.postValue(true)
+                if (it.isSuccessful) liveDataResponse.postValue(true)
             }.addOnFailureListener {
-                liveDataCharity.postValue(false)
+                liveDataResponse.postValue(false)
             }
 
-        return liveDataCharity
+        return liveDataResponse
     }
 
     fun editDocument(collection: String, id: String, updateDocument: HashMap<String, String?>): LiveData<Boolean> {
         createDBFirestore()
 
-        val liveDataCharity = MutableLiveData<Boolean>()
+        val liveDataResponse = MutableLiveData<Boolean>()
 
         dbFirestore.collection(collection).document(id).set(updateDocument)
             .addOnCompleteListener {
-                if (it.isSuccessful) liveDataCharity.postValue(true)
+                if (it.isSuccessful) liveDataResponse.postValue(true)
             }.addOnFailureListener {
-                liveDataCharity.postValue(false)
+                liveDataResponse.postValue(false)
             }
 
-        return liveDataCharity
+        return liveDataResponse
+    }
+
+    fun deleteDocument(collection: String, id: String): LiveData<Boolean>{
+        createDBFirestore()
+
+        val liveDataResponse = MutableLiveData<Boolean>()
+
+        dbFirestore.collection(collection).document(id).delete()
+            .addOnCompleteListener {
+                if (it.isSuccessful) liveDataResponse.postValue(true)
+            }.addOnFailureListener {
+                liveDataResponse.postValue(false)
+            }
+
+        return liveDataResponse
     }
 
 }

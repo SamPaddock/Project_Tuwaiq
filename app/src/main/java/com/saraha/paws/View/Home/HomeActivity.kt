@@ -3,6 +3,7 @@ package com.saraha.paws.View.Home
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -19,6 +20,7 @@ import com.mikepenz.materialdrawer.widget.AccountHeaderView
 import com.mikepenz.materialdrawer.widget.MaterialDrawerSliderView
 import com.saraha.paws.R
 import com.saraha.paws.Util.AppSharedPreference
+import com.saraha.paws.Util.NetworkStatus
 import com.saraha.paws.View.SplashView.MainSplash.SplashActivity
 import com.saraha.paws.View.AccountViews.Profile.ProfileFragment
 import com.saraha.paws.View.ShowFacts.DisplayFactsFragment
@@ -37,6 +39,8 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
 
+        isNetworkAvailable()
+
         getUserInformation()
 
         displayFragment(ViewAnimalsFragment())
@@ -44,6 +48,19 @@ class HomeActivity : AppCompatActivity() {
         setupToolbarAndSliderDrawer(savedInstanceState)
 
         setContentView(binding.root)
+    }
+
+    //Function to check network status and show/hide noNetwork view
+    private fun isNetworkAvailable(): Boolean {
+        return if (!NetworkStatus().isOnline(this)) {
+            binding.HomeFrameLayout.visibility = View.GONE
+            binding.noConnectionLayout.visibility = View.VISIBLE
+            false
+        } else {
+            binding.HomeFrameLayout.visibility = View.VISIBLE
+            binding.noConnectionLayout.visibility = View.GONE
+            true
+        }
     }
 
     //Function to get user information from Firestore and save in SharedPref
@@ -155,6 +172,12 @@ class HomeActivity : AppCompatActivity() {
 
     //Function to replace a fragment view
     private fun displayFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().replace(R.id.HomeFrameLayout, fragment).commit()
+        if (!isNetworkAvailable()){
+            binding.buttonRefreshMain.setOnClickListener {
+                displayFragment(fragment)
+            }
+        } else {
+            supportFragmentManager.beginTransaction().replace(R.id.HomeFrameLayout, fragment).commit()
+        }
     }
 }

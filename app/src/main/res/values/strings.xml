@@ -73,5 +73,13 @@
     <string name="or_connect_with">or connect with</string>
     <string name="email_subject_temp">Inquiring About ...</string>
     <string name="email_intro_temp">Dear Sir/Madam, I would like to inquiry about</string>
+    <string name="refresh">Refresh</string>
+    <string name="netowrk_issues_msg">Connect to the network and try again.</string>
+    <string name="network_issue_title">No Network Connection</string>
+    <string name="delete">Delete</string>
+    <string name="successful_delete_charity">successfully delete charity</string>
+    <string name="successful_delete_animal">successfully delete animal</string>
+    <string name="failure_delete_animal">could not delete animal</string>
+    <string name="failure_delete_charity">could not delete charity</string>
 
 </resources>

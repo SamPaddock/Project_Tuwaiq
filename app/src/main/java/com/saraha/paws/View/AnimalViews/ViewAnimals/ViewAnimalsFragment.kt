@@ -1,9 +1,7 @@
 package com.saraha.paws.View.AnimalViews.ViewAnimals
 
-import android.R
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -11,12 +9,10 @@ import androidx.fragment.app.Fragment
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.mikepenz.fastadapter.dsl.genericFastAdapter
 import com.saraha.paws.Model.Animal
+import com.saraha.paws.R
 import com.saraha.paws.Util.Helper
-import com.saraha.paws.View.AccountViews.EditProfile.EditProfileActivity
 import com.saraha.paws.View.AnimalViews.AddEditAnimal.AddEditAnimalActivity
 import com.saraha.paws.View.Home.HomeActivity
 import com.saraha.paws.databinding.FragmentViewAnimalsBinding
@@ -59,8 +55,8 @@ class ViewAnimalsFragment : Fragment() {
 
     //Function for an toolbar content and handler
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(com.saraha.paws.R.menu.recycler_view_menu,menu)
-        menu.findItem(com.saraha.paws.R.id.filter_item_menu)?.setOnMenuItemClickListener {
+        inflater.inflate(R.menu.recycler_view_menu,menu)
+        menu.findItem(R.id.filter_item_menu)?.setOnMenuItemClickListener {
             var isFilterVisible = binding.constraintLayoutFilterContent.visibility
             if (isFilterVisible == View.VISIBLE) {
                 binding.constraintLayoutFilterContent.visibility = View.GONE
@@ -94,9 +90,9 @@ class ViewAnimalsFragment : Fragment() {
 
     private fun setRecyclerViewFilter(){
         binding.inputTextFilterStatus.setAdapter(
-            ArrayAdapter(context!!, R.layout.simple_list_item_1, Helper().getStatusList()))
+            ArrayAdapter(context!!, android.R.layout.simple_list_item_1, Helper().getStatusList()))
         binding.inputTextFilterType.setAdapter(
-            ArrayAdapter(context!!, R.layout.simple_list_item_1, Helper().getTypeList()))
+            ArrayAdapter(context!!, android.R.layout.simple_list_item_1, Helper().getTypeList()))
     }
 
     private fun onClickFilterListener(){

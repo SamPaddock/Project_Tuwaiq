@@ -66,4 +66,10 @@
     <string name="or_connect_with">أو تسجيل مع</string>
     <string name="email_subject_temp">… الاستفسار عن</string>
     <string name="email_intro_temp">سيدي العزيز / سيدتي ، أود الاستفسار عن</string>
+
+
+    <string name="refresh">Refresh</string>
+    <string name="netowrk_issues_msg">Connect to the network and try again.</string>
+    <string name="network_issue_title">No Network Connection</string>
+    <string name="delete">Delete</string>
 </resources>

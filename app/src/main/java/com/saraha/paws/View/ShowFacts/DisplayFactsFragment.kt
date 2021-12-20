@@ -57,7 +57,7 @@ class DisplayFactsFragment : Fragment() {
     //Function to set New data from Api
     private fun setNewFacts(data: CatFacts?) {
         val instance = Calendar.getInstance()
-        instance.add(Calendar.HOUR,24)
+        instance.add(Calendar.MINUTE,5)
         sharedPref.write(SharedConst.PrefsFactDate.string, instance.timeInMillis)
         setNextFacts(data)
     }

@@ -10,15 +10,21 @@ import android.content.Intent
 import android.net.Uri
 import android.view.Menu
 import android.widget.Toast
+import androidx.activity.viewModels
+import com.saraha.paws.Util.AppSharedPreference
 import com.saraha.paws.Util.toast
+import com.saraha.paws.View.AnimalViews.ViewAnimalDetail.ViewAnimalDetailsViewModel
 import com.saraha.paws.View.CharityViews.AddEditCharity.AddEditCharityActivity
 import java.lang.Exception
 
 
 class ViewCharityDetailActivity : AppCompatActivity() {
 
+    val viewModel: ViewCharityDetailViewModel by viewModels()
     lateinit var binding: ActivityViewCharityDetailBinding
     lateinit var charity: Charity
+
+    val sharedPref = AppSharedPreference()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,15 +54,43 @@ class ViewCharityDetailActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.edit_menu_item,menu)
-        menu?.findItem(R.id.edit_item)?.setOnMenuItemClickListener {
-            val intent = Intent(this, AddEditCharityActivity::class.java)
-            intent.putExtra("type", "Edit")
-            intent.putExtra("charity", charity)
-            startActivity(intent)
-            true
+        if (sharedPref.read("tName","")!! == "Admin"){
+            menuInflater.inflate(R.menu.edit_delete_menu_items,menu)
+            menu?.findItem(R.id.edit_item_1)?.setOnMenuItemClickListener {
+                redirectToEditContent()
+                true
+            }
+            menu?.findItem(R.id.delete_item_2)?.setOnMenuItemClickListener {
+                deleteCharity()
+                true
+            }
+        } else {
+            menuInflater.inflate(R.menu.edit_menu_item,menu)
+            menu?.findItem(R.id.edit_item)?.setOnMenuItemClickListener {
+                redirectToEditContent()
+                true
+            }
         }
         return super.onCreateOptionsMenu(menu)
+    }
+
+    private fun deleteCharity() {
+        viewModel.deleteCharityFromFirebase(charity.cid!!)
+        viewModel.deleteDocumentLiveData.observe(this){
+            if (it) {
+                this.toast(getString(R.string.successful_delete_charity))
+                finish()
+            } else {
+                this.toast(getString(R.string.failure_delete_charity))
+            }
+        }
+    }
+
+    private fun redirectToEditContent() {
+        val intent = Intent(this, AddEditCharityActivity::class.java)
+        intent.putExtra("type", "Edit")
+        intent.putExtra("charity", charity)
+        startActivity(intent)
     }
 
     //Function to set data in textviews
