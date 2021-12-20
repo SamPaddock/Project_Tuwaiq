@@ -64,4 +64,6 @@
     <string name="failure_edit_user">تعذر تحديث الملف الشخصي</string>
     <string name="link_error">لا يمكن فتح الرابط</string>
     <string name="or_connect_with">أو تسجيل مع</string>
+    <string name="email_subject_temp">… الاستفسار عن</string>
+    <string name="email_intro_temp">سيدي العزيز / سيدتي ، أود الاستفسار عن</string>
 </resources>

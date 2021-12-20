@@ -72,6 +72,18 @@ class ViewCharityDetailActivity : AppCompatActivity() {
         binding.imageViewFacebookLink.setOnClickListener { openFacebook(charity.facebookUrl) }
         binding.imageViewInstaLink.setOnClickListener { openInstagram(charity.instagramUrl) }
         binding.imageViewWhatsappLink.setOnClickListener { openWhatsapp(charity.mobile) }
+        binding.imageViewMail.setOnClickListener { openMain(charity) }
+    }
+
+    //Function to handle to mail icon click
+    private fun openMain(charity: Charity){
+        // create an Intent to send data to mail
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.data = Uri.parse("mailto:")
+        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(charity.email))
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject_temp))
+        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.email_intro_temp))
+        startActivity(intent)
     }
 
     //Function to handle to whatsapp icon click

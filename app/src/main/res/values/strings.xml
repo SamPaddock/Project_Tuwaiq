@@ -71,5 +71,7 @@
     <string name="failure_edit_user">Could not updated the Profile</string>
     <string name="link_error">could not open link</string>
     <string name="or_connect_with">or connect with</string>
+    <string name="email_subject_temp">Inquiring About ...</string>
+    <string name="email_intro_temp">Dear Sir/Madam, I would like to inquiry about</string>
 
 </resources>
