@@ -81,5 +81,6 @@
     <string name="successful_delete_animal">successfully delete animal</string>
     <string name="failure_delete_animal">could not delete animal</string>
     <string name="failure_delete_charity">could not delete charity</string>
+    <string name="notfication_msg_1">Check out new fun facts about Cats!!</string>
 
 </resources>

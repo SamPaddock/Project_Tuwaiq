@@ -1,5 +1,7 @@
 package com.saraha.paws.View.ShowFacts
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.saraha.paws.Database.AppDatabase
@@ -40,9 +42,14 @@ class DisplayFactsViewModel: ViewModel() {
 
         if (roomData?.isNotEmpty() == true && factTime != (-1).toLong()){
 
-            val currentDateTime = Calendar.getInstance().timeInMillis
+            val currentDateTime = Calendar.getInstance()
+            val setDateTime = Calendar.getInstance()
+            setDateTime.timeInMillis = factTime!!
 
-            if (currentDateTime <= currentDateTime){
+            Log.d(TAG,"DisplayFactsViewModel: - checkIfRoomIsEmpty: - set: ${setDateTime}")
+            Log.d(TAG,"DisplayFactsViewModel: - checkIfRoomIsEmpty: - current: ${currentDateTime}")
+
+            if (factTime!! <= currentDateTime.timeInMillis){
                 val nextPage = if (roomData[0].last_page != roomData[0].current_page+1) roomData[0].current_page+1 else 1
                 getNextPageOfFacts(nextPage)
             } else {

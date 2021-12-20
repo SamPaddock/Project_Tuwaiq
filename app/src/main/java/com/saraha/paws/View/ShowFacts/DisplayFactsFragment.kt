@@ -15,6 +15,16 @@ import com.saraha.paws.Util.toast
 import com.saraha.paws.View.Home.HomeActivity
 import com.saraha.paws.databinding.FragmentDisplayFactsBinding
 import java.util.*
+import android.app.AlarmManager
+
+import android.app.PendingIntent
+import android.content.ContentValues.TAG
+import android.content.Context
+
+import android.content.Intent
+import android.util.Log
+import com.saraha.paws.Service.MyFactNotificationReceiver
+
 
 class DisplayFactsFragment : Fragment() {
 
@@ -25,7 +35,7 @@ class DisplayFactsFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentDisplayFactsBinding.inflate(inflater, container, false)
 
@@ -35,6 +45,8 @@ class DisplayFactsFragment : Fragment() {
         viewModel.db = viewModel.dbClient?.getInstance(requireActivity().applicationContext)?.getAppDatabase()
 
         checkContentInRoom()
+
+        setNotification()
 
         return binding.root
     }
@@ -56,14 +68,16 @@ class DisplayFactsFragment : Fragment() {
 
     //Function to set New data from Api
     private fun setNewFacts(data: CatFacts?) {
-        val instance = Calendar.getInstance()
-        instance.add(Calendar.MINUTE,5)
-        sharedPref.write(SharedConst.PrefsFactDate.string, instance.timeInMillis)
         setNextFacts(data)
     }
 
     //Function to set data from next page of Api
     private fun setNextFacts(data: CatFacts?) {
+        //Time of retrieving facts
+        val instance = Calendar.getInstance()
+        instance.add(Calendar.HOUR,24)
+        sharedPref.write(SharedConst.PrefsFactDate.string, instance.timeInMillis)
+        //saving facts in Room and displaying facts
         viewModel.saveFactIntoRoom(data)
         setRecyclerViewWithData(data)
     }
@@ -73,5 +87,24 @@ class DisplayFactsFragment : Fragment() {
         val recyclerView = binding.recyclerViewDisplayfacts
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
         recyclerView.adapter = DisplayFactsViewAdapter(this.requireContext(),catFacts!!)
+    }
+
+    private fun setNotification() {
+        val notifyIntent = Intent(this.requireContext(), MyFactNotificationReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(context,
+            0,
+            notifyIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val alarmUp = PendingIntent.getBroadcast(context, 0,
+            notifyIntent,
+            PendingIntent.FLAG_NO_CREATE) != null
+
+        if (alarmUp){
+            val alarmManager = context!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), (
+                    1000 * 60 * 60 * 24).toLong(), pendingIntent)
+        }
+
     }
 }
