@@ -2,15 +2,18 @@ package com.saraha.paws.View.AnimalViews.AddEditAnimal.Fragment
 
 import android.R
 import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.location.Geocoder
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.textfield.TextInputEditText
@@ -95,7 +98,7 @@ class AddEditAnimalPage1Fragment : Fragment() {
         if (animal.photoUrl.isNotEmpty()){ binding.imageViewAnimalPhoto.loadImage(animal.photoUrl)}
         if (animal.name.isNotEmpty()){  binding.edittextAddAnimalName.setText(animal.name) }
         if (animal.type.isNotEmpty()){  binding.edittextAddAnimalType.setText(animal.type) }
-        if (animal.states.isNotEmpty()){  binding.edittextAddAnimalStatues.setText(animal.name) }
+        if (animal.states.isNotEmpty()){  binding.edittextAddAnimalStatues.setText(animal.states) }
 
         val location = LatLng(animal.latitude, animal.longitude)
         binding.editTextAddAnimalLocation.setText(location.getStringAddress(this.requireContext()))
@@ -103,8 +106,8 @@ class AddEditAnimalPage1Fragment : Fragment() {
 
     //Set onOutOfFocus on textFields
     private fun onFieldFocus(){
-        binding.edittextAddAnimalName.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) viewModel.validateText(binding.edittextAddAnimalName,0)
+        binding.edittextAddAnimalName.addTextChangedListener {
+            viewModel.validateText( binding.edittextAddAnimalName,0)
         }
         binding.edittextAddAnimalType.setOnItemClickListener { _, _, position, _ ->
             viewModel.setAnimalType(Helper().getTypeList().get(position))

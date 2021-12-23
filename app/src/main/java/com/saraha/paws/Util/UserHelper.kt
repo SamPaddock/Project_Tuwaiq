@@ -1,22 +1,18 @@
 package com.saraha.paws.Util
 
-import android.content.res.Resources
 import android.util.Patterns
-import com.saraha.paws.R
 
 class UserHelper {
 
     enum class inputHandler(val string: String){
-        Required(Resources.getSystem().getString(R.string.required)),
-        IncorrectEmail(Resources.getSystem().getString(R.string.incorrect_email)),
-        IncorrectPassword(Resources.getSystem().getString(R.string.incorrect_password)),
-        IncorrectMobile(Resources.getSystem().getString(R.string.incorrect_mobile)),
-        IncorrectLink(Resources.getSystem().getString(R.string.incorrect_link)),
-        Correct(""),
-        Mismatch(Resources.getSystem().getString(R.string.mismatch_text))
+        Required("Required"),
+        IncorrectEmail("Email does not follow the correct format"),
+        IncorrectPassword("should be at least 8 characters, 2 digits and no symbols"),
+        IncorrectMobile("should be between 9 to 12 digits"),
+        IncorrectLink("The link is not in the correct format"),
+        Correct("nothing"),
+        Mismatch("Does not match password")
     }
-
-
 
     fun fieldVerification(editText: String): Pair<inputHandler,Boolean>{
         return if (editText.isEmpty()){

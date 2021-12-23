@@ -1,7 +1,9 @@
 package com.saraha.paws.Util
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 
 enum class SharedConst(var string: String){
     PrefsName("cats"),

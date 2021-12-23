@@ -33,7 +33,6 @@ class AnimalRepository {
                     if (animal.data.isNotEmpty()){
                         val name = animal.get("name") as String
                         val type = animal.get("type") as String
-                        val location = animal.get("location") as String
                         val age = animal.get("age") as String
                         val states = animal.get("states") as String
                         val gender = animal.get("gender") as String
@@ -45,10 +44,11 @@ class AnimalRepository {
                         val volunteerID = animal.get("volunteerID") as String
                         val volunteerName = animal.get("volunteerName") as String
                         val groupName = animal.get("groupName") as String
-                        val dbAnimal = Animal(animal.id, name, type, location, age, states,
-                            gender, color, personality, grooming, medical, photoUrl,
-                            volunteerID, volunteerName, groupName
-                        )
+                        val latitude = animal.get("latitude") as Double
+                        val longitude = animal.get("longitude") as Double
+                        val dbAnimal = Animal(animal.id, name, type, age, states, gender, color
+                            , personality, grooming, medical, photoUrl, latitude, longitude,
+                            volunteerID, volunteerName, groupName)
                         listOfAnimals.add(dbAnimal)
                     }
                 }

@@ -17,7 +17,7 @@ import com.saraha.paws.View.AccountViews.RegisterAccount.Fragment.RegisterPage2F
 import com.saraha.paws.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
-//reorganize
+
     private val viewModel: RegisterViewModel by viewModels()
     private lateinit var binding: ActivityRegisterBinding
 

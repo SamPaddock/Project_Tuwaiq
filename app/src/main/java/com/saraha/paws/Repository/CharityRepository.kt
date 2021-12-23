@@ -42,11 +42,13 @@ class CharityRepository {
                         val founder = charity.get("founder") as String
                         val mobile = charity.get("mobile") as String
                         val stcPay = charity.get("stcPay") as String
+                        val latitude = charity.get("latitude") as Double
+                        val longitude = charity.get("longitude") as Double
                         val photo = charity.get("photo") as String
                         val facebookUrl = charity.get("facebookUrl") as String
                         val instagramUrl = charity.get("instagramUrl") as String
                         val dbCharity = Charity(charity.id, name, founder, email, mobile,
-                            stcPay, photo, facebookUrl, instagramUrl)
+                            stcPay, latitude, longitude, photo, facebookUrl, instagramUrl)
                         listOfCharities.add(dbCharity)
                     }
                 }

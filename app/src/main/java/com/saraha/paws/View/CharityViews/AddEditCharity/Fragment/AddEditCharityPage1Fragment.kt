@@ -15,6 +15,7 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
+import androidx.core.widget.addTextChangedListener
 import com.saraha.paws.View.CharityViews.AddEditCharity.AddEditCharityActivity
 import com.squareup.picasso.Picasso
 
@@ -75,17 +76,17 @@ class AddEditCharityPage1Fragment : Fragment() {
 
     //Set onOutOfFocus on textFields
     private fun onFieldFocus(){
-        binding.editTextAddCharityEmail.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) viewModel.validateEmail(binding.editTextAddCharityEmail,0)
+        binding.editTextAddCharityEmail.addTextChangedListener {
+            viewModel.validateEmail(binding.editTextAddCharityEmail,0)
         }
-        binding.editTextAddCharityMobile.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) viewModel.validateMobile(binding.editTextAddCharityMobile, 1)
+        binding.editTextAddCharityMobile.addTextChangedListener {
+            viewModel.validateMobile(binding.editTextAddCharityMobile, 1)
         }
-        binding.editTextAddCharityName.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) viewModel.validateText(binding.editTextAddCharityName, 2)
+        binding.editTextAddCharityName.addTextChangedListener {
+            viewModel.validateText(binding.editTextAddCharityName, 2)
         }
-        binding.editTextAddCharityFounder.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) viewModel.validateText(binding.editTextAddCharityFounder, 3)
+        binding.editTextAddCharityFounder.addTextChangedListener {
+            viewModel.validateText(binding.editTextAddCharityFounder, 3)
         }
     }
 

@@ -68,7 +68,7 @@ class HomeActivity : AppCompatActivity() {
         viewModel.getUserDataFromFirebase()
 
         viewModel.livedataUser.observe(this){
-            if (it.email.isNotEmpty()){
+            if (it.name.isNotEmpty()){
                 sharedPref.write("uName", it.name)
                 sharedPref.write("eName", it.email)
                 sharedPref.write("mName", it.mobile)

@@ -1,8 +1,10 @@
 package com.saraha.paws.Util
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Geocoder
+import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -31,6 +33,7 @@ fun ImageView.loadImage(imageUrl: String) {
 }
 
 fun LatLng.getStringAddress(context: Context): String {
+    Log.d(TAG,": - getStringAddress: - : ${this.latitude}")
     val geoCoder = Geocoder(context).getFromLocation(this.latitude, this.longitude, 1)
-    return geoCoder[0].getAddressLine(0)
+    return if (geoCoder.isEmpty()) "unable to retrieve location" else geoCoder[0].getAddressLine(0)
 }

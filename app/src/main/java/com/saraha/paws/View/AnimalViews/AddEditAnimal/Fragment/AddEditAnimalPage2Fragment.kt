@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
 import com.saraha.paws.Model.Animal
@@ -46,17 +47,17 @@ class AddEditAnimalPage2Fragment : Fragment() {
 
     //Set onOutOfFocus on textFields
     private fun onFieldFocus(){
-        binding.edittextAddAnimalAge.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) viewModel.validateText(binding.edittextAddAnimalAge,1)
+        binding.edittextAddAnimalAge.addTextChangedListener {
+            viewModel.validateText(binding.edittextAddAnimalAge,1)
         }
-        binding.edittextAddAnimalColor.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) viewModel.validateText(binding.edittextAddAnimalColor,2)
+        binding.edittextAddAnimalColor.addTextChangedListener {
+            viewModel.validateText(binding.edittextAddAnimalColor,2)
         }
-        binding.edittextAddAnimalGender.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) viewModel.validateText(binding.edittextAddAnimalGender,3)
+        binding.edittextAddAnimalGender.addTextChangedListener {
+            viewModel.validateText(binding.edittextAddAnimalGender,3)
         }
-        binding.edittextAddAnimalPersonality.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) viewModel.validateText(binding.edittextAddAnimalPersonality,4)
+        binding.edittextAddAnimalPersonality.addTextChangedListener {
+            viewModel.validateText(binding.edittextAddAnimalPersonality,4)
         }
     }
 }

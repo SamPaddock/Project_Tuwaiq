@@ -36,6 +36,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
+        mMap.mapType = GoogleMap.MAP_TYPE_HYBRID
+
         getCurrentLocation { lat, lon -> setCurrentLocation(lat, lon) }
 
         mMap.setOnMapClickListener { sendSelectedLocationBack(it) }

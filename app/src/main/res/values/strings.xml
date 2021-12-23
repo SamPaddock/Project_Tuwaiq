@@ -84,7 +84,6 @@
     <string name="failure_delete_charity">could not delete charity</string>
     <string name="notfication_msg_1">Check out new fun facts about Cats!!</string>
     <string name="location_required_msg">Permission must be granted in order to access Locations and Google Maps</string>
-    <string name="required">Required</string>
     <string name="incorrect_email">Email does not follow the correct format</string>
     <string name="incorrect_password">should be at least 8 characters, 2 digits and no symbols</string>
     <string name="incorrect_mobile">should be between 9 to 12 digits</string>

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
 import com.saraha.paws.Model.User
@@ -41,16 +42,16 @@ class RegisterPage1Fragment : Fragment() {
 
     //Set onOutOfFocus on textFields
     private fun onFieldFocus(){
-        binding.edittextRegisterConfirmPassword.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) viewModel.validateConfirmPassword(
+        binding.edittextRegisterConfirmPassword.addTextChangedListener {
+            viewModel.validateConfirmPassword(
                 binding.edittextRegisterConfirmPassword, binding.edittextRegisterPassword, 2
             )
         }
-        binding.edittextRegisterPassword.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) viewModel.validatePassword(binding.edittextRegisterPassword, 1)
+        binding.edittextRegisterPassword.addTextChangedListener {
+            viewModel.validatePassword(binding.edittextRegisterPassword, 1)
         }
-        binding.editTextRegisterEmail.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) viewModel.validateEmail(binding.editTextRegisterEmail, 0)
+        binding.editTextRegisterEmail.addTextChangedListener {
+            viewModel.validateEmail(binding.editTextRegisterEmail, 0)
         }
     }
 }

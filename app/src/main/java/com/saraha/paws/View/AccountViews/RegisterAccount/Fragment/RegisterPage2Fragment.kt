@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
 import com.saraha.paws.Model.User
@@ -53,11 +54,11 @@ class RegisterPage2Fragment : Fragment() {
 
     //Set onOutOfFocus on textFields
     private fun onFieldFocus(){
-        binding.edittextRegisterName.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) viewModel.validateName(binding.edittextRegisterName, 3)
+        binding.edittextRegisterName.addTextChangedListener {
+            viewModel.validateName(binding.edittextRegisterName, 3)
         }
-        binding.edittextRegisterMobile.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) viewModel.validateMobile(binding.edittextRegisterMobile, 4)
+        binding.edittextRegisterMobile.addTextChangedListener {
+            viewModel.validateMobile(binding.edittextRegisterMobile, 4)
         }
         binding.autoCompleteRegisterGroup.setOnItemClickListener { _, _, position, _ ->
             viewModel.setGroupFromPage2(list.get(position))

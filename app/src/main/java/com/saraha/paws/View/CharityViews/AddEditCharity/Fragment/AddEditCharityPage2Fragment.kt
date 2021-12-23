@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.textfield.TextInputEditText
@@ -70,14 +71,14 @@ class AddEditCharityPage2Fragment : Fragment() {
 
     //Set onOutOfFocus on textFields
     private fun onFieldFocus(){
-        binding.editTextAddCharityPay.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) viewModel.validateMobile(binding.editTextAddCharityPay, 4)
+        binding.editTextAddCharityPay.addTextChangedListener {
+            viewModel.validateMobile(binding.editTextAddCharityPay, 4)
         }
-        binding.editTextAddCharityFacebook.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) viewModel.validateLink(binding.editTextAddCharityFacebook, 5)
+        binding.editTextAddCharityFacebook.addTextChangedListener {
+            viewModel.validateLink(binding.editTextAddCharityFacebook, 5)
         }
-        binding.editTextAddCharityInstagram.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) viewModel.validateLink(binding.editTextAddCharityInstagram, 6)
+        binding.editTextAddCharityInstagram.addTextChangedListener {
+            viewModel.validateLink(binding.editTextAddCharityInstagram, 6)
         }
     }
 

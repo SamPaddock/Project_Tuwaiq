@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
 import com.saraha.paws.Model.Animal
@@ -43,11 +44,11 @@ class AddEditAnimalPage3Fragment : Fragment() {
 
     //Set onOutOfFocus on textFields
     private fun onFieldFocus(){
-        binding.edittextAddAnimalGrooming.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) viewModel.validateText(binding.edittextAddAnimalGrooming,5)
+        binding.edittextAddAnimalGrooming.addTextChangedListener {
+            viewModel.validateText(binding.edittextAddAnimalGrooming,5)
         }
-        binding.edittextAddAnimalMedical.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) viewModel.validateText(binding.edittextAddAnimalMedical,6)
+        binding.edittextAddAnimalMedical.addTextChangedListener {
+            viewModel.validateText(binding.edittextAddAnimalMedical,6)
         }
     }
 
