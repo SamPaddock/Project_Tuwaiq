@@ -42,6 +42,8 @@ class AddEditCharityActivity : AppCompatActivity() {
             charity = intent.getSerializableExtra("charity") as Charity
         }
 
+        setupToolbar()
+
         //Set fragment view when activity is created
         displayFragment(AddEditCharityPage1Fragment())
 
@@ -51,6 +53,18 @@ class AddEditCharityActivity : AppCompatActivity() {
         setButtonOnClickListener()
 
         setContentView(binding.root)
+    }
+
+    private fun setupToolbar() {
+        val mainToolbar = binding.toolbarAddEditCharity
+        mainToolbar.title = ""
+        mainToolbar.setNavigationIcon(R.drawable.ic_back_24)
+        setSupportActionBar(mainToolbar)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 
     //Function to set button onClick listener

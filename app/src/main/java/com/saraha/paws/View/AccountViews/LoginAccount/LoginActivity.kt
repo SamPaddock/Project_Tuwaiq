@@ -17,9 +17,23 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
 
+        setupToolbar()
+
         binding.buttonLogin.setOnClickListener { if (checkFields()) onLoginButtonClick() }
 
         setContentView(binding.root)
+    }
+
+    private fun setupToolbar() {
+        val mainToolbar = binding.toolbarLogin
+        mainToolbar.title = getString(R.string.welcome_msg)
+        mainToolbar.setNavigationIcon(R.drawable.ic_back_24)
+        setSupportActionBar(mainToolbar)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 
     //Function the verifies login input

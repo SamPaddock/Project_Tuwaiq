@@ -35,6 +35,8 @@ class RegisterActivity : AppCompatActivity() {
         //Get data coming from viewModel that is sent from fragment
         getRegistrationLiveData()
 
+        setupToolbar()
+
         //set onClick listener for next button
         binding.buttonToRegistrationPage2.setOnClickListener {
             setFragmentView(false, StateProgressBar.StateNumber.TWO, RegisterPage2Fragment())
@@ -48,6 +50,18 @@ class RegisterActivity : AppCompatActivity() {
         binding.buttonCreateAccount.setOnClickListener { verifyRegistrationFormFields() }
 
         setContentView(binding.root)
+    }
+
+    private fun setupToolbar() {
+        val mainToolbar = binding.toolbarRegister
+        mainToolbar.title = getString(R.string.create_account_msg)
+        mainToolbar.setNavigationIcon(R.drawable.ic_back_24)
+        setSupportActionBar(mainToolbar)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 
     //Check all data is entered then send to firebase authentication

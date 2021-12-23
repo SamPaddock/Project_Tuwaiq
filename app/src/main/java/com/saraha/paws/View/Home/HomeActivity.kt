@@ -82,6 +82,7 @@ class HomeActivity : AppCompatActivity() {
     //Function to setup Toolbar and Slider Menu
     private fun setupToolbarAndSliderDrawer(savedInstanceState: Bundle?) {
         val mainToolbar = binding.toolbarHome
+        mainToolbar.title = "Rescues"
         setSupportActionBar(mainToolbar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -99,12 +100,27 @@ class HomeActivity : AppCompatActivity() {
         mainSliderContent(mainSlider, savedInstanceState)
         mainSlider.onDrawerItemClickListener = { _, drawerItem, _ ->
             when(drawerItem.identifier){
-                0.toLong() -> displayFragment(ViewAnimalsFragment())
-                1.toLong() -> displayFragment(ProfileFragment())
-                2.toLong() -> displayFragment(ViewCharitiesFragment())
-                3.toLong() -> displayFragment(DisplayFactsFragment())
+                0.toLong() -> {
+                    displayFragment(ViewAnimalsFragment())
+                    mainToolbar.title = "Rescues"
+                }
+                1.toLong() -> {
+                    displayFragment(ProfileFragment())
+                    mainToolbar.title = "Profile"
+                }
+                2.toLong() -> {
+                    displayFragment(ViewCharitiesFragment())
+                    mainToolbar.title = "Charities"
+                }
+                3.toLong() -> {
+                    displayFragment(DisplayFactsFragment())
+                    mainToolbar.title = "Fun Facts"
+                }
                 7.toLong() -> signOutFromAccount()
-                else -> displayFragment(ViewAnimalsFragment())
+                else -> {
+                    displayFragment(ViewAnimalsFragment())
+                    mainToolbar.title = "Rescues"
+                }
             }
             false
         }

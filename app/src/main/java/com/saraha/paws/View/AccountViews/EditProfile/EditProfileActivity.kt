@@ -9,6 +9,7 @@ import android.util.Patterns
 import android.view.View
 import android.widget.ArrayAdapter
 import androidx.activity.viewModels
+import androidx.core.widget.addTextChangedListener
 import com.google.android.material.textfield.TextInputEditText
 import com.saraha.paws.Model.User
 import com.saraha.paws.R
@@ -37,6 +38,8 @@ class EditProfileActivity : AppCompatActivity() {
             setValue(user)
         }
 
+        setupToolbar()
+
         setGroupDropDownMenu()
 
         onFieldFocus()
@@ -51,6 +54,19 @@ class EditProfileActivity : AppCompatActivity() {
         }
 
         setContentView(binding.root)
+    }
+
+
+    private fun setupToolbar() {
+        val mainToolbar = binding.toolbarEditProfile
+        mainToolbar.title = "Edit Profile"
+        mainToolbar.setNavigationIcon(R.drawable.ic_back_24)
+        setSupportActionBar(mainToolbar)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 
     //Function the verifies data inputted by user, then uploading image in FireStorage
@@ -106,14 +122,14 @@ class EditProfileActivity : AppCompatActivity() {
 
     //Function to set onOutOfFocus on textFields
     private fun onFieldFocus(){
-        binding.editTextEditProfileEmail.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) validateEmail(binding.editTextEditProfileEmail, 0)
+        binding.editTextEditProfileEmail.addTextChangedListener {
+            validateEmail(binding.editTextEditProfileEmail, 0)
         }
-        binding.editTextEditProfileName.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) validateName(binding.editTextEditProfileName, 1)
+        binding.editTextEditProfileName.addTextChangedListener {
+            validateName(binding.editTextEditProfileName, 1)
         }
-        binding.editTextLayoutEditProfileMobile.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) validateMobile(binding.editTextLayoutEditProfileMobile, 2)
+        binding.editTextLayoutEditProfileMobile.addTextChangedListener {
+            validateMobile(binding.editTextLayoutEditProfileMobile, 2)
         }
         binding.autoCompleteEditGroup.setOnItemClickListener { parent, view, position, id ->
             user.group = list[position]

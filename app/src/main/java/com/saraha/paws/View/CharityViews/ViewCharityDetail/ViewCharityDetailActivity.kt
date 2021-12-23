@@ -47,6 +47,7 @@ class ViewCharityDetailActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         val mainToolbar = binding.toolbarViewCharity
+        mainToolbar.title = charity.name
         mainToolbar.setNavigationIcon(R.drawable.ic_back_24)
         setSupportActionBar(mainToolbar)
     }

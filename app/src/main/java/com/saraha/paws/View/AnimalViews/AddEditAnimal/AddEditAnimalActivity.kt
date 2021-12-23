@@ -52,6 +52,8 @@ class AddEditAnimalActivity : AppCompatActivity() {
             animal = intent.getSerializableExtra("animal") as Animal
         }
 
+        setupToolbar()
+
         //Set fragment view when activity is created
         displayFragment(pageFragments[index])
 
@@ -61,6 +63,18 @@ class AddEditAnimalActivity : AppCompatActivity() {
         setButtonOnClickListener()
 
         setContentView(binding.root)
+    }
+
+    private fun setupToolbar() {
+        val mainToolbar = binding.toolbarAddEditAnimal
+        mainToolbar.title = ""
+        mainToolbar.setNavigationIcon(R.drawable.ic_back_24)
+        setSupportActionBar(mainToolbar)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 
     //Function to set button onClick listener

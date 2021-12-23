@@ -6,11 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".View.AccountViews.EditProfile.EditProfileActivity">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewEditToolbar"
-        android:layout_width="0dp"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarEditProfile"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
-        app:cardBackgroundColor="@color/blue"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,11 +21,10 @@
         android:id="@+id/cardViewEditProfile"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:layout_marginTop="-70dp"
         app:cardCornerRadius="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardViewEditToolbar">
+        tools:layout_editor_absoluteY="30dp">
 
         <ImageView
             android:id="@+id/imageViewEditProfile"

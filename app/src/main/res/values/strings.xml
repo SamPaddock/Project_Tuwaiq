@@ -90,5 +90,7 @@
     <string name="incorrect_link">The link is not in the correct format</string>
     <string name="mismatch_text">Does not match password</string>
     <string name="location_error">Could not show location</string>
+    <string name="welcome_msg">Welcome Back</string>
+    <string name="create_account_msg">Create Account</string>
 
 </resources>

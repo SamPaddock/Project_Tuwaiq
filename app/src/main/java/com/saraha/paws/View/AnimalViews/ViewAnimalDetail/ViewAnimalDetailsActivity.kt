@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.viewModels
+import com.google.android.gms.maps.model.LatLng
 import com.saraha.paws.Model.Animal
 import com.saraha.paws.R
 import com.saraha.paws.Util.AppSharedPreference
+import com.saraha.paws.Util.getStringAddress
+import com.saraha.paws.Util.loadImage
 import com.saraha.paws.Util.toast
 import com.saraha.paws.View.AnimalViews.AddEditAnimal.AddEditAnimalActivity
 import com.saraha.paws.View.CharityViews.AddEditCharity.AddEditCharityActivity
@@ -40,6 +43,7 @@ class ViewAnimalDetailsActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         val mainToolbar = binding.toolbarViewAnimal
+        mainToolbar.title = animal.name
         mainToolbar.setNavigationIcon(R.drawable.ic_back_24)
         setSupportActionBar(mainToolbar)
     }
@@ -96,12 +100,14 @@ class ViewAnimalDetailsActivity : AppCompatActivity() {
         binding.textViewDisplayAnimalVolunteer.setText(animal.volunteerName)
         binding.textViewDisplayAnimalCharity.setText(animal.groupName)
         //set image
-        Picasso.get().load(animal.photoUrl).into(binding.imageViewDisplayAnimalPhoto)
+        binding.imageViewDisplayAnimalPhoto.loadImage(animal.photoUrl)
         //set secondary values
         binding.textViewDisplayAnimalType.setText(animal.type)
         binding.textViewDisplayAnimalGender.setText(animal.gender)
         binding.textViewDisplayAnimalAge.setText(animal.age)
         binding.textViewDisplayAnimalColor.setText(animal.color)
+        val location = LatLng(animal.latitude, animal.longitude)
+        binding.textViewDisplayAnimalVolunteer.setText(location.getStringAddress(this))
         binding.textViewDisplayAnimalPersonality.setText(animal.personality)
         binding.textViewDisplayAnimalGrooming.setText(animal.grooming)
         binding.textViewDisplayAnimalMedical.setText(animal.medical)
