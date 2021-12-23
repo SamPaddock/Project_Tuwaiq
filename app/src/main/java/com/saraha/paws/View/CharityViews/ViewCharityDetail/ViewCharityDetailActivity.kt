@@ -7,11 +7,14 @@ import com.saraha.paws.R
 import com.saraha.paws.databinding.ActivityViewCharityDetailBinding
 import com.squareup.picasso.Picasso
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.view.Menu
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.google.android.gms.maps.model.LatLng
 import com.saraha.paws.Util.AppSharedPreference
+import com.saraha.paws.Util.loadImage
 import com.saraha.paws.Util.toast
 import com.saraha.paws.View.AnimalViews.ViewAnimalDetail.ViewAnimalDetailsViewModel
 import com.saraha.paws.View.CharityViews.AddEditCharity.AddEditCharityActivity
@@ -100,8 +103,11 @@ class ViewCharityDetailActivity : AppCompatActivity() {
         binding.textViewDisplayCharityFounder.text = charity.founder
         binding.textViewDisplayCharityMobile.text = charity.mobile
         //set image
-        Picasso.get().load(charity.photo).into(binding.imageViewDisplayCharityPhoto)
+        binding.imageViewDisplayCharityPhoto.loadImage(charity.photo)
         //set buttons
+        binding.buttonCharityLocation.setOnClickListener {
+            openGoogleMaps(LatLng(charity.latitude,charity.longitude))
+        }
         binding.imageViewSTCPayLink.setOnClickListener { openSTCPay(charity.stcPay) }
         binding.imageViewFacebookLink.setOnClickListener { openFacebook(charity.facebookUrl) }
         binding.imageViewInstaLink.setOnClickListener { openInstagram(charity.instagramUrl) }
@@ -181,6 +187,17 @@ class ViewCharityDetailActivity : AppCompatActivity() {
         }else {
             val i = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=sa.com.stcpay"))
             startActivity(i)
+        }
+    }
+
+    private fun openGoogleMaps(location: LatLng){
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse("geo:${location.latitude},${location.longitude}?z=8")
+        intent.setPackage("com.google.android.apps.maps")
+        if (intent.resolveActivity(packageManager) != null){
+            startActivity(intent)
+        } else {
+            this.toast(getString(R.string.location_error))
         }
     }
 }
