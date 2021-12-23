@@ -122,11 +122,11 @@ class UserRepository {
         var ref = dbFBStorage?.reference?.child(Firebase.auth.uid.toString())?.child(fileName)
 
         val uploadTask = ref?.putFile(fileUri)
-        uploadTask?.continueWithTask { task ->
+        val tasks = uploadTask?.continueWithTask { task ->
             if (!task.isSuccessful) {
                 Log.d(TAG,"could not upload image: ${task.result?.error}")
             }
-            ref?.downloadUrl
+            ref?.downloadUrl!!
         }?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val downloadUri = task.result

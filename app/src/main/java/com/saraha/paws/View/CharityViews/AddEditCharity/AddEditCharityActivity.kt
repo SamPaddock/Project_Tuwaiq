@@ -1,21 +1,15 @@
 package com.saraha.paws.View.CharityViews.AddEditCharity
 
-import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.kofigyan.stateprogressbar.StateProgressBar
 import com.saraha.paws.Model.Charity
 import com.saraha.paws.R
 import com.saraha.paws.Util.toast
-import com.saraha.paws.View.AnimalViews.AddEditAnimal.Fragment.AddEditAnimalPage1Fragment
-import com.saraha.paws.View.AnimalViews.AddEditAnimal.Fragment.AddEditAnimalPage2Fragment
-import com.saraha.paws.View.AnimalViews.AddEditAnimal.Fragment.AddEditAnimalPage3Fragment
 import com.saraha.paws.View.CharityViews.AddEditCharity.Fragment.AddEditCharityPage1Fragment
 import com.saraha.paws.View.CharityViews.AddEditCharity.Fragment.AddEditCharityPage2Fragment
 import com.saraha.paws.databinding.ActivityAddEditCharityBinding
@@ -27,7 +21,7 @@ class AddEditCharityActivity : AppCompatActivity() {
 
     private var actionType = ""
     private var charity = Charity(null,"","","",
-        "","","","", "")
+        "","",0.0,0.0, "", "", "")
     var pageFragments = listOf(
         AddEditCharityPage1Fragment(),
         AddEditCharityPage2Fragment()
@@ -152,6 +146,10 @@ class AddEditCharityActivity : AppCompatActivity() {
         viewModel.facebookLinkLiveData.observe(this ,{ charity.facebookUrl = it })
         viewModel.instagramLinkLiveData.observe(this ,{ charity.instagramUrl = it })
         viewModel.photoLiveData.observe(this ,{ charity.photo = it.toString() })
+        viewModel.locationLiveData.observe(this ,{
+            charity.latitude = it.latitude
+            charity.longitude = it.longitude
+        })
     }
 
     //Function to add or replace a fragment view

@@ -9,6 +9,8 @@ data class Charity (
     var email: String,
     var mobile: String,
     var stcPay: String,
+    var latitude: Double,
+    var longitude: Double,
     var photo: String,
     var facebookUrl: String,
     var instagramUrl: String
@@ -20,13 +22,15 @@ data class Charity (
                 && photo.isNotEmpty()
     }
 
-    fun getHashMap(photoUrl: String): HashMap<String, String?>{
+    fun getHashMap(photoUrl: String): HashMap<String, Any?>{
         return hashMapOf(
             "name" to name,
             "email" to email,
             "mobile" to mobile,
             "photo" to photoUrl,
             "stcPay" to stcPay,
+            "latitude" to latitude,
+            "longitude" to longitude,
             "facebookUrl" to facebookUrl,
             "instagramUrl" to instagramUrl,
             "founder" to founder,

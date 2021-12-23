@@ -46,6 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="@string/founder"
+        app:startIconDrawable="@drawable/ic_person_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAddCharityName">
@@ -79,6 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        app:startIconDrawable="@drawable/ic_email_24"
         android:hint="@string/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,6 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="@string/mobile"
+        app:startIconDrawable="@drawable/ic_smartphone_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAddCharityEmail">

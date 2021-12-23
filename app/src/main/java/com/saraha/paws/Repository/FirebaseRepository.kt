@@ -55,7 +55,7 @@ class FirebaseRepository {
         return liveDataImage
     }
 
-    fun addDocument(collection: String, newDocument: HashMap<String, String?>): LiveData<Boolean> {
+    fun addDocument(collection: String, newDocument: HashMap<String, Any?>): LiveData<Boolean> {
         createDBFirestore()
 
         val liveDataResponse = MutableLiveData<Boolean>()
@@ -70,7 +70,7 @@ class FirebaseRepository {
         return liveDataResponse
     }
 
-    fun editDocument(collection: String, id: String, updateDocument: HashMap<String, String?>): LiveData<Boolean> {
+    fun editDocument(collection: String, id: String, updateDocument: HashMap<String, Any?>): LiveData<Boolean> {
         createDBFirestore()
 
         val liveDataResponse = MutableLiveData<Boolean>()

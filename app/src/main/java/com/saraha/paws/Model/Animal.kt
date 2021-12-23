@@ -17,6 +17,8 @@ data class Animal (
     var grooming: String,
     var medical: String,
     var photoUrl: String,
+    var latitude: Double,
+    var longitude: Double,
     var volunteerID: String,
     var volunteerName: String,
     var groupName: String
@@ -30,7 +32,7 @@ data class Animal (
                 && states.isNotEmpty())
     }
 
-    fun getHashMap(photo: String): HashMap<String, String?>{
+    fun getHashMap(photo: String): HashMap<String, Any?>{
         return hashMapOf(
             "name" to name,
             "type" to type,
@@ -43,6 +45,8 @@ data class Animal (
             "grooming" to grooming,
             "medical" to medical,
             "photoUrl" to photo,
+            "latitude" to latitude,
+            "longitude" to longitude,
             "volunteerID" to volunteerID,
             "volunteerName" to volunteerName,
             "groupName" to groupName

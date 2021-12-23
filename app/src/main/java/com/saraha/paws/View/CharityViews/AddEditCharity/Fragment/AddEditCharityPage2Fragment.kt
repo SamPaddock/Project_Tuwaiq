@@ -1,16 +1,22 @@
 package com.saraha.paws.View.CharityViews.AddEditCharity.Fragment
 
+import android.app.Activity
+import android.content.Intent
+import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.textfield.TextInputEditText
 import com.saraha.paws.Model.Charity
 import com.saraha.paws.Util.UserHelper
 import com.saraha.paws.View.CharityViews.AddEditCharity.AddEditCharityActivity
 import com.saraha.paws.View.CharityViews.AddEditCharity.AddEditCharityViewModel
+import com.saraha.paws.View.MapView.MapsActivity
 import com.saraha.paws.databinding.FragmentAddEditCharityPage2Binding
 
 
@@ -33,6 +39,11 @@ class AddEditCharityPage2Fragment : Fragment() {
 
         onFieldFocus()
 
+        binding.imageViewAddCharityLocation.setOnClickListener {
+            val intent = Intent(this.requireContext(), MapsActivity::class.java)
+            startActivityForResult(intent, 5)
+        }
+
         return binding.root
     }
 
@@ -43,54 +54,34 @@ class AddEditCharityPage2Fragment : Fragment() {
         if (charity.instagramUrl.isNotEmpty()){  binding.editTextAddCharityInstagram.setText(charity.instagramUrl) }
     }
 
+    //Function to handle response from action result
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 5 && resultCode == Activity.RESULT_OK){
+            val lat = data?.getDoubleExtra("Lat", 0.0) ?: 0.0
+            val lon = data?.getDoubleExtra("Lon", 0.0)  ?: 0.0
+
+            val geoCoder = Geocoder(this.requireContext()).getFromLocation(lat, lon, 1)
+            val address = geoCoder[0].getAddressLine(0)
+            binding.editTextAddCharityLocation.setText(address)
+            viewModel.setCharityLocation(LatLng(lat, lon))
+        }
+    }
+
     //Set onOutOfFocus on textFields
     private fun onFieldFocus(){
         binding.editTextAddCharityPay.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) validateMobile()
+            if (!hasFocus) viewModel.validateMobile(binding.editTextAddCharityPay, 4)
         }
         binding.editTextAddCharityFacebook.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) validateFacebookLink()
+            if (!hasFocus) viewModel.validateLink(binding.editTextAddCharityFacebook, 5)
         }
         binding.editTextAddCharityInstagram.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) validateInstaLink()
+            if (!hasFocus) viewModel.validateLink(binding.editTextAddCharityInstagram, 6)
         }
     }
 
-    //Check mobile from textField and handle use cases
-    private fun validateMobile() {
-        val mobile = binding.editTextAddCharityPay
-        val (result, isValid) = UserHelper().mobileValidation(mobile.text.toString())
-        handleTextFields(mobile,result.string,0,isValid)
-    }
 
-    //Check facebook link from textField and handle use cases
-    private fun validateFacebookLink() {
-        val string = binding.editTextAddCharityFacebook
-        val (result, isValid) = UserHelper().fieldVerification(string.text.toString())
-        handleTextFields(string,result.string,1,isValid)
-    }
-
-    //Check insta link from textField and handle use cases
-    private fun validateInstaLink() {
-        val string = binding.editTextAddCharityInstagram
-        val (result, isValid) = UserHelper().fieldVerification(string.text.toString())
-        handleTextFields(string,result.string,2,isValid)
-    }
-
-    //Handle result of textField checks
-    private fun handleTextFields(v: TextInputEditText, msg: String, index: Int, isValid: Boolean){
-        if (!isValid){
-            v.error = msg
-        } else {
-            v.error = null
-            when (index){
-                0 -> viewModel.setCharitySTCPay(v.text.toString())
-                1 -> viewModel.setCharityFacebookLink(v.text.toString())
-                2 -> viewModel.setCharityInstagramLink(v.text.toString())
-                else -> return
-            }
-        }
-    }
 
 
 }

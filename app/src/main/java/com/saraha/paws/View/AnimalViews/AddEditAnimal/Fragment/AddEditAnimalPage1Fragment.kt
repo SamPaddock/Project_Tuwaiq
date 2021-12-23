@@ -3,6 +3,7 @@ package com.saraha.paws.View.AnimalViews.AddEditAnimal.Fragment
 import android.R
 import android.app.Activity
 import android.content.Intent
+import android.location.Geocoder
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.fragment.app.Fragment
@@ -17,6 +18,7 @@ import com.saraha.paws.Util.Helper
 import com.saraha.paws.Util.UserHelper
 import com.saraha.paws.View.AnimalViews.AddEditAnimal.AddEditAnimalActivity
 import com.saraha.paws.View.AnimalViews.AddEditAnimal.AddEditAnimalViewModel
+import com.saraha.paws.View.MapView.MapsActivity
 import com.saraha.paws.databinding.FragmentAddEditAnimalPage1Binding
 import com.squareup.picasso.Picasso
 
@@ -42,6 +44,11 @@ class AddEditAnimalPage1Fragment : Fragment() {
         onFieldFocus()
 
         selectPhoto()
+
+        binding.imageViewAddLocation.setOnClickListener {
+            val intent = Intent(this.requireContext(), MapsActivity::class.java)
+            startActivityForResult(intent, 5)
+        }
 
         return binding.root
     }
@@ -70,6 +77,14 @@ class AddEditAnimalPage1Fragment : Fragment() {
             val imgData = data?.data!!
             binding.imageViewAnimalPhoto.setImageURI(imgData)
             viewModel.setAnimalPhoto(imgData)
+        }
+        if (requestCode == 5 && resultCode == Activity.RESULT_OK){
+            val lat = data?.getDoubleExtra("Lat", 0.0) ?: 0.0
+            val lon = data?.getDoubleExtra("Lon", 0.0)  ?: 0.0
+
+            val geoCoder = Geocoder(this.requireContext()).getFromLocation(lat, lon, 1)
+            val address = geoCoder[0].getAddressLine(0)
+            binding.editTextAddAnimalLocation.setText(address)
         }
     }
 

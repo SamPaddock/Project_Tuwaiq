@@ -1,6 +1,7 @@
 package com.saraha.paws.View.ShowFacts
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +10,7 @@ import com.saraha.paws.Database.DatabaseClient
 import com.saraha.paws.Model.Facts.CatFacts
 import com.saraha.paws.Repository.FactsRepository
 import com.saraha.paws.Util.AppSharedPreference
+import com.saraha.paws.Util.NetworkStatus
 import com.saraha.paws.Util.SharedConst
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -36,7 +38,7 @@ class DisplayFactsViewModel: ViewModel() {
     val factsLiveData = MutableLiveData<Pair<CatFacts?,DataStatus>>()
 
     //Function to check if database Room is empty, then check data save time, if save time is more than 24 hours old, then get new data
-    fun checkIfRoomIsEmpty(){
+    fun checkIfRoomIsEmpty(context: Context) {
         val roomData = db?.catFactsDao()?.get()
         val factTime = sharedPref.read(SharedConst.PrefsFactDate.string, (-1).toLong())
 
@@ -46,10 +48,7 @@ class DisplayFactsViewModel: ViewModel() {
             val setDateTime = Calendar.getInstance()
             setDateTime.timeInMillis = factTime!!
 
-            Log.d(TAG,"DisplayFactsViewModel: - checkIfRoomIsEmpty: - set: ${setDateTime}")
-            Log.d(TAG,"DisplayFactsViewModel: - checkIfRoomIsEmpty: - current: ${currentDateTime}")
-
-            if (factTime!! <= currentDateTime.timeInMillis){
+            if (factTime <= currentDateTime.timeInMillis && NetworkStatus().isOnline(context)){
                 val nextPage = if (roomData[0].last_page != roomData[0].current_page+1) roomData[0].current_page+1 else 1
                 getNextPageOfFacts(nextPage)
             } else {
@@ -72,7 +71,7 @@ class DisplayFactsViewModel: ViewModel() {
                 }
 
                 response.body()?.let { list ->
-                    val facts = if (list.data?.isNotEmpty() == true) list else null
+                    val facts = if (list.data.isNotEmpty()) list else null
                     factsLiveData.postValue(Pair(facts.takeIf { facts != null },DataStatus.New))
                 }
             }

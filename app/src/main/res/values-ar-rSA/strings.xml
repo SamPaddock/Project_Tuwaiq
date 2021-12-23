@@ -72,4 +72,9 @@
     <string name="netowrk_issues_msg">Connect to the network and try again.</string>
     <string name="network_issue_title">No Network Connection</string>
     <string name="delete">Delete</string>
+    <string name="successful_delete_charity">successfully delete charity</string>
+    <string name="successful_delete_animal">successfully delete animal</string>
+    <string name="failure_delete_animal">could not delete animal</string>
+    <string name="failure_delete_charity">could not delete charity</string>
+    <string name="notfication_msg_1">Check out new fun facts about Cats!!</string>
 </resources>

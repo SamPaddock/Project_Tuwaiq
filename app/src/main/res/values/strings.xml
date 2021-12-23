@@ -1,6 +1,7 @@
 <resources>
     <!-- Main -->
     <string name="app_name" translatable="false">Paws</string>
+    <string name="title_activity_maps" translatable="false">MapsActivity</string>
 
     <string name="next">Next</string>
     <string name="previous">Previous</string>
@@ -82,5 +83,6 @@
     <string name="failure_delete_animal">could not delete animal</string>
     <string name="failure_delete_charity">could not delete charity</string>
     <string name="notfication_msg_1">Check out new fun facts about Cats!!</string>
+    <string name="location_required_msg">Permission must be granted in order to access Locations and Google Maps</string>
 
 </resources>

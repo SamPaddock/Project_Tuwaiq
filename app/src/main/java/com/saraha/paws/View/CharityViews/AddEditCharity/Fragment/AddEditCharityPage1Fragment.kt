@@ -76,61 +76,16 @@ class AddEditCharityPage1Fragment : Fragment() {
     //Set onOutOfFocus on textFields
     private fun onFieldFocus(){
         binding.editTextAddCharityEmail.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) validateEmail()
-        }
-        binding.editTextAddCharityName.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) validateName()
-        }
-        binding.editTextAddCharityFounder.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) validateFounder()
+            if (!hasFocus) viewModel.validateEmail(binding.editTextAddCharityEmail,0)
         }
         binding.editTextAddCharityMobile.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) validateMobile()
+            if (!hasFocus) viewModel.validateMobile(binding.editTextAddCharityMobile, 1)
         }
-    }
-
-    //Check email textField and handle use cases
-    private fun validateEmail() {
-        val email = binding.editTextAddCharityEmail
-        val (result, isValid) = UserHelper()
-            .emailVerification(email.text.toString())
-        handleTextFields(email,result.string,0,isValid)
-    }
-
-    //Check mobile textField and handle use cases
-    private fun validateMobile() {
-        val mobile = binding.editTextAddCharityMobile
-        val (result, isValid) = UserHelper().mobileValidation(mobile.text.toString())
-        handleTextFields(mobile,result.string,1,isValid)
-    }
-
-    //Check name textField and handle use cases
-    private fun validateName() {
-        val string = binding.editTextAddCharityName
-        val (result, isValid) = UserHelper().fieldVerification(string.text.toString())
-        handleTextFields(string,result.string,2,isValid)
-    }
-
-    //Check founder textField and handle use cases
-    private fun validateFounder() {
-        val string = binding.editTextAddCharityFounder
-        val (result, isValid) = UserHelper().fieldVerification(string.text.toString())
-        handleTextFields(string,result.string,3,isValid)
-    }
-
-    //Handle result of textField checks
-    private fun handleTextFields(v: TextInputEditText, msg: String, index: Int, isValid: Boolean){
-        if (!isValid){
-            v.error = msg
-        } else {
-            v.error = null
-            when (index){
-                0 -> viewModel.setCharityEmail(v.text.toString())
-                1 -> viewModel.setCharityMobile(v.text.toString())
-                2 -> viewModel.setCharityName(v.text.toString())
-                3 -> viewModel.setCharityFounder(v.text.toString())
-                else -> return
-            }
+        binding.editTextAddCharityName.setOnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) viewModel.validateText(binding.editTextAddCharityName, 2)
+        }
+        binding.editTextAddCharityFounder.setOnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) viewModel.validateText(binding.editTextAddCharityFounder, 3)
         }
     }
 

@@ -35,6 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -63,6 +66,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
     //Cat Facts -> Room
     implementation("androidx.room:room-runtime:2.3.0")
+    implementation 'com.google.android.gms:play-services-maps:18.0.1'
     annotationProcessor("androidx.room:room-compiler:2.3.0")
     // To use Kotlin annotation processing tool (kapt)
     kapt("androidx.room:room-compiler:2.3.0")
