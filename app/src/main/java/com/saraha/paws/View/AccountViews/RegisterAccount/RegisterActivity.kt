@@ -1,12 +1,20 @@
 package com.saraha.paws.View.AccountViews.RegisterAccount
 
+import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.FacebookSdk
+import com.facebook.appevents.AppEventsLogger
+import com.facebook.login.LoginResult
 import com.kofigyan.stateprogressbar.StateProgressBar
 import com.saraha.paws.Model.User
 import com.saraha.paws.R

@@ -2,6 +2,9 @@
     <!-- Main -->
     <string name="app_name" translatable="false">Paws</string>
     <string name="title_activity_maps" translatable="false">MapsActivity</string>
+    <string name="facebook_app_id" translatable="false">891969328182204</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb891969328182204</string>
+
 
     <string name="next">Next</string>
     <string name="previous">Previous</string>

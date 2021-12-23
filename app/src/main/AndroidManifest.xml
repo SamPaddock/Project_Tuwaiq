@@ -26,6 +26,9 @@
         android:theme="@style/Theme.Project_Tuwaiq"
         android:usesCleartextTraffic="true">
 
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />

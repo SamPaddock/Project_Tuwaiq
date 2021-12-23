@@ -3,7 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/filter_item_menu"
-        android:icon="@drawable/ic_filter_list_24"
+        android:icon="@drawable/ic_filter_alt_24"
         android:title="Filter"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/sort_item_menu"
+        android:icon="@drawable/ic_sort_24"
+        android:title="Sort"
         app:showAsAction="always" />
 </menu>

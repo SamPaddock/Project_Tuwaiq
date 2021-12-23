@@ -1,11 +1,22 @@
 package com.saraha.paws.View.AccountViews.RegisterAccount
 
+import android.content.ContentValues
+import android.content.Intent
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.facebook.AccessToken
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.FacebookAuthProvider
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.saraha.paws.Repository.CharityRepository
 import com.saraha.paws.Repository.UserRepository
 import com.saraha.paws.Util.UserHelper
+import com.saraha.paws.Util.toast
+import com.saraha.paws.View.Home.HomeActivity
 
 class RegisterViewModel: ViewModel() {
 
