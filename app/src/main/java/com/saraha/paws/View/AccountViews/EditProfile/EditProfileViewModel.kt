@@ -3,11 +3,15 @@ package com.saraha.paws.View.AccountViews.EditProfile
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.saraha.paws.Model.User
 import com.saraha.paws.Repository.CharityRepository
 import com.saraha.paws.Repository.UserRepository
+import com.saraha.paws.Util.AppSharedPreference
 import java.util.HashMap
 
 class EditProfileViewModel: ViewModel() {
+
+    val sharedPref = AppSharedPreference()
 
     //Variable to get liveData response from Firebase
     val postedPhotoLiveData = MutableLiveData<String>()
@@ -38,6 +42,15 @@ class EditProfileViewModel: ViewModel() {
         UserRepository().updateUserAccount(user).observeForever {
             if (it) editUserLiveData.postValue(it)
         }
+    }
+
+    fun setSharedPreference(user: User){
+        sharedPref.write("uName", user.name)
+        sharedPref.write("eName", user.email)
+        sharedPref.write("mName", user.mobile)
+        sharedPref.write("tName", user.type)
+        sharedPref.write("gName", user.group)
+        sharedPref.write("pName", user.photoUrl!!)
     }
 
 }

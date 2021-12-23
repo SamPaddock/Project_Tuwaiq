@@ -29,25 +29,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(binding.root)
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        getCurrentLocation { lat, lon ->
-            setCurrentLocation(lat, lon)
-        }
+        getCurrentLocation { lat, lon -> setCurrentLocation(lat, lon) }
 
-        mMap.setOnMapClickListener {
-            val intent = Intent()
-            intent.putExtra("Lat", it.latitude)
-            intent.putExtra("Lon", it.longitude)
-            setResult(RESULT_OK, intent)
-            finish()
-        }
+        mMap.setOnMapClickListener { sendSelectedLocationBack(it) }
+    }
+
+    private fun sendSelectedLocationBack(it: LatLng) {
+        val intent = Intent()
+        intent.putExtra("Lat", it.latitude)
+        intent.putExtra("Lon", it.longitude)
+        setResult(RESULT_OK, intent)
+        finish()
     }
 
     private fun setCurrentLocation(lat: Double, lon: Double) {
@@ -64,9 +63,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
 
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,10000,5f){
-            var location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+            val location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
             val latitude = location?.latitude!!
-            val longitude = location?.longitude!!
+            val longitude = location.longitude
             onCompletion(latitude, longitude)
         }
     }

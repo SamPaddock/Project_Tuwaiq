@@ -57,11 +57,7 @@ class ProfileFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        user = User(Firebase.auth.currentUser?.uid, sharedPref.read("pName",""),
-            sharedPref.read("eName","")!!, null, sharedPref.read("uName","")!!,
-            sharedPref.read("mName","")!!, sharedPref.read("gName","")!!,
-            sharedPref.read("tName","")!!
-        )
+        user = viewModel.getUserInfo()
         setUserData(user)
     }
 

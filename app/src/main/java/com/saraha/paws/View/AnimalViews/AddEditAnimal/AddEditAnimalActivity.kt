@@ -27,7 +27,7 @@ class AddEditAnimalActivity : AppCompatActivity() {
 
     private var actionType = ""
     var animal = Animal(null, "", "", "", "", "", "",
-        "", "", "", "", "",
+        "", "", "", "", 0.0,0.0,
         Firebase.auth.currentUser?.uid!!, sharedPref.read("uName","")!!, sharedPref.read("gName","")!!)
     var pageFragments = listOf(
         AddEditAnimalPage1Fragment(),
@@ -171,7 +171,6 @@ class AddEditAnimalActivity : AppCompatActivity() {
     private fun getAnimalLiveData() {
         viewModel.nameLiveData.observe(this ,{ animal.name = it })
         viewModel.typeLiveData.observe(this ,{ animal.type = it })
-        viewModel.locationLiveData.observe(this ,{ animal.location = it })
         viewModel.ageLiveData.observe(this ,{ animal.age = it})
         viewModel.statusLiveData.observe(this ,{ animal.states = it })
         viewModel.genderLiveData.observe(this ,{ animal.gender = it })
@@ -180,6 +179,10 @@ class AddEditAnimalActivity : AppCompatActivity() {
         viewModel.groomingLiveData.observe(this ,{ animal.grooming = it })
         viewModel.medicalLiveData.observe(this ,{ animal.medical = it })
         viewModel.photoLiveData.observe(this ,{ animal.photoUrl = it.toString() })
+        viewModel.locationLiveData.observe(this ,{
+            animal.latitude = it.latitude
+            animal.longitude = it.latitude
+        })
     }
 
     //Function to add or replace a fragment view

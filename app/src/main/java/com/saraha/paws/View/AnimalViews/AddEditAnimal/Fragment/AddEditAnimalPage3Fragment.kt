@@ -44,30 +44,12 @@ class AddEditAnimalPage3Fragment : Fragment() {
     //Set onOutOfFocus on textFields
     private fun onFieldFocus(){
         binding.edittextAddAnimalGrooming.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) validateText(binding.edittextAddAnimalGrooming,0)
+            if (!hasFocus) viewModel.validateText(binding.edittextAddAnimalGrooming,5)
         }
         binding.edittextAddAnimalMedical.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) validateText(binding.edittextAddAnimalMedical,1)
+            if (!hasFocus) viewModel.validateText(binding.edittextAddAnimalMedical,6)
         }
     }
 
-    //Check text from textField and handle use cases
-    private fun validateText(edittext: TextInputEditText, index: Int) {
-        val (result, isValid) = UserHelper().fieldVerification(edittext.text.toString())
-        handleTextFields(edittext,result.string,index,isValid)
-    }
 
-    //Handle result of textField checks
-    private fun handleTextFields(v: TextInputEditText, msg: String, index: Int, isValid: Boolean){
-        if (!isValid){
-            v.error = msg
-        } else {
-            v.error = null
-            when (index){
-                0 -> viewModel.setAnimalGrooming(v.text.toString())
-                1 -> viewModel.setAnimalMedical(v.text.toString())
-                else -> return
-            }
-        }
-    }
 }

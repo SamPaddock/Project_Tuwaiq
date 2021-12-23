@@ -2,8 +2,10 @@ package com.saraha.paws.View.AccountViews.RegisterAccount
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.material.textfield.TextInputEditText
 import com.saraha.paws.Repository.CharityRepository
 import com.saraha.paws.Repository.UserRepository
+import com.saraha.paws.Util.UserHelper
 
 class RegisterViewModel: ViewModel() {
 
@@ -55,6 +57,59 @@ class RegisterViewModel: ViewModel() {
     fun createAnAccountInFirebase(newUser: HashMap<String, String?>){
         UserRepository().createUserAccount(newUser).observeForever {
             createAccountResponseLiveData.postValue(it)
+        }
+    }
+
+    //Check email textField and handle use cases
+    fun validateEmail(email: TextInputEditText, index: Int) {
+        val (result, isValid) = UserHelper().emailVerification(email.text.toString())
+        handleTextFields(email,result.string,index,isValid)
+    }
+
+    //Check password textField and handle use cases
+    fun validatePassword(password: TextInputEditText, index: Int) {
+        val (result, isValid) = UserHelper().passwordValidation(password.text.toString())
+        handleTextFields(password,result.string,index,isValid)
+    }
+
+    //Check confirmed password textField and handle use cases
+    fun validateConfirmPassword(
+        confirmPassword: TextInputEditText, password: TextInputEditText, index: Int
+    ) {
+        val (result, isValid) = UserHelper().passwordValidation(
+            confirmPassword.text.toString(), password.text.toString())
+        handleTextFields(confirmPassword,result.string,index,isValid)
+    }
+
+    //Check mobile textField and handle use cases
+    fun validateMobile(mobile: TextInputEditText, index: Int) {
+        val (result, isValid) = UserHelper().mobileValidation(mobile.text.toString())
+        handleTextFields(mobile, result.string, index, isValid)
+    }
+
+    //Check name textField and handle use cases
+    fun validateName(name: TextInputEditText, index: Int) {
+        val (result, isValid) = UserHelper().fieldVerification(name.text.toString())
+        handleTextFields(name, result.string, index, isValid)
+    }
+
+    //Handle result of textField checks
+    private fun handleTextFields(v: TextInputEditText, msg: String, index: Int, isValid: Boolean){
+        if (!isValid){
+            v.error = msg
+        } else {
+            v.error = null
+            when (index){
+                0 -> setEmailFromPage1(v.text.toString())
+                1 -> {
+                    setPasswordValidation(isValid)
+                    setPasswordFromPage1(v.text.toString())
+                }
+                2 -> setConfirmedPasswordValidation(isValid)
+                3 -> setNameFromPage2(v.text.toString())
+                4 -> setMobileFromPage2(v.text.toString())
+                else -> return
+            }
         }
     }
 }

@@ -8,7 +8,6 @@ data class Animal (
     var aid: String? = null,
     var name: String,
     var type: String,
-    var location: String,
     var age: String,
     var states: String,
     var gender: String,
@@ -26,7 +25,7 @@ data class Animal (
 {
 
     fun isAllDataNotEmpty(): Boolean {
-        return (name.isNotEmpty() && type.isNotEmpty() && location.isNotEmpty() && age.isNotEmpty()
+        return (name.isNotEmpty() && type.isNotEmpty() && age.isNotEmpty()
                 && gender.isNotEmpty() && color.isNotEmpty() && personality.isNotEmpty()
                 && grooming.isNotEmpty() && medical.isNotEmpty() && photoUrl.isNotEmpty()
                 && states.isNotEmpty())
@@ -36,7 +35,6 @@ data class Animal (
         return hashMapOf(
             "name" to name,
             "type" to type,
-            "location" to location,
             "age" to age,
             "states" to states,
             "gender" to gender,

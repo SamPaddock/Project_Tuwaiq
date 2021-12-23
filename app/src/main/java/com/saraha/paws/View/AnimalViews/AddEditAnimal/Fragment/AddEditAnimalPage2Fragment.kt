@@ -47,38 +47,16 @@ class AddEditAnimalPage2Fragment : Fragment() {
     //Set onOutOfFocus on textFields
     private fun onFieldFocus(){
         binding.edittextAddAnimalAge.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) validateText(binding.edittextAddAnimalAge,0)
+            if (!hasFocus) viewModel.validateText(binding.edittextAddAnimalAge,1)
         }
         binding.edittextAddAnimalColor.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) validateText(binding.edittextAddAnimalColor,1)
+            if (!hasFocus) viewModel.validateText(binding.edittextAddAnimalColor,2)
         }
         binding.edittextAddAnimalGender.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) validateText(binding.edittextAddAnimalGender,2)
+            if (!hasFocus) viewModel.validateText(binding.edittextAddAnimalGender,3)
         }
         binding.edittextAddAnimalPersonality.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) validateText(binding.edittextAddAnimalPersonality,3)
-        }
-    }
-
-    //Check text from textField and handle use cases
-    private fun validateText(edittext: TextInputEditText, index: Int) {
-        val (result, isValid) = UserHelper().fieldVerification(edittext.text.toString())
-        handleTextFields(edittext,result.string,index,isValid)
-    }
-
-    //Handle result of textField checks
-    private fun handleTextFields(v: TextInputEditText, msg: String, index: Int, isValid: Boolean){
-        if (!isValid){
-            v.error = msg
-        } else {
-            v.error = null
-            when (index){
-                0 -> viewModel.setAnimalAge(v.text.toString())
-                1 -> viewModel.setAnimalColor(v.text.toString())
-                2 -> viewModel.setAnimalGender(v.text.toString())
-                3 -> viewModel.setAnimalPersonality(v.text.toString())
-                else -> return
-            }
+            if (!hasFocus) viewModel.validateText(binding.edittextAddAnimalPersonality,4)
         }
     }
 }

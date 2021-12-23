@@ -54,43 +54,13 @@ class RegisterPage2Fragment : Fragment() {
     //Set onOutOfFocus on textFields
     private fun onFieldFocus(){
         binding.edittextRegisterName.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) validateName()
+            if (!hasFocus) viewModel.validateName(binding.edittextRegisterName, 3)
         }
         binding.edittextRegisterMobile.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) validateMobile()
+            if (!hasFocus) viewModel.validateMobile(binding.edittextRegisterMobile, 4)
         }
         binding.autoCompleteRegisterGroup.setOnItemClickListener { _, _, position, _ ->
             viewModel.setGroupFromPage2(list.get(position))
         }
     }
-
-    //Check mobile textField and handle use cases
-    private fun validateMobile() {
-        val mobile = binding.edittextRegisterMobile
-        val (result, isValid) = UserHelper().mobileValidation(mobile.text.toString())
-        handleTextFields(mobile,result.string,1 ,isValid)
-    }
-
-    //Check name textField and handle use cases
-    private fun validateName() {
-        val name = binding.edittextRegisterName
-        val (result, isValid) = UserHelper().fieldVerification(name.text.toString())
-        handleTextFields(name,result.string,0 ,isValid)
-    }
-
-    //Handle result of textField checks
-    private fun handleTextFields(v: TextInputEditText, msg: String, index: Int, isValid: Boolean){
-        if (!isValid){
-            v.error = msg
-        } else {
-            v.error = null
-            when (index){
-                0 -> viewModel.setNameFromPage2(v.text.toString())
-                1 -> viewModel.setMobileFromPage2(v.text.toString())
-                else -> return
-            }
-        }
-    }
-
-
 }

@@ -58,7 +58,7 @@ class EditProfileActivity : AppCompatActivity() {
         if (user.isAllDataEmpty()) {
             binding.layoutEditView.visibility = View.VISIBLE
             binding.buttonSaveProfileEdit.isClickable = false
-            if (!Patterns.WEB_URL.matcher(user.photoUrl).matches()){
+            if (!Patterns.WEB_URL.matcher(user.photoUrl!!).matches()){
                 viewModel.setPhotoInFireStorage(user.photoUrl!!)
                 viewModel.postedPhotoLiveData.observe(this) {
                     if (it.isNotEmpty()) { updateUserInformation(it) }
@@ -82,12 +82,7 @@ class EditProfileActivity : AppCompatActivity() {
             binding.layoutEditView.visibility = View.GONE
             binding.buttonSaveProfileEdit.isClickable = true
             if (it){
-                sharedPref.write("uName", user.name)
-                sharedPref.write("eName", user.email)
-                sharedPref.write("mName", user.mobile)
-                sharedPref.write("tName", user.type)
-                sharedPref.write("gName", user.group)
-                sharedPref.write("pName", user.photoUrl!!)
+                viewModel.setSharedPreference(user)
                 this.toast(getString(R.string.successful_edit_user))
                 finish()
             } else {
@@ -112,13 +107,13 @@ class EditProfileActivity : AppCompatActivity() {
     //Function to set onOutOfFocus on textFields
     private fun onFieldFocus(){
         binding.editTextEditProfileEmail.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) validateEmail()
+            if (!hasFocus) validateEmail(binding.editTextEditProfileEmail, 0)
         }
         binding.editTextEditProfileName.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) validateName()
+            if (!hasFocus) validateName(binding.editTextEditProfileName, 1)
         }
         binding.editTextLayoutEditProfileMobile.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) validateMobile()
+            if (!hasFocus) validateMobile(binding.editTextLayoutEditProfileMobile, 2)
         }
         binding.autoCompleteEditGroup.setOnItemClickListener { parent, view, position, id ->
             user.group = list[position]
@@ -136,25 +131,21 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     //Check email textField and handle use cases
-    private fun validateEmail() {
-        val email = binding.editTextEditProfileEmail
-        val (result, isValid) = UserHelper()
-            .emailVerification(email.text.toString())
-        handleTextFields(email,result.string,0,isValid)
+    private fun validateEmail(email: TextInputEditText, index: Int) {
+        val (result, isValid) = UserHelper().emailVerification(email.text.toString())
+        handleTextFields(email, result.string, index, isValid)
     }
 
     //Check mobile textField and handle use cases
-    private fun validateMobile() {
-        val mobile = binding.editTextLayoutEditProfileMobile
+    private fun validateMobile(mobile: TextInputEditText, index: Int) {
         val (result, isValid) = UserHelper().mobileValidation(mobile.text.toString())
-        handleTextFields(mobile,result.string,1,isValid)
+        handleTextFields(mobile, result.string, index, isValid)
     }
 
     //Check name textField and handle use cases
-    private fun validateName() {
-        val name = binding.editTextEditProfileName
+    private fun validateName(name: TextInputEditText, index: Int) {
         val (result, isValid) = UserHelper().fieldVerification(name.text.toString())
-        handleTextFields(name,result.string,2,isValid)
+        handleTextFields(name, result.string, index, isValid)
     }
 
     //Handle result of textField checks
