@@ -45,7 +45,7 @@ class UserHelper {
         return if (toMatchPassword == null){
             if (password.isEmpty()) {
                 Pair(inputHandler.Required, false)
-            } else if (password.length >= 8 && !password.matches("([A-Za-z0-9]*)(\\D*\\d){2,}".toRegex())){
+            } else if (password.length < 8 || !password.matches("([A-Za-z0-9]*)(\\D*\\d){2,}".toRegex())){
                 Pair(inputHandler.IncorrectPassword, false)
             } else {
                 Pair(inputHandler.Correct, true)

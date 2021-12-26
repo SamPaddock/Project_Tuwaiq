@@ -1,18 +1,19 @@
 package com.saraha.paws.View.AccountViews.LoginAccount
 
-import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.FacebookSdk
-import com.facebook.appevents.AppEventsLogger
-import com.facebook.login.LoginResult
+import com.google.firebase.FirebaseException
+import com.google.firebase.FirebaseNetworkException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.saraha.paws.R
+import com.saraha.paws.Util.FirebaseExceptionMsg
+import com.saraha.paws.Util.toast
 import com.saraha.paws.View.Home.HomeActivity
 import com.saraha.paws.databinding.ActivityLoginBinding
 
@@ -63,17 +64,33 @@ class LoginActivity : AppCompatActivity() {
         val email = binding.editTextLoginEmail.text.toString()
         val password = binding.editTextLoginPassword.text.toString()
 
+        isLoginIn(true)
         viewModel.signInUserInFirebase(email,password)
 
         viewModel.loginInResponseLiveData.observe(this){
-            if (it){
+            Log.d(TAG,"LoginActivity: - onLoginButtonClick: - : ${it}")
+            isLoginIn(false)
+            if (it.first && it.second == null){
                 binding.textViewLoginWarning.setText("")
                 this.startActivity(Intent(this,HomeActivity::class.java))
                 this.finish()
             } else {
-                binding.textViewLoginWarning.setText(getString(R.string.login_warning))
+                try {
+                    throw it.second!!
+                } catch (e: FirebaseNetworkException){
+                    this.toast(FirebaseExceptionMsg.ERROR_NETWORK.reason, Toast.LENGTH_LONG)
+                } catch (e: FirebaseAuthInvalidUserException) {
+                    this.toast(e.message.toString())
+                } catch (e: Exception){
+                    binding.textViewLoginWarning.setText(getString(R.string.login_warning))
+                }
             }
         }
 
+    }
+
+    private fun isLoginIn(isLogin: Boolean) {
+        binding.progressBarLogin.visibility = if (isLogin) View.VISIBLE else View.GONE
+        binding.buttonLogin.isClickable = !isLogin
     }
 }

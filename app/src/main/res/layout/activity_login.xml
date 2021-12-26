@@ -56,17 +56,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textViewConnectionText"
+        <ProgressBar
+            android:id="@+id/progressBarLogin"
+            style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/or_connect_with"
-            android:visibility="invisible"
+            android:theme="@style/ProgressBarStyle"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ellipse_2" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -84,43 +84,49 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayoutLoginEmail"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/textInputLayoutStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/email"
-        app:startIconDrawable="@drawable/ic_email_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarLogin">
+        app:layout_constraintTop_toBottomOf="@+id/toolbarLogin"
+        app:startIconDrawable="@drawable/ic_email_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextLoginEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="none|textEmailAddress"
+            android:textCursorDrawable="@null"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayoutLoginPassword"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/textInputLayoutStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/password"
-        app:startIconDrawable="@drawable/ic_unlock_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputLayoutLoginEmail">
+        app:layout_constraintTop_toBottomOf="@+id/inputLayoutLoginEmail"
+        app:startIconDrawable="@drawable/ic_unlock_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextLoginPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="textPassword"
+            android:textColorHighlight="@color/beige"
+            android:textColorLink="@color/beige"
+            android:textCursorDrawable="@null"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 

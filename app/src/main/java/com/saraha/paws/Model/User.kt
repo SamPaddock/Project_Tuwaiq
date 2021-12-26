@@ -38,7 +38,8 @@ data class User (
             "name" to name,
             "email" to email,
             "mobile" to mobile,
-            "group" to group
+            "group" to group,
+            "type" to type
         )
     }
 }

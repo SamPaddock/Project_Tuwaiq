@@ -60,7 +60,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayoutRegisterName"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/textInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -76,12 +76,14 @@
             android:id="@+id/edittextRegisterName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="textPersonName|text"
+            android:textCursorDrawable="@null"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayoutRegisterMobile"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/textInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -98,12 +100,14 @@
             android:id="@+id/edittextRegisterMobile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="phone"
+            android:textCursorDrawable="@null"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayoutRegisterGroup"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        style="@style/textMenuLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

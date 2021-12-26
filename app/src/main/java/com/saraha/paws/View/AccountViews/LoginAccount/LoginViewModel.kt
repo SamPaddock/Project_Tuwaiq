@@ -19,7 +19,7 @@ import com.saraha.paws.View.Home.HomeActivity
 class LoginViewModel: ViewModel() {
 
     //Variable to get liveData response from Firebase
-    var loginInResponseLiveData = MutableLiveData<Boolean>()
+    var loginInResponseLiveData = MutableLiveData<Pair<Boolean, Exception?>>()
 
     //Function to handle firebase repository for signing in a user
     fun signInUserInFirebase(email: String, password: String){

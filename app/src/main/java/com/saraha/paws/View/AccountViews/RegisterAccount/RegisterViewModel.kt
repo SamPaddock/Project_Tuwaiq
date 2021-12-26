@@ -30,15 +30,15 @@ class RegisterViewModel: ViewModel() {
     var groupLiveData = MutableLiveData<String>()
 
     //Variable to get liveData response from Firebase
-    var signInResponseLiveData = MutableLiveData<Boolean>()
-    var createAccountResponseLiveData = MutableLiveData<Boolean>()
+    var signInResponseLiveData = MutableLiveData<Pair<Boolean, Exception?>>()
+    var createAccountResponseLiveData = MutableLiveData<Pair<Boolean, Exception?>>()
 
     //Function to set data entered by user from RegisterPage1Fragment
     fun setEmailFromPage1(email: String){ emailLiveData.postValue(email) }
     fun setPasswordFromPage1(password: String){ passwordLiveData.postValue(password) }
     fun setNameFromPage2(name: String){ nameLiveData.postValue(name) }
-    fun setGroupFromPage2(group: String){ mobileLiveData.postValue(group) }
-    fun setMobileFromPage2(mobile: String){ groupLiveData.postValue(mobile) }
+    fun setGroupFromPage2(group: String){ groupLiveData.postValue(group) }
+    fun setMobileFromPage2(mobile: String){ mobileLiveData.postValue(mobile) }
 
     //Function to set password Validation
     fun setPasswordValidation(bool: Boolean){ isPasswordCorrect.postValue(bool) }

@@ -95,5 +95,6 @@
     <string name="location_error">Could not show location</string>
     <string name="welcome_msg">Welcome Back</string>
     <string name="create_account_msg">Create Account</string>
+    <string name="create">Create</string>
 
 </resources>

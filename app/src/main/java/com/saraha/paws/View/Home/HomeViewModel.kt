@@ -13,7 +13,7 @@ class HomeViewModel: ViewModel() {
     //Function to handle firebase repository response to retrieving user data
     fun getUserDataFromFirebase(){
         UserRepository().getUserAccount().observeForever {
-            if (it.email.isNotEmpty()){ livedataUser.postValue(it) }
+            if (it.first?.email?.isNotEmpty() == true){ livedataUser.postValue(it.first!!) }
         }
     }
 

@@ -33,62 +33,53 @@ class UserRepository {
     fun createDBAuth(){dbFBAuth = Firebase.auth}
 
 
-    fun signinUser(email: String, password: String): LiveData<Boolean>{
+    fun signinUser(email: String, password: String): LiveData<Pair<Boolean, Exception?>>{
         if (dbFBAuth == null) createDBAuth()
 
-        val liveDataUser = MutableLiveData<Boolean>()
+        val liveDataUser = MutableLiveData<Pair<Boolean, Exception?>>()
 
         dbFBAuth?.signInWithEmailAndPassword(email, password)
             ?.addOnCompleteListener { result ->
-                if (result.isSuccessful) {
-                    liveDataUser.postValue(true)
-                }
+                if (result.isSuccessful) { liveDataUser.postValue(Pair(true, null)) }
             }?.addOnFailureListener {
-                liveDataUser.postValue(false)
+                liveDataUser.postValue(Pair(false, it))
             }
 
         return liveDataUser
     }
 
-    fun signupUser(email: String, password: String): LiveData<Boolean> {
+    fun signupUser(email: String, password: String): LiveData<Pair<Boolean, Exception?>> {
         if (dbFBAuth == null) createDBAuth()
 
-        val liveDataUser = MutableLiveData<Boolean>()
+        val liveDataUser = MutableLiveData<Pair<Boolean, Exception?>>()
 
 
         dbFBAuth?.createUserWithEmailAndPassword(email,password)
-            ?.addOnSuccessListener {
-                liveDataUser.postValue(true)
-            }?.addOnFailureListener {
-                liveDataUser.postValue(false)
-            }
+            ?.addOnSuccessListener { liveDataUser.postValue(Pair(true, null)) }
+            ?.addOnFailureListener { liveDataUser.postValue(Pair(false, it)) }
 
         return liveDataUser
     }
 
-    fun createUserAccount(newUser: HashMap<String, String?>): LiveData<Boolean>  {
+    fun createUserAccount(newUser: HashMap<String, String?>): LiveData<Pair<Boolean, Exception?>>{
         if (dbFirestore == null) createDBFirestore()
 
-        val liveDataUser = MutableLiveData<Boolean>()
+        val liveDataUser = MutableLiveData<Pair<Boolean, Exception?>>()
 
         val currentUser = Firebase.auth.currentUser?.uid
 
         dbFirestore?.collection("Users")?.document(currentUser.toString())
             ?.set(newUser)?.addOnCompleteListener {
-                if (it.isSuccessful){
-                    liveDataUser.postValue(true)
-                }
-            }?.addOnFailureListener {
-                liveDataUser.postValue(false)
-            }
+                if (it.isSuccessful){ liveDataUser.postValue(Pair(true, null)) }
+            }?.addOnFailureListener { liveDataUser.postValue(Pair(false, it)) }
 
         return liveDataUser
     }
 
-    fun getUserAccount(): LiveData<User>{
+    fun getUserAccount(): LiveData<Pair<User?, Exception?>>{
         if (dbFirestore == null) createDBFirestore()
 
-        val liveDataUser = MutableLiveData<User>()
+        val liveDataUser = MutableLiveData<Pair<User?, Exception?>>()
 
         dbFirestore?.collection("Users")?.document(Firebase.auth.uid!!)?.get()
             ?.addOnCompleteListener {
@@ -104,11 +95,10 @@ class UserRepository {
 
                     val user = User(Firebase.auth.uid!!, photoUrl.toString() ,email, null,
                         name, mobile, group, type)
-                    liveDataUser.postValue(user)
+                    liveDataUser.postValue(Pair(user, null))
                 }
-            }?.addOnFailureListener {
+            }?.addOnFailureListener { liveDataUser.postValue(Pair(null, it)) }
 
-            }
         return liveDataUser
     }
 
@@ -139,18 +129,16 @@ class UserRepository {
         return liveDataImage
     }
 
-    fun updateUserAccount(updateUser: HashMap<String, String?>): LiveData<Boolean>{
+    fun updateUserAccount(updateUser: HashMap<String, String?>): LiveData<Pair<Boolean, Exception?>>{
         if (dbFirestore == null) createDBFirestore()
 
-        val liveDataUser = MutableLiveData<Boolean>()
+        val liveDataUser = MutableLiveData<Pair<Boolean, Exception?>>()
 
         dbFirestore?.collection("Users")
             ?.document(Firebase.auth.currentUser?.uid!!)?.set(updateUser)
             ?.addOnCompleteListener {
-                if (it.isSuccessful) liveDataUser.postValue(true)
-            }?.addOnFailureListener {
-                liveDataUser.postValue(false)
-            }
+                if (it.isSuccessful) liveDataUser.postValue(Pair(true, null))
+            }?.addOnFailureListener { liveDataUser.postValue(Pair(false, it)) }
 
         return liveDataUser
     }

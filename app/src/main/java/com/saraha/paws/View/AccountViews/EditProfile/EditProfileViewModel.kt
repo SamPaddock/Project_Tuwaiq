@@ -40,7 +40,7 @@ class EditProfileViewModel: ViewModel() {
     //Function to handle firebase repository for updating user info
     fun editUserInFirebase(user: HashMap<String, String?>){
         UserRepository().updateUserAccount(user).observeForever {
-            if (it) editUserLiveData.postValue(it)
+            if (it.first) editUserLiveData.postValue(it.first!!)
         }
     }
 

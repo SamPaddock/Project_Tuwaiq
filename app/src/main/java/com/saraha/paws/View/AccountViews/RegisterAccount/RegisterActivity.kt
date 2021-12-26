@@ -1,23 +1,18 @@
 package com.saraha.paws.View.AccountViews.RegisterAccount
 
-import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.FacebookSdk
-import com.facebook.appevents.AppEventsLogger
-import com.facebook.login.LoginResult
+import com.google.firebase.FirebaseNetworkException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.kofigyan.stateprogressbar.StateProgressBar
 import com.saraha.paws.Model.User
 import com.saraha.paws.R
+import com.saraha.paws.Util.FirebaseExceptionMsg
 import com.saraha.paws.Util.toast
 import com.saraha.paws.View.Home.HomeActivity
 import com.saraha.paws.View.AccountViews.RegisterAccount.Fragment.RegisterPage1Fragment
@@ -75,25 +70,48 @@ class RegisterActivity : AppCompatActivity() {
     //Check all data is entered then send to firebase authentication
     private fun verifyRegistrationFormFields() {
         if (isPasswordCorrect && isConfirmedPasswordCorrect && user.isRegistrationDataNotEmpty()) {
+            isCreatingAccount(true)
             viewModel.signUpUserInFirebase(user.email, user.password!!)
             viewModel.signInResponseLiveData.observe(this) {
-                createUserAccountAfterAuthentication(it)
+                if (it.first){
+                    createUserAccountAfterAuthentication()
+                } else {
+                    handleSignUpException(it.second!!)
+                }
+
             }
         } else {
+            isCreatingAccount(false)
             this.toast(getString(R.string.all_required))
         }
     }
 
+    private fun isCreatingAccount(isCreating: Boolean) {
+        binding.progressBarCreateAccount.visibility = if (isCreating) View.VISIBLE else View.GONE
+        binding.buttonCreateAccount.isClickable = !isCreating
+    }
+
     //after firebase authentication is complete, send the rest of the data to firebase firestorm
-    private fun createUserAccountAfterAuthentication(it: Boolean) {
-        if (it) {
-            viewModel.createAnAccountInFirebase(user.getRegistrationHashMap())
-            viewModel.createAccountResponseLiveData.observe(this) {
-                if (it){
-                    this.startActivity(Intent(this, HomeActivity::class.java))
-                    this.finish()
-                }
+    private fun createUserAccountAfterAuthentication() {
+        viewModel.createAnAccountInFirebase(user.getRegistrationHashMap())
+        viewModel.createAccountResponseLiveData.observe(this) {
+            isCreatingAccount(false)
+            if (it.first){
+                this.startActivity(Intent(this, HomeActivity::class.java))
+                this.finish()
+            } else {
+                handleSignUpException(it.second!!)
             }
+        }
+    }
+
+    private fun handleSignUpException(e: Exception){
+        try {
+            throw e
+        } catch (e: FirebaseNetworkException){
+            this.toast(FirebaseExceptionMsg.ERROR_NETWORK.reason, Toast.LENGTH_LONG)
+        } catch (e: Exception) {
+            this.toast(e.message.toString(), Toast.LENGTH_LONG)
         }
     }
 
