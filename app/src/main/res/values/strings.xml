@@ -96,5 +96,7 @@
     <string name="welcome_msg">Welcome Back</string>
     <string name="create_account_msg">Create Account</string>
     <string name="create">Create</string>
+    <string name="view_error_general">Could not view this content. Please try again later.</string>
+    <string name="address_error">Could not get address</string>
 
 </resources>

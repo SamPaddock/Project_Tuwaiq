@@ -1,11 +1,13 @@
 package com.saraha.paws.View.SplashView.MainSplash
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -30,6 +32,7 @@ class SplashActivity : AppCompatActivity() {
 
         //Initialize Shared Preference
         AppSharedPreference.init(applicationContext)
+        Log.d(TAG,"SplashActivity: - onCreate: - : ${AppSharedPreference.prefs}")
 
         checkNetworkStatus()
 

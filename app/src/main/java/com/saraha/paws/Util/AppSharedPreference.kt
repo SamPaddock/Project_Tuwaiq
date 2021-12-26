@@ -1,5 +1,6 @@
 package com.saraha.paws.Util
 
+import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.SharedPreferences
@@ -13,11 +14,12 @@ enum class SharedConst(var string: String){
 class AppSharedPreference {
 
     companion object {
-        private var prefs: SharedPreferences? = null
+        var prefs: SharedPreferences? = null
 
         fun init(context: Context) {
             if (prefs == null){
                 prefs = context.getSharedPreferences(SharedConst.PrefsName.string, Context.MODE_PRIVATE)
+
             }
         }
     }

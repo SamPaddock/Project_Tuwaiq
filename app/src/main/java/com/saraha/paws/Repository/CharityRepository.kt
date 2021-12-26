@@ -47,6 +47,7 @@ class CharityRepository {
                         val photo = charity.get("photo") as String
                         val facebookUrl = charity.get("facebookUrl") as String
                         val instagramUrl = charity.get("instagramUrl") as String
+                        Log.d(TAG,"CharityRepository: - getAll: - : ${latitude}")
                         val dbCharity = Charity(charity.id, name, founder, email, mobile,
                             stcPay, latitude, longitude, photo, facebookUrl, instagramUrl)
                         listOfCharities.add(dbCharity)

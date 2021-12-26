@@ -29,13 +29,15 @@ class ViewAnimalDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityViewAnimalDetailsBinding.inflate(layoutInflater)
 
-        setupToolbar()
-
         val data = intent.getSerializableExtra("animal")
 
         if (data != null){
             animal = data as Animal
             setValues(animal)
+            setupToolbar()
+        } else {
+            this.toast(getString(R.string.view_error_general))
+            finish()
         }
 
         setContentView(binding.root)
@@ -107,7 +109,7 @@ class ViewAnimalDetailsActivity : AppCompatActivity() {
         binding.textViewDisplayAnimalAge.setText(animal.age)
         binding.textViewDisplayAnimalColor.setText(animal.color)
         val location = LatLng(animal.latitude, animal.longitude)
-        binding.textViewDisplayAnimalVolunteer.setText(location.getStringAddress(this))
+        binding.textViewDisplayAnimalLocation.setText(location.getStringAddress(this))
         binding.textViewDisplayAnimalPersonality.setText(animal.personality)
         binding.textViewDisplayAnimalGrooming.setText(animal.grooming)
         binding.textViewDisplayAnimalMedical.setText(animal.medical)

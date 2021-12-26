@@ -33,13 +33,12 @@ class ViewCharityDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityViewCharityDetailBinding.inflate(layoutInflater)
 
-        setupToolbar()
-
         val data = intent.getSerializableExtra("charity")
 
         if (data != null){
             charity = data as Charity
             setValues(charity)
+            setupToolbar()
         }
 
         setContentView(binding.root)

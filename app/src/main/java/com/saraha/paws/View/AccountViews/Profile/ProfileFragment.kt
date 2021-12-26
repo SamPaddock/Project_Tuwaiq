@@ -47,6 +47,7 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
+    //Function to show.hide add charity btn depending on user type
     private fun checkIfAdmin() {
         if (sharedPref.read("tName","")!! == "Admin"){
             binding.fabCreateCharity.visibility = View.VISIBLE

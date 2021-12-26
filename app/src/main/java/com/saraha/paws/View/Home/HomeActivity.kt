@@ -69,11 +69,6 @@ class HomeActivity : AppCompatActivity() {
 
         viewModel.livedataUser.observe(this){
             if (it.name.isNotEmpty()){
-                sharedPref.write("uName", it.name)
-                sharedPref.write("eName", it.email)
-                sharedPref.write("mName", it.mobile)
-                sharedPref.write("tName", it.type)
-                sharedPref.write("gName", it.group)
                 it.photoUrl?.let { photo -> sharedPref.write("pName", photo) }
             }
         }
@@ -145,9 +140,9 @@ class HomeActivity : AppCompatActivity() {
         val itemFacts = SecondaryDrawerItem().apply {
             nameRes = R.string.fun_fact_home; iconRes = R.drawable.ic_fact_24; identifier = 3
         }
-        val itemAlbum = SecondaryDrawerItem().apply {
-            nameRes = R.string.photo_album_home; iconRes = R.drawable.ic_album_24; identifier = 4
-        }
+//        val itemAlbum = SecondaryDrawerItem().apply {
+//            nameRes = R.string.photo_album_home; iconRes = R.drawable.ic_album_24; identifier = 4
+//        }
         val itemSignOut = SecondaryDrawerItem().apply {
             nameRes = R.string.sign_out_home; iconRes = R.drawable.ic_exit_24; identifier = 7
         }
@@ -155,7 +150,7 @@ class HomeActivity : AppCompatActivity() {
         mainSlider.itemAdapter.add(
             itemHome, itemProfile, itemCharity,
             DividerDrawerItem(),
-            itemFacts, itemAlbum,
+            itemFacts,
             DividerDrawerItem(),
             itemSignOut
         )

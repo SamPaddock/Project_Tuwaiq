@@ -1,7 +1,9 @@
 package com.saraha.paws.View.CharityViews.AddEditCharity
 
+import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import androidx.activity.viewModels
@@ -85,8 +87,7 @@ class AddEditCharityActivity : AppCompatActivity() {
     //Function to check all data is entered then send photo to FireStorage
     private fun verifyCharityFormFields() {
         if (charity.isAllDataNotEmpty()) {
-            binding.layoutAddEditCharity.visibility = View.VISIBLE
-            binding.buttonCreateCharity.isClickable = false
+            isUploading(true)
             if (!Patterns.WEB_URL.matcher(charity.photo).matches()){
                 viewModel.setPhotoInFireStorage(charity.photo)
                 viewModel.postedPhotoLiveData.observe(this) { checkActionToPerform(it) }
@@ -95,10 +96,14 @@ class AddEditCharityActivity : AppCompatActivity() {
             }
 
         } else {
-            binding.layoutAddEditCharity.visibility = View.GONE
-            binding.buttonCreateCharity.isClickable = true
+            isUploading(false)
             this.toast(getString(R.string.all_required))
         }
+    }
+
+    private fun isUploading(isUpload: Boolean) {
+        binding.layoutAddEditCharity.visibility = if (isUpload) View.VISIBLE else View.GONE
+        binding.buttonCreateCharity.isClickable = !isUpload
     }
 
     //Function to check type of activity and call action

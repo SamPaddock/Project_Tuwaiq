@@ -14,7 +14,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.textfield.TextInputEditText
 import com.saraha.paws.Model.Charity
+import com.saraha.paws.R
+import com.saraha.paws.Util.NetworkStatus
 import com.saraha.paws.Util.UserHelper
+import com.saraha.paws.Util.getStringAddress
+import com.saraha.paws.Util.toast
 import com.saraha.paws.View.CharityViews.AddEditCharity.AddEditCharityActivity
 import com.saraha.paws.View.CharityViews.AddEditCharity.AddEditCharityViewModel
 import com.saraha.paws.View.MapView.MapsActivity
@@ -53,19 +57,25 @@ class AddEditCharityPage2Fragment : Fragment() {
         if (charity.stcPay.isNotEmpty()){  binding.editTextAddCharityPay.setText(charity.stcPay) }
         if (charity.facebookUrl.isNotEmpty()){  binding.editTextAddCharityFacebook.setText(charity.facebookUrl) }
         if (charity.instagramUrl.isNotEmpty()){  binding.editTextAddCharityInstagram.setText(charity.instagramUrl) }
+
+        val location = LatLng(charity.latitude, charity.longitude)
+        binding.editTextAddCharityLocation.setText(location.getStringAddress(this.requireContext()))
     }
 
     //Function to handle response from action result
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 5 && resultCode == Activity.RESULT_OK){
-            val lat = data?.getDoubleExtra("Lat", 0.0) ?: 0.0
-            val lon = data?.getDoubleExtra("Lon", 0.0)  ?: 0.0
+        if (requestCode == 5 && resultCode == Activity.RESULT_OK && data != null){
+            val lat = data.getDoubleExtra("Lat", 0.0)
+            val lon = data.getDoubleExtra("Lon", 0.0)
 
             val geoCoder = Geocoder(this.requireContext()).getFromLocation(lat, lon, 1)
             val address = geoCoder[0].getAddressLine(0)
             binding.editTextAddCharityLocation.setText(address)
+
             viewModel.setCharityLocation(LatLng(lat, lon))
+        } else {
+            this.requireContext().toast(getString(R.string.address_error))
         }
     }
 
