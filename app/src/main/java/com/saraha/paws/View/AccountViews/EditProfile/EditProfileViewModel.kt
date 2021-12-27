@@ -15,7 +15,7 @@ class EditProfileViewModel: ViewModel() {
 
     //Variable to get liveData response from Firebase
     val postedPhotoLiveData = MutableLiveData<String>()
-    val editUserLiveData = MutableLiveData<Boolean>()
+    val editUserLiveData = MutableLiveData<Pair<Boolean, Exception?>>()
 
     //Function to get charity group names
     fun setGroupData(): MutableLiveData<List<String>> {
@@ -40,7 +40,7 @@ class EditProfileViewModel: ViewModel() {
     //Function to handle firebase repository for updating user info
     fun editUserInFirebase(user: HashMap<String, String?>){
         UserRepository().updateUserAccount(user).observeForever {
-            if (it.first) editUserLiveData.postValue(it.first!!)
+            editUserLiveData.postValue(it)
         }
     }
 

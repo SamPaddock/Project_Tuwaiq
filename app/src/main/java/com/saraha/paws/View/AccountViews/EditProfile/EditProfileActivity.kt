@@ -24,6 +24,7 @@ class EditProfileActivity : AppCompatActivity() {
     lateinit var user: User
     lateinit var list: List<String>
     lateinit var imgData: Uri
+    var isUserValid = true
     val viewModel: EditProfileViewModel by viewModels()
 
     val sharedPref = AppSharedPreference()
@@ -71,7 +72,7 @@ class EditProfileActivity : AppCompatActivity() {
 
     //Function the verifies data inputted by user, then uploading image in FireStorage
     private fun verifyCharityFormFields() {
-        if (user.isAllDataEmpty()) {
+        if (user.isAllDataEmpty() && isUserValid) {
             binding.layoutEditView.visibility = View.VISIBLE
             binding.buttonSaveProfileEdit.isClickable = false
             if (!Patterns.WEB_URL.matcher(user.photoUrl!!).matches()){
@@ -82,7 +83,6 @@ class EditProfileActivity : AppCompatActivity() {
             } else {
                 updateUserInformation()
             }
-
         } else {
             binding.layoutEditView.visibility = View.GONE
             binding.buttonSaveProfileEdit.isClickable = true
@@ -97,14 +97,14 @@ class EditProfileActivity : AppCompatActivity() {
         viewModel.editUserLiveData.observe(this){
             binding.layoutEditView.visibility = View.GONE
             binding.buttonSaveProfileEdit.isClickable = true
-            if (it){
+            if (it.first){
                 viewModel.setSharedPreference(user)
                 this.toast(getString(R.string.successful_edit_user))
-                finish()
             } else {
                 this.toast(getString(R.string.failure_edit_user))
-                finish()
+                this.toast(it.second?.message.toString())
             }
+            finish()
         }
     }
 
@@ -126,10 +126,10 @@ class EditProfileActivity : AppCompatActivity() {
             validateEmail(binding.editTextEditProfileEmail, 0)
         }
         binding.editTextEditProfileName.addTextChangedListener {
-            validateName(binding.editTextEditProfileName, 1)
+            validateName(binding.editTextEditProfileName, 2)
         }
         binding.editTextLayoutEditProfileMobile.addTextChangedListener {
-            validateMobile(binding.editTextLayoutEditProfileMobile, 2)
+            validateMobile(binding.editTextLayoutEditProfileMobile, 1)
         }
         binding.autoCompleteEditGroup.setOnItemClickListener { parent, view, position, id ->
             user.group = list[position]
@@ -168,8 +168,10 @@ class EditProfileActivity : AppCompatActivity() {
     private fun handleTextFields(v: TextInputEditText, msg: String, index: Int, isValid: Boolean){
         if (!isValid){
             v.error = msg
+            isUserValid = false
         } else {
             v.error = null
+            isUserValid = true
             when (index){
                 0 -> user.email = v.text.toString()
                 1 -> user.mobile = v.text.toString()
