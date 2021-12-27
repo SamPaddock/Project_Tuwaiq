@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/edit_item"
+        android:id="@+id/edit_item_1"
         android:checkable="true"
         android:icon="@drawable/ic_edit_24"
         android:title="@string/edit"

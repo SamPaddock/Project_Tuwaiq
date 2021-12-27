@@ -43,8 +43,6 @@ class HomeActivity : AppCompatActivity() {
 
         getUserInformation()
 
-        displayFragment(ViewAnimalsFragment())
-
         setupToolbarAndSliderDrawer(savedInstanceState)
 
         setContentView(binding.root)
@@ -77,7 +75,6 @@ class HomeActivity : AppCompatActivity() {
     //Function to setup Toolbar and Slider Menu
     private fun setupToolbarAndSliderDrawer(savedInstanceState: Bundle?) {
         val mainToolbar = binding.toolbarHome
-        mainToolbar.title = "Rescues"
         setSupportActionBar(mainToolbar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -119,6 +116,8 @@ class HomeActivity : AppCompatActivity() {
             }
             false
         }
+        mainSlider.setSelection(0)
+
         mainToolbar.setNavigationOnClickListener {
             mainSlider.drawerLayout?.open()
         }

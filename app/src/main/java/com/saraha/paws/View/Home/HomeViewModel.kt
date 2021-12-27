@@ -9,7 +9,7 @@ import com.saraha.paws.Repository.UserRepository
 import com.saraha.paws.Util.AppSharedPreference
 
 class HomeViewModel: ViewModel() {
-
+    //Shared preference helper class object
     val sharedPref = AppSharedPreference()
 
     //Variable to get liveData response from Firebase
@@ -20,7 +20,7 @@ class HomeViewModel: ViewModel() {
         UserRepository().getUserAccount().observeForever {
             val user = it.first
             if (user != null && it.first?.email?.isNotEmpty() == true){
-                Log.d(TAG,"HomeViewModel: - getUserDataFromFirebase: - : ${sharedPref}")
+                //saved user info in shared preference
                 sharedPref.write("uName", user.name)
                 sharedPref.write("eName", user.email)
                 sharedPref.write("mName", user.mobile)

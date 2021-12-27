@@ -2,13 +2,19 @@ package com.saraha.paws.Util
 
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.location.Geocoder
+import android.net.Uri
 import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.model.LatLng
+import com.google.rpc.context.AttributeContext
+import com.saraha.paws.Model.Charity
+import com.saraha.paws.R
 import com.squareup.picasso.Picasso
 
 
@@ -32,6 +38,7 @@ fun ImageView.loadImage(imageUrl: String) {
     Picasso.get().load(imageUrl).into(this)
 }
 
+//Get address from latitude and longitude
 fun LatLng.getStringAddress(context: Context): String {
     Log.d(TAG,": - getStringAddress: - : ${this.latitude}")
     val geoCoder = Geocoder(context).getFromLocation(this.latitude, this.longitude, 1)

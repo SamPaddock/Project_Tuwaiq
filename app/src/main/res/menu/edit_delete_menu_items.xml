@@ -3,12 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/edit_item_1"
+        android:id="@+id/edit_item"
         android:icon="@drawable/ic_edit_24"
         android:title="@string/edit"
         app:showAsAction="always" />
     <item
-        android:id="@+id/delete_item_2"
+        android:id="@+id/delete_item"
         android:icon="@drawable/ic_delete_24"
         android:title="@string/delete"
         app:showAsAction="always" />

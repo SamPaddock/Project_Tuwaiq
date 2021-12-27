@@ -1,52 +1,47 @@
 package com.saraha.paws.View.CharityViews.ViewCharityDetail
 
-import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.saraha.paws.Model.Charity
 import com.saraha.paws.R
 import com.saraha.paws.databinding.ActivityViewCharityDetailBinding
-import com.squareup.picasso.Picasso
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
-import android.util.Log
 import android.view.Menu
-import android.widget.Toast
 import androidx.activity.viewModels
 import com.google.android.gms.maps.model.LatLng
-import com.saraha.paws.Model.Animal
 import com.saraha.paws.Util.AppSharedPreference
 import com.saraha.paws.Util.loadImage
 import com.saraha.paws.Util.toast
-import com.saraha.paws.View.AnimalViews.ViewAnimalDetail.ViewAnimalDetailsViewModel
 import com.saraha.paws.View.CharityViews.AddEditCharity.AddEditCharityActivity
 import java.lang.Exception
 
 
 class ViewCharityDetailActivity : AppCompatActivity() {
-
+    //View model and binding lateinit property
     val viewModel: ViewCharityDetailViewModel by viewModels()
     lateinit var binding: ActivityViewCharityDetailBinding
     lateinit var charity: Charity
-
+    //Shared preference helper class object
     val sharedPref = AppSharedPreference()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityViewCharityDetailBinding.inflate(layoutInflater)
-
+        //send data from intent, if not null, then display content and set toolbar
         val data = intent.getSerializableExtra("charity")
-
         if (data != null){
             charity = data as Charity
             setValues(charity)
             setupToolbar()
+        } else {
+            this.toast(getString(R.string.view_error_general))
+            finish()
         }
 
         setContentView(binding.root)
     }
-
+    //Function to set toolbar and back button
     private fun setupToolbar() {
         val mainToolbar = binding.toolbarViewCharity
         mainToolbar.title = charity.name
@@ -59,20 +54,24 @@ class ViewCharityDetailActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 
+    //set up item menu depending on use type with on item click listener
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         if (sharedPref.read("tName","")!! == "Admin"){
             menuInflater.inflate(R.menu.edit_delete_menu_items,menu)
-            menu?.findItem(R.id.edit_item_1)?.setOnMenuItemClickListener {
+            val editItem = menu?.findItem(R.id.edit_item)
+            editItem?.setOnMenuItemClickListener {
                 redirectToEditContent()
                 true
             }
-            menu?.findItem(R.id.delete_item_2)?.setOnMenuItemClickListener {
+            val deleteItem = menu?.findItem(R.id.delete_item)
+            deleteItem?.setOnMenuItemClickListener {
                 deleteCharity()
                 true
             }
         } else {
             menuInflater.inflate(R.menu.edit_menu_item,menu)
-            menu?.findItem(R.id.edit_item)?.setOnMenuItemClickListener {
+            val editItem = menu?.findItem(R.id.edit_item_1)
+            editItem?.setOnMenuItemClickListener {
                 redirectToEditContent()
                 true
             }
@@ -89,6 +88,7 @@ class ViewCharityDetailActivity : AppCompatActivity() {
         }
     }
 
+    //Function to delete a charity from firebase
     private fun deleteCharity() {
         viewModel.deleteCharityFromFirebase(charity.cid!!)
         viewModel.deleteDocumentLiveData.observe(this){
@@ -101,6 +101,7 @@ class ViewCharityDetailActivity : AppCompatActivity() {
         }
     }
 
+    //Function to start Add/Edit activity with result on completion
     private fun redirectToEditContent() {
         val intent = Intent(this, AddEditCharityActivity::class.java)
         intent.putExtra("type", "Edit")
@@ -124,11 +125,11 @@ class ViewCharityDetailActivity : AppCompatActivity() {
         binding.imageViewFacebookLink.setOnClickListener { openFacebook(charity.facebookUrl) }
         binding.imageViewInstaLink.setOnClickListener { openInstagram(charity.instagramUrl) }
         binding.imageViewWhatsappLink.setOnClickListener { openWhatsapp(charity.mobile) }
-        binding.imageViewMail.setOnClickListener { openMain(charity) }
+        binding.imageViewMail.setOnClickListener { openMail(charity) }
     }
 
     //Function to handle to mail icon click
-    private fun openMain(charity: Charity){
+    private fun openMail(charity: Charity){
         // create an Intent to send data to mail
         val intent = Intent(Intent.ACTION_SEND)
         intent.data = Uri.parse("mailto:")
@@ -202,8 +203,8 @@ class ViewCharityDetailActivity : AppCompatActivity() {
         }
     }
 
+    //Function to handle to charity location clicked
     private fun openGoogleMaps(location: LatLng){
-        Log.d(TAG,"ViewCharityDetailActivity: - openGoogleMaps: - : ${location}")
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse("http://maps.google.com/maps?q=loc:"+location.latitude+","
                     +location.longitude+"("+charity.name+")")

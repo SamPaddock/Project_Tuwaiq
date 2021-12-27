@@ -1,11 +1,8 @@
 package com.saraha.paws.View.AnimalViews.ViewAnimalDetail
 
-import android.app.Activity
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import androidx.activity.viewModels
 import com.google.android.gms.maps.model.LatLng
@@ -16,24 +13,21 @@ import com.saraha.paws.Util.getStringAddress
 import com.saraha.paws.Util.loadImage
 import com.saraha.paws.Util.toast
 import com.saraha.paws.View.AnimalViews.AddEditAnimal.AddEditAnimalActivity
-import com.saraha.paws.View.CharityViews.AddEditCharity.AddEditCharityActivity
 import com.saraha.paws.databinding.ActivityViewAnimalDetailsBinding
-import com.squareup.picasso.Picasso
 
 class ViewAnimalDetailsActivity : AppCompatActivity() {
-
+    //View model and binding lateinit property
     val viewModel: ViewAnimalDetailsViewModel by viewModels()
     lateinit var binding: ActivityViewAnimalDetailsBinding
     lateinit var animal: Animal
-
+    //Shared preference helper class object
     val sharedPref = AppSharedPreference()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityViewAnimalDetailsBinding.inflate(layoutInflater)
-
+        //send data from intent, if not null, then display content and set toolbar
         val data = intent.getSerializableExtra("animal")
-
         if (data != null){
             animal = data as Animal
             setValues(animal)
@@ -45,7 +39,7 @@ class ViewAnimalDetailsActivity : AppCompatActivity() {
 
         setContentView(binding.root)
     }
-
+    //Function to set toolbar and back button
     private fun setupToolbar() {
         val mainToolbar = binding.toolbarViewAnimal
         mainToolbar.title = animal.name
@@ -57,24 +51,18 @@ class ViewAnimalDetailsActivity : AppCompatActivity() {
         onBackPressed()
         return super.onSupportNavigateUp()
     }
-
+    //set up item menu depending on use type with on item click listener
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         if (sharedPref.read("tName","")!! == "Admin"){
             menuInflater.inflate(R.menu.edit_delete_menu_items,menu)
-            menu?.findItem(R.id.edit_item_1)?.setOnMenuItemClickListener {
-                redirectToEditContent()
-                true
-            }
-            menu?.findItem(R.id.delete_item_2)?.setOnMenuItemClickListener {
-                deleteAnimal()
-                true
-            }
+            val editItem = menu?.findItem(R.id.edit_item)
+            editItem?.setOnMenuItemClickListener { redirectToEditContent(); true }
+            val deleteItem = menu?.findItem(R.id.delete_item)
+            deleteItem?.setOnMenuItemClickListener { deleteAnimal(); true}
         } else {
             menuInflater.inflate(R.menu.edit_menu_item,menu)
-            menu?.findItem(R.id.edit_item)?.setOnMenuItemClickListener {
-                redirectToEditContent()
-                true
-            }
+            val editItem = menu?.findItem(R.id.edit_item_1)
+            editItem?.setOnMenuItemClickListener { redirectToEditContent(); true }
         }
         return super.onCreateOptionsMenu(menu)
     }
@@ -87,7 +75,7 @@ class ViewAnimalDetailsActivity : AppCompatActivity() {
             setValues(animal)
         }
     }
-
+    //Function to delete an animal from firebase
     private fun deleteAnimal() {
         viewModel.deleteCharityFromFirebase(animal.aid!!)
         viewModel.deleteDocumentLiveData.observe(this){
@@ -100,6 +88,7 @@ class ViewAnimalDetailsActivity : AppCompatActivity() {
         }
     }
 
+    //Function to start Add/Edit activity with result on completion
     private fun redirectToEditContent() {
         val intent = Intent(this, AddEditAnimalActivity::class.java)
         intent.putExtra("type", "Edit")

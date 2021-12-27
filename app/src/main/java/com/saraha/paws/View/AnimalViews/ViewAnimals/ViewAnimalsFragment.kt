@@ -18,10 +18,10 @@ import com.saraha.paws.View.Home.HomeActivity
 import com.saraha.paws.databinding.FragmentViewAnimalsBinding
 
 class ViewAnimalsFragment : Fragment() {
-
+    //View model and binding lateinit property
     private lateinit var viewModel: ViewAnimalsViewModel
     lateinit var binding: FragmentViewAnimalsBinding
-
+    //list of animals and recycler view adapter lateinit property
     lateinit var animal: List<Animal>
     lateinit var adapter: AnimalViewAdapter
 
@@ -88,6 +88,7 @@ class ViewAnimalsFragment : Fragment() {
         recyclerView.adapter = adapter
     }
 
+    //Function to set data into recyclerview
     private fun setRecyclerViewFilter(){
         binding.inputTextFilterStatus.setAdapter(
             ArrayAdapter(context!!, android.R.layout.simple_list_item_1, Helper().getStatusList()))
@@ -95,14 +96,13 @@ class ViewAnimalsFragment : Fragment() {
             ArrayAdapter(context!!, android.R.layout.simple_list_item_1, Helper().getTypeList()))
     }
 
+    //Function to handle filter list dropdown menu listener
     private fun onClickFilterListener(){
         binding.inputTextFilterType.setOnItemClickListener { _, _, position, _ ->
-            Log.d(TAG,"ViewAnimalsFragment: - onClickFilterListener: - getTypeList: ${Helper().getTypeList().get(position)}")
             val selectedType = Helper().getTypeList().get(position)
             adapter.filter.filter(selectedType)
         }
         binding.inputTextFilterStatus.setOnItemClickListener { _, _, position, _ ->
-            Log.d(TAG,"ViewAnimalsFragment: - onClickFilterListener: - getStatusList: ${Helper().getStatusList().get(position)}")
             val selectedStatus = Helper().getStatusList().get(position)
             adapter.filter.filter(selectedStatus)
         }

@@ -43,6 +43,7 @@ class AnimalViewAdapter(var context: Context, var data: List<Animal>) :
         }
     }
 
+    //Filter function to handle recycler view filter
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
@@ -53,10 +54,8 @@ class AnimalViewAdapter(var context: Context, var data: List<Animal>) :
                     val resultList = ArrayList<Animal>()
                     for (row in animalFilterList) {
                         if (row.type.lowercase().contains(constraint.toString().lowercase())){
-                            Log.d(TAG,"AnimalViewAdapter: - performFiltering: - : ${row.type}")
                             resultList.add(row)
                         } else if (row.states.lowercase().contains(constraint.toString().lowercase())){
-                            Log.d(TAG,"AnimalViewAdapter: - performFiltering: - : ${row.states}")
                             resultList.add(row)
                         }
                     }

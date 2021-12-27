@@ -33,6 +33,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
     }
 
+    //Function to setup map when ready
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
@@ -43,6 +44,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.setOnMapClickListener { sendSelectedLocationBack(it) }
     }
 
+    //send back tapped location
     private fun sendSelectedLocationBack(it: LatLng) {
         val intent = Intent()
         intent.putExtra("Lat", it.latitude)
@@ -51,6 +53,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         finish()
     }
 
+    //Function to display current device location on map
     private fun setCurrentLocation(lat: Double, lon: Double) {
         Log.d(ContentValues.TAG, "MapsActivity: - onMapReady: - : ${lat} - ${lon}")
         // Add a marker at your location and move the camera
@@ -59,7 +62,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 15f))
     }
 
-
+    //get current device location
     @SuppressLint("MissingPermission")
     fun getCurrentLocation(onCompletion: (latitude:Double, longitude:Double) -> Unit){
         val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager

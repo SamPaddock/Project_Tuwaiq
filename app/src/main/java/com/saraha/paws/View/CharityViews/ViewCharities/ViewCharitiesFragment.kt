@@ -13,7 +13,7 @@ import com.saraha.paws.databinding.FragmentViewCharitiesBinding
 
 
 class ViewCharitiesFragment : Fragment() {
-
+    //View model and binding lateinit property
     private lateinit var viewModel: ViewCharitiesViewModel
     lateinit var binding: FragmentViewCharitiesBinding
 

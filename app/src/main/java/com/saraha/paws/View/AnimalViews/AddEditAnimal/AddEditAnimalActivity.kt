@@ -81,6 +81,7 @@ class AddEditAnimalActivity : AppCompatActivity() {
         binding.buttonAnimalCharity.setOnClickListener { verifyAnimalFormFields() }
     }
 
+    //Function to make sure all textfields are valid
     private fun checkTextValidationBeforeNavigation(navigationType: String) {
         if (viewModel.isTextValid) navigateBetweenFragments(navigationType)
         else this.toast(getString(R.string.all_required))
@@ -97,7 +98,7 @@ class AddEditAnimalActivity : AppCompatActivity() {
             this.toast(getString(R.string.all_required))
         }
     }
-
+    //Function to show/hide progress bar and set button clickable
     private fun isUploadingContent(isUploading: Boolean) {
         binding.layoutAddEditAnimal.visibility = if (isUploading) View.VISIBLE else View.GONE
         binding.buttonAnimalCharity.isClickable = !isUploading

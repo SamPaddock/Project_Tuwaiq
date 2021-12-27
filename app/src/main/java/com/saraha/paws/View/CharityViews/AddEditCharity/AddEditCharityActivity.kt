@@ -18,12 +18,13 @@ import com.saraha.paws.View.CharityViews.AddEditCharity.Fragment.AddEditCharityP
 import com.saraha.paws.databinding.ActivityAddEditCharityBinding
 
 class AddEditCharityActivity : AppCompatActivity() {
-
+    //View model and binding lateinit property
     private val viewModel: AddEditCharityViewModel by viewModels()
     private lateinit var binding: ActivityAddEditCharityBinding
-
+    //Variables that will hold intent values
     private var actionType = ""
     private var charity = Charity()
+    //Fragment navigation arguments
     var pageFragments = listOf(AddEditCharityPage1Fragment(), AddEditCharityPage2Fragment())
     var pageProgress = listOf(StateProgressBar.StateNumber.ONE, StateProgressBar.StateNumber.TWO)
 
@@ -63,16 +64,20 @@ class AddEditCharityActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 
-    //Function to set button onClick listener
+    //Function to set button onClick listener and makes sure all textfields are valid
     private fun setButtonOnClickListener() {
         //set onClick listener for next button
         binding.buttonToAddEditCharityPage2.setOnClickListener {
-            setFragmentView(false, pageProgress[1], pageFragments[1])
+            if (viewModel.isTextValid)
+                setFragmentView(false, pageProgress[1], pageFragments[1])
+            else this.toast(getString(R.string.all_required))
         }
 
         //set onClick listener for previous button
         binding.buttonAddEditCharityPage1.setOnClickListener {
-            setFragmentView(true, pageProgress[0], pageFragments[0])
+            if (viewModel.isTextValid)
+                setFragmentView(true, pageProgress[0], pageFragments[0])
+            else this.toast(getString(R.string.all_required))
         }
 
         binding.buttonCreateCharity.setOnClickListener { verifyCharityFormFields() }
@@ -89,7 +94,7 @@ class AddEditCharityActivity : AppCompatActivity() {
             this.toast(getString(R.string.all_required))
         }
     }
-
+    //Function to show/hide progress bar and set button clickable
     private fun isUploading(isUpload: Boolean) {
         binding.layoutAddEditCharity.visibility = if (isUpload) View.VISIBLE else View.GONE
         binding.buttonCreateCharity.isClickable = !isUpload

@@ -18,13 +18,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 
+//Enum class to handle different cases
 enum class DataStatus(var string: String){
     New("new"),
     Room("room"),
     Next("next"),
-    Error("could not retrieve"),
-    Success("Saved"),
-    Fail("failed")
+    Error("could not retrieve")
 }
 
 class DisplayFactsViewModel: ViewModel() {
@@ -42,12 +41,14 @@ class DisplayFactsViewModel: ViewModel() {
         val roomData = db?.catFactsDao()?.get()
         val factTime = sharedPref.read(SharedConst.PrefsFactDate.string, (-1).toLong())
 
+        //check if Room is empty and if Api data has been retrieved before else get new data from Api
         if (roomData?.isNotEmpty() == true && factTime != (-1).toLong()){
 
             val currentDateTime = Calendar.getInstance()
             val setDateTime = Calendar.getInstance()
             setDateTime.timeInMillis = factTime!!
 
+            //check if it has been 24 hours since data has been retrieve and if there is network connection else get from Room
             if (factTime <= currentDateTime.timeInMillis && NetworkStatus().isOnline(context)){
                 val nextPage = if (roomData[0].last_page != roomData[0].current_page+1) roomData[0].current_page+1 else 1
                 getNextPageOfFacts(nextPage)

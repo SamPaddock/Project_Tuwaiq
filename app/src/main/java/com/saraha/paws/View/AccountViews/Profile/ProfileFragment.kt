@@ -1,20 +1,13 @@
 package com.saraha.paws.View.AccountViews.Profile
 
-import android.app.Activity
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.gms.maps.model.LatLng
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.saraha.paws.Model.User
 import com.saraha.paws.R
 import com.saraha.paws.Util.AppSharedPreference
-import com.saraha.paws.Util.getStringAddress
 import com.saraha.paws.View.CharityViews.AddEditCharity.AddEditCharityActivity
 import com.saraha.paws.View.AccountViews.EditProfile.EditProfileActivity
 import com.saraha.paws.View.Home.HomeActivity
@@ -68,7 +61,7 @@ class ProfileFragment : Fragment() {
     //Function for an toolbar content and handler
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.edit_menu_item,menu)
-        menu.findItem(R.id.edit_item)?.setOnMenuItemClickListener {
+        menu.findItem(R.id.edit_item_1)?.setOnMenuItemClickListener {
             val intent = Intent(activity, EditProfileActivity::class.java)
             intent.putExtra("user", user)
             startActivityForResult(intent, 8)
