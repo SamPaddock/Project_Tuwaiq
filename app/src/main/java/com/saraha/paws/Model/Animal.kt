@@ -2,6 +2,8 @@ package com.saraha.paws.Model
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import java.io.Serializable
 
 data class Animal (
@@ -23,6 +25,11 @@ data class Animal (
     var groupName: String
     ): Serializable
 {
+
+    constructor() : this(null, "", "", "", "", "", "",
+        "", "", "", "", 0.0,0.0,
+        "", "", "")
+
 
     fun isAllDataNotEmpty(): Boolean {
         return (name.isNotEmpty() && type.isNotEmpty() && age.isNotEmpty()

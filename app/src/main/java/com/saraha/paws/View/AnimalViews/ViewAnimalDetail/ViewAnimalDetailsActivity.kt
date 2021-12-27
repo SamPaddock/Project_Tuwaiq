@@ -1,8 +1,11 @@
 package com.saraha.paws.View.AnimalViews.ViewAnimalDetail
 
+import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import androidx.activity.viewModels
 import com.google.android.gms.maps.model.LatLng
@@ -76,6 +79,15 @@ class ViewAnimalDetailsActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+    //Function to handle response from action result
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 9 && resultCode == RESULT_OK){
+            animal = data?.getSerializableExtra("animal") as Animal
+            setValues(animal)
+        }
+    }
+
     private fun deleteAnimal() {
         viewModel.deleteCharityFromFirebase(animal.aid!!)
         viewModel.deleteDocumentLiveData.observe(this){
@@ -92,7 +104,7 @@ class ViewAnimalDetailsActivity : AppCompatActivity() {
         val intent = Intent(this, AddEditAnimalActivity::class.java)
         intent.putExtra("type", "Edit")
         intent.putExtra("animal", animal)
-        startActivity(intent)
+        startActivityForResult(intent, 9)
     }
 
     //Function to set data in textviews

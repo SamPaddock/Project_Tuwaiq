@@ -85,10 +85,11 @@ class AddEditAnimalPage1Fragment : Fragment() {
             viewModel.setAnimalPhoto(imgData)
         }
         if (requestCode == 5 && resultCode == Activity.RESULT_OK){
-            val lat = data?.getDoubleExtra("Lat", 0.0) ?: 0.0
-            val lon = data?.getDoubleExtra("Lon", 0.0)  ?: 0.0
+            val lat = data?.getDoubleExtra("Lat", 0.1) ?: 0.1
+            val lon = data?.getDoubleExtra("Lon", 0.1)  ?: 0.1
 
             val location = LatLng(lat, lon)
+            viewModel.setAnimalLocation(location)
             binding.editTextAddAnimalLocation.setText(location.getStringAddress(this.requireContext()))
         }
     }

@@ -23,6 +23,7 @@
             android:id="@+id/edittextAddAnimalAge"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="text"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -42,6 +43,7 @@
             android:id="@+id/edittextAddAnimalGender"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="text"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,6 +63,7 @@
             android:id="@+id/edittextAddAnimalColor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="text"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,6 +83,7 @@
             android:id="@+id/edittextAddAnimalPersonality"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="textMultiLine"
             android:lines="8"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>

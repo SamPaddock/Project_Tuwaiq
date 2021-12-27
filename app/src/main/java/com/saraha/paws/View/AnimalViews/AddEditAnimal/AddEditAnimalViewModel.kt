@@ -1,12 +1,16 @@
 package com.saraha.paws.View.AnimalViews.AddEditAnimal
 
 import android.net.Uri
+import android.util.Patterns
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.textfield.TextInputEditText
+import com.saraha.paws.Model.Animal
+import com.saraha.paws.R
 import com.saraha.paws.Repository.FirebaseRepository
 import com.saraha.paws.Util.UserHelper
+import com.saraha.paws.Util.toast
 import kotlin.collections.HashMap
 
 class AddEditAnimalViewModel: ViewModel() {
@@ -29,6 +33,8 @@ class AddEditAnimalViewModel: ViewModel() {
     val createdAnimalLiveData = MutableLiveData<Boolean>()
     val editAnimalLiveData = MutableLiveData<Boolean>()
 
+    var isTextValid = true
+
     //Function to set data entered by user and set live data variables
     fun setAnimalName(name: String){ nameLiveData.postValue(name) }
     fun setAnimalType(type: String){ typeLiveData.postValue(type) }
@@ -41,6 +47,27 @@ class AddEditAnimalViewModel: ViewModel() {
     fun setAnimalMedical(medical: String){ medicalLiveData.postValue(medical) }
     fun setAnimalPhoto(photo: Uri){ photoLiveData.postValue(photo) }
     fun setAnimalLocation(location: LatLng) {locationLiveData.postValue(location)}
+
+    //Function to upload values from view
+    fun uploadValues(actionType: String, animal: Animal){
+        if (!Patterns.WEB_URL.matcher(animal.photoUrl).matches()){
+            setPhotoInFireStorage(animal.photoUrl)
+            postedPhotoLiveData.observeForever{ checkActionToPerform(actionType, animal, it) }
+        } else {
+            checkActionToPerform(actionType, animal)
+        }
+    }
+
+    //Function to check type of activity and call action
+    private fun checkActionToPerform(actionType: String, animal: Animal, it: String = animal.photoUrl) {
+        if (it.isNotEmpty()) {
+            if (actionType == "Edit") {
+                editAAnimalInFirebase(animal.aid!!, animal.getHashMap(it))
+            } else {
+                createAAnimalInFirebase(animal.getHashMap(it))
+            }
+        }
+    }
 
     //Function to handle firebase repository for uploading photo
     fun setPhotoInFireStorage(photo: String){
@@ -72,8 +99,10 @@ class AddEditAnimalViewModel: ViewModel() {
     //Handle result of textField checks
     private fun handleTextFields(v: TextInputEditText, msg: String, index: Int, isValid: Boolean){
         if (!isValid){
+            isTextValid = false
             v.error = msg
         } else {
+            isTextValid = true
             v.error = null
             when (index){
                 0 -> setAnimalName(v.text.toString())

@@ -59,6 +59,7 @@
             android:id="@+id/edittextAddAnimalName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="textPersonName"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -118,6 +119,7 @@
             android:id="@+id/editTextAddAnimalLocation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:editable="false"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
