@@ -15,6 +15,10 @@ data class Charity (
     var facebookUrl: String,
     var instagramUrl: String
 ): Serializable {
+
+    constructor(): this(null,"","","", "","",0.0,
+        0.0, "", "", "")
+
     fun isAllDataNotEmpty(): Boolean {
         return name.isNotEmpty() && email.isNotEmpty() && mobile.isNotEmpty()
                 && stcPay.isNotEmpty() && facebookUrl.isNotEmpty()

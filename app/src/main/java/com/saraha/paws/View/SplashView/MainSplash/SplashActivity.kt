@@ -32,7 +32,6 @@ class SplashActivity : AppCompatActivity() {
 
         //Initialize Shared Preference
         AppSharedPreference.init(applicationContext)
-        Log.d(TAG,"SplashActivity: - onCreate: - : ${AppSharedPreference.prefs}")
 
         checkNetworkStatus()
 
@@ -41,6 +40,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    //Function to check network status on app start
     private fun checkNetworkStatus() {
         if (NetworkStatus().isOnline(this) && this.hasPermissions(appPermissionList[0])) {
             startApp()
@@ -49,6 +49,7 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
+    //Function to show a dialog when the network is offline
     private fun networkMissingDialog(){
         binding.LoadingDotsMain.visibility = View.GONE
 
@@ -58,6 +59,7 @@ class SplashActivity : AppCompatActivity() {
         networkDialog.create().show()
     }
 
+    //Function to redirect to app
     private fun startApp(){
         binding.LoadingDotsMain.visibility = View.VISIBLE
 
@@ -72,6 +74,7 @@ class SplashActivity : AppCompatActivity() {
         }, 2000)
     }
 
+    //Function to check app location permission
     private fun checkLocationPermission(){
         val fineLocation = this.hasPermissions(appPermissionList[0])
         val coarseLocation = this.hasPermissions(appPermissionList[1])
@@ -83,6 +86,7 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
+    //Function to handle permission response
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -91,11 +95,7 @@ class SplashActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 4){
             if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(
-                    this,
-                    getString(R.string.location_required_msg),
-                    Toast.LENGTH_SHORT
-                ).show()
+                this.toast( getString(R.string.location_required_msg))
             }
         } else {
             checkNetworkStatus()

@@ -1,6 +1,7 @@
 package com.saraha.paws.View.CharityViews.AddEditCharity
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,16 +23,9 @@ class AddEditCharityActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddEditCharityBinding
 
     private var actionType = ""
-    private var charity = Charity(null,"","","",
-        "","",0.0,0.0, "", "", "")
-    var pageFragments = listOf(
-        AddEditCharityPage1Fragment(),
-        AddEditCharityPage2Fragment()
-    )
-    var pageProgress = listOf(
-        StateProgressBar.StateNumber.ONE,
-        StateProgressBar.StateNumber.TWO
-    )
+    private var charity = Charity()
+    var pageFragments = listOf(AddEditCharityPage1Fragment(), AddEditCharityPage2Fragment())
+    var pageProgress = listOf(StateProgressBar.StateNumber.ONE, StateProgressBar.StateNumber.TWO)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,13 +82,8 @@ class AddEditCharityActivity : AppCompatActivity() {
     private fun verifyCharityFormFields() {
         if (charity.isAllDataNotEmpty()) {
             isUploading(true)
-            if (!Patterns.WEB_URL.matcher(charity.photo).matches()){
-                viewModel.setPhotoInFireStorage(charity.photo)
-                viewModel.postedPhotoLiveData.observe(this) { checkActionToPerform(it) }
-            } else {
-                checkActionToPerform()
-            }
-
+            viewModel.uploadValues(actionType, charity)
+            if (actionType == "Edit") { editCharity() } else { addCharity() }
         } else {
             isUploading(false)
             this.toast(getString(R.string.all_required))
@@ -106,21 +95,15 @@ class AddEditCharityActivity : AppCompatActivity() {
         binding.buttonCreateCharity.isClickable = !isUpload
     }
 
-    //Function to check type of activity and call action
-    private fun checkActionToPerform(it: String = charity.photo) {
-        if (it.isNotEmpty()) {
-            if (actionType == "Edit") { editCharity(it) } else { addCharity(it) }
-        }
-    }
-
     //Function to update a charity information
-    private fun editCharity(photo: String){
-        viewModel.editACharityInFirebase(charity.cid!!, charity.getHashMap(photo))
+    private fun editCharity(){
         viewModel.editCharityLiveData.observe(this){
-            binding.layoutAddEditCharity.visibility = View.GONE
-            binding.buttonCreateCharity.isClickable = true
+            isUploading(false)
             if (it) {
                 this.toast(getString(R.string.successful_edit_charity))
+                val intent = Intent()
+                intent.putExtra("charity", charity)
+                setResult(RESULT_OK,intent)
                 finish()
             } else {
                 this.toast(getString(R.string.failure_edit_charity))
@@ -129,12 +112,9 @@ class AddEditCharityActivity : AppCompatActivity() {
     }
 
     //Function to add a charity information
-    private fun addCharity(photo: String) {
-        viewModel.createACharityInFirebase(charity.getHashMap(photo))
-
+    private fun addCharity() {
         viewModel.createdCharityLiveData.observe(this) {
-            binding.layoutAddEditCharity.visibility = View.GONE
-            binding.buttonCreateCharity.isClickable = true
+            isUploading(false)
             if (it) {
                 this.toast(getString(R.string.successful_add_charity))
                 finish()

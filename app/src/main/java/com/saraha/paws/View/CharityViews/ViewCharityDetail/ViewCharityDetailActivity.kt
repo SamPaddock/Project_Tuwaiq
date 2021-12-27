@@ -1,5 +1,6 @@
 package com.saraha.paws.View.CharityViews.ViewCharityDetail
 
+import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.saraha.paws.Model.Charity
@@ -9,10 +10,12 @@ import com.squareup.picasso.Picasso
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.util.Log
 import android.view.Menu
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.google.android.gms.maps.model.LatLng
+import com.saraha.paws.Model.Animal
 import com.saraha.paws.Util.AppSharedPreference
 import com.saraha.paws.Util.loadImage
 import com.saraha.paws.Util.toast
@@ -77,6 +80,15 @@ class ViewCharityDetailActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+    //Function to handle response from action result
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 10 && resultCode == RESULT_OK){
+            charity = data?.getSerializableExtra("charity") as Charity
+            setValues(charity)
+        }
+    }
+
     private fun deleteCharity() {
         viewModel.deleteCharityFromFirebase(charity.cid!!)
         viewModel.deleteDocumentLiveData.observe(this){
@@ -93,7 +105,7 @@ class ViewCharityDetailActivity : AppCompatActivity() {
         val intent = Intent(this, AddEditCharityActivity::class.java)
         intent.putExtra("type", "Edit")
         intent.putExtra("charity", charity)
-        startActivity(intent)
+        startActivityForResult(intent, 10)
     }
 
     //Function to set data in textviews
@@ -191,8 +203,10 @@ class ViewCharityDetailActivity : AppCompatActivity() {
     }
 
     private fun openGoogleMaps(location: LatLng){
+        Log.d(TAG,"ViewCharityDetailActivity: - openGoogleMaps: - : ${location}")
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse("geo:${location.latitude},${location.longitude}?z=8")
+        intent.data = Uri.parse("http://maps.google.com/maps?q=loc:"+location.latitude+","
+                    +location.longitude+"("+charity.name+")")
         intent.setPackage("com.google.android.apps.maps")
         if (intent.resolveActivity(packageManager) != null){
             startActivity(intent)

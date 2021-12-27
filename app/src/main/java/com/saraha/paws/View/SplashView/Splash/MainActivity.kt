@@ -11,7 +11,6 @@ import com.saraha.paws.databinding.ActivitySplashBinding
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySplashBinding
-    lateinit var callbackManager: CallbackManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

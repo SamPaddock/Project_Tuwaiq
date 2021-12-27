@@ -33,6 +33,7 @@ class AddEditAnimalViewModel: ViewModel() {
     val createdAnimalLiveData = MutableLiveData<Boolean>()
     val editAnimalLiveData = MutableLiveData<Boolean>()
 
+    //Variable is true if all textfields have validated and are correct
     var isTextValid = true
 
     //Function to set data entered by user and set live data variables

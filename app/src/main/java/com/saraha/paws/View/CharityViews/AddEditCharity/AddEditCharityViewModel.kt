@@ -1,10 +1,13 @@
 package com.saraha.paws.View.CharityViews.AddEditCharity
 
 import android.net.Uri
+import android.util.Patterns
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.textfield.TextInputEditText
+import com.saraha.paws.Model.Animal
+import com.saraha.paws.Model.Charity
 import com.saraha.paws.Repository.FirebaseRepository
 import com.saraha.paws.Util.UserHelper
 import kotlin.collections.HashMap
@@ -27,6 +30,9 @@ class AddEditCharityViewModel: ViewModel() {
     val createdCharityLiveData = MutableLiveData<Boolean>()
     val editCharityLiveData = MutableLiveData<Boolean>()
 
+    //Variable is true if all textfields have validated and are correct
+    var isTextValid = true
+
     //Function to set data entered by user and set live data variables
     fun setCharityEmail(email: String){ emailLiveData.postValue(email) }
     fun setCharityName(name: String){ nameLiveData.postValue(name) }
@@ -37,6 +43,27 @@ class AddEditCharityViewModel: ViewModel() {
     fun setCharityInstagramLink(link: String){ instagramLinkLiveData.postValue(link) }
     fun setCharityPhoto(imgData: Uri) {photoLiveData.postValue(imgData)}
     fun setCharityLocation(location: LatLng) {locationLiveData.postValue(location)}
+
+    //Function to upload values from view
+    fun uploadValues(actionType: String, charity: Charity){
+        if (!Patterns.WEB_URL.matcher(charity.photo).matches()){
+            setPhotoInFireStorage(charity.photo)
+            postedPhotoLiveData.observeForever{ checkActionToPerform(actionType, charity, it) }
+        } else {
+            checkActionToPerform(actionType, charity)
+        }
+    }
+
+    //Function to check type of activity and call action
+    private fun checkActionToPerform(actionType: String, charity: Charity, it: String =charity.photo) {
+        if (it.isNotEmpty()) {
+            if (actionType == "Edit") {
+                editACharityInFirebase(charity.cid!!, charity.getHashMap(it))
+            } else {
+                createACharityInFirebase(charity.getHashMap(it))
+            }
+        }
+    }
 
     //Function to handle firebase repository for uploading photo
     fun setPhotoInFireStorage(photo: String){
