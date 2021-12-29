@@ -11,9 +11,11 @@
 
     <color name="blue">#6883a1</color>
     <color name="beige">#f9e8e1</color>
+    <color name="light_beige">#FFF4F0</color>
     <color name="dark_beige">#9d9391</color>
     <color name="grey_1">#9d9391</color>
     <color name="grey_2">#adadad</color>
+    <color name="light_grey">#D8D8D8</color>
     <color name="grey_3">#908f8d</color>
     <color name="grey_4">#7f7e7c</color>
     <color name="dark_grey">#3b3b3b</color>

@@ -93,13 +93,13 @@
         android:hint="@string/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarLogin"
-        app:startIconDrawable="@drawable/ic_email_24">
+        app:layout_constraintTop_toBottomOf="@+id/toolbarLogin">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextLoginEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:drawableStart="@drawable/user_email_icon"
             android:inputType="none|textEmailAddress"
             android:textCursorDrawable="@null"
             tools:ignore="SpeakableTextPresentCheck" />
@@ -116,13 +116,13 @@
         android:hint="@string/password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputLayoutLoginEmail"
-        app:startIconDrawable="@drawable/ic_unlock_24">
+        app:layout_constraintTop_toBottomOf="@+id/inputLayoutLoginEmail">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextLoginPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:drawableStart="@drawable/user_key_icon"
             android:inputType="textPassword"
             android:textColorHighlight="@color/beige"
             android:textColorLink="@color/beige"

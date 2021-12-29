@@ -46,7 +46,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="@string/founder"
-        app:startIconDrawable="@drawable/ic_person_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAddCharityName">
@@ -54,7 +53,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextAddCharityFounder"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/user_profile_icon" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -71,7 +71,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextAddCharityName"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/charity_profile_icon" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -80,7 +81,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        app:startIconDrawable="@drawable/ic_email_24"
         android:hint="@string/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +89,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextAddCharityEmail"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/user_email_icon" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -99,7 +100,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="@string/mobile"
-        app:startIconDrawable="@drawable/ic_smartphone_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAddCharityEmail">
@@ -107,7 +107,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextAddCharityMobile"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/user_mobile_icon" />
     </com.google.android.material.textfield.TextInputLayout>
 
 

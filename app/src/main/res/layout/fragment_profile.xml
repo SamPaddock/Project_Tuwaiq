@@ -55,11 +55,11 @@
                 android:id="@+id/imageViewProfileName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_person_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textViewProfileName"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/user_profile_icon" />
 
             <TextView
                 android:id="@+id/textViewProfileName"
@@ -85,11 +85,11 @@
                 android:id="@+id/imageViewProfileEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_email_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textViewProfileEmail"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/user_email_icon" />
 
             <TextView
                 android:id="@+id/textViewProfileEmail"
@@ -114,12 +114,12 @@
                 android:id="@+id/imageViewProfileMobile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_smartphone_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textViewProfileMobile"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/user_mobile_icon" />
 
             <TextView
                 android:id="@+id/textViewProfileMobile"
@@ -145,11 +145,11 @@
                 android:id="@+id/imageViewProfileGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_groups_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textViewProfileGroup"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/charity_profile_icon" />
 
             <TextView
                 android:id="@+id/textViewProfileGroup"

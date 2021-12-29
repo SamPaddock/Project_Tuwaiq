@@ -40,25 +40,15 @@
                 app:layout_constraintStart_toEndOf="@+id/imageViewListCharityPhoto"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:id="@+id/imageViewCharityName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_groups_24" />
-
                 <TextView
                     android:id="@+id/textViewCharityName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:text="@string/test_string"
                     android:textAppearance="@style/body_6b_style"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewCharityName"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -83,7 +73,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_email_24" />
+                    app:srcCompat="@drawable/user_email_icon" />
 
                 <TextView
                     android:id="@+id/textViewCharityEmail"
@@ -116,7 +106,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_smartphone_24" />
+                    app:srcCompat="@drawable/user_mobile_icon" />
 
                 <TextView
                     android:id="@+id/textViewCharityMobile"

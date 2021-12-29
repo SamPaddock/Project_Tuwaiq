@@ -69,13 +69,13 @@
         android:hint="@string/name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
-        app:startIconDrawable="@drawable/ic_person_24">
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edittextRegisterName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:drawableStart="@drawable/user_profile_icon"
             android:inputType="textPersonName|text"
             android:textCursorDrawable="@null"
             tools:ignore="SpeakableTextPresentCheck" />
@@ -90,16 +90,16 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/mobile"
-        app:placeholderText="@string/mobile_placeholder"
-        app:startIconDrawable="@drawable/ic_smartphone_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputLayoutRegisterName">
+        app:layout_constraintTop_toBottomOf="@+id/inputLayoutRegisterName"
+        app:placeholderText="@string/mobile_placeholder">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edittextRegisterMobile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:drawableStart="@drawable/user_mobile_icon"
             android:inputType="phone"
             android:textCursorDrawable="@null"
             tools:ignore="SpeakableTextPresentCheck" />
@@ -114,7 +114,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/charity_group"
-        app:startIconDrawable="@drawable/ic_groups_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputLayoutRegisterMobile">
@@ -123,6 +122,7 @@
             android:id="@+id/autoCompleteRegisterGroup"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:drawableStart="@drawable/charity_profile_icon"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 

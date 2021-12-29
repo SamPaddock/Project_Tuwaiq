@@ -56,14 +56,14 @@
         android:hint="@string/name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardViewEditProfile"
-        app:startIconDrawable="@drawable/ic_person_24">
+        app:layout_constraintTop_toBottomOf="@+id/cardViewEditProfile">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextEditProfileName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            tools:drawableStart="@drawable/user_profile_icon" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -77,13 +77,13 @@
         android:hint="@string/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEditProfileName"
-        app:startIconDrawable="@drawable/ic_email_24">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEditProfileName">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextEditProfileEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:drawableStart="@drawable/user_email_icon"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,13 +98,13 @@
         android:hint="@string/mobile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEditProfileEmail"
-        app:startIconDrawable="@drawable/ic_smartphone_24">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEditProfileEmail">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextLayoutEditProfileMobile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:drawableStart="@drawable/user_mobile_icon"
             android:inputType="phone" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -122,13 +122,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEditProfileMobile"
-        app:layout_constraintVertical_bias="0.0"
-        app:startIconDrawable="@drawable/ic_groups_24">
+        app:layout_constraintVertical_bias="0.0">
 
         <AutoCompleteTextView
             android:id="@+id/autoCompleteEditGroup"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:drawableStart="@drawable/charity_profile_icon"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 

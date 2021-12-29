@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="@string/age"
-        app:startIconDrawable="@drawable/ic_time_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,6 +22,7 @@
             android:id="@+id/edittextAddAnimalAge"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:drawableStart="@drawable/pet_birthday_icon"
             android:inputType="text"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -34,7 +34,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="@string/gender"
-        app:startIconDrawable="@drawable/ic_gender"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputLayoutAddAnimalAge">
@@ -43,6 +42,7 @@
             android:id="@+id/edittextAddAnimalGender"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:drawableStart="@drawable/pet_gender_icon"
             android:inputType="text"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -54,7 +54,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="@string/color"
-        app:startIconDrawable="@drawable/ic_color_picker"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputLayoutAddAnimalGender">
@@ -63,6 +62,7 @@
             android:id="@+id/edittextAddAnimalColor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:drawableStart="@drawable/pet_color_icon"
             android:inputType="text"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -74,7 +74,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="@string/personality"
-        app:startIconDrawable="@drawable/ic_story"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputLayoutAddAnimalColor">
@@ -83,6 +82,7 @@
             android:id="@+id/edittextAddAnimalPersonality"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:drawableStart="@drawable/pet_describtion_icon"
             android:inputType="textMultiLine"
             android:lines="8"
             tools:ignore="SpeakableTextPresentCheck" />
