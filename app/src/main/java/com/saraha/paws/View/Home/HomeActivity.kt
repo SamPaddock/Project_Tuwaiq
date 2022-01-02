@@ -39,26 +39,11 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
 
-        isNetworkAvailable()
-
         getUserInformation()
 
         setupToolbarAndSliderDrawer(savedInstanceState)
 
         setContentView(binding.root)
-    }
-
-    //Function to check network status and show/hide noNetwork view
-    private fun isNetworkAvailable(): Boolean {
-        return if (!NetworkStatus().isOnline(this)) {
-            binding.HomeFrameLayout.visibility = View.GONE
-            binding.noConnectionLayout.visibility = View.VISIBLE
-            false
-        } else {
-            binding.HomeFrameLayout.visibility = View.VISIBLE
-            binding.noConnectionLayout.visibility = View.GONE
-            true
-        }
     }
 
     //Function to get user information from Firestore and save in SharedPref
@@ -182,12 +167,6 @@ class HomeActivity : AppCompatActivity() {
 
     //Function to replace a fragment view
     private fun displayFragment(fragment: Fragment) {
-        if (!isNetworkAvailable()){
-            binding.buttonRefreshMain.setOnClickListener {
-                displayFragment(fragment)
-            }
-        } else {
-            supportFragmentManager.beginTransaction().replace(R.id.HomeFrameLayout, fragment).commit()
-        }
+        supportFragmentManager.beginTransaction().replace(R.id.HomeFrameLayout, fragment).commit()
     }
 }

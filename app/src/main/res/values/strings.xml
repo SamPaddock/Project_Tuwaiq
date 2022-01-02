@@ -98,5 +98,6 @@
     <string name="create">Create</string>
     <string name="view_error_general">Could not view this content. Please try again later.</string>
     <string name="address_error">Could not get address</string>
+    <string name="donation_msg">Rescued animals need you help</string>
 
 </resources>

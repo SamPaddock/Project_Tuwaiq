@@ -117,15 +117,15 @@ class ViewCharityDetailActivity : AppCompatActivity() {
         binding.textViewDisplayCharityMobile.text = charity.mobile
         //set image
         binding.imageViewDisplayCharityPhoto.loadImage(charity.photo)
-        //set buttons
-        binding.buttonCharityLocation.setOnClickListener {
-            openGoogleMaps(LatLng(charity.latitude,charity.longitude))
-        }
+        //set image buttons
         binding.imageViewSTCPayLink.setOnClickListener { openSTCPay(charity.stcPay) }
         binding.imageViewFacebookLink.setOnClickListener { openFacebook(charity.facebookUrl) }
         binding.imageViewInstaLink.setOnClickListener { openInstagram(charity.instagramUrl) }
         binding.imageViewWhatsappLink.setOnClickListener { openWhatsapp(charity.mobile) }
         binding.imageViewMail.setOnClickListener { openMail(charity) }
+        binding.imageViewMaps.setOnClickListener {
+            openGoogleMaps(LatLng(charity.latitude,charity.longitude))
+        }
     }
 
     //Function to handle to mail icon click
