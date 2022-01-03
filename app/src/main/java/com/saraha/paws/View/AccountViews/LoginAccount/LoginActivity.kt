@@ -33,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    //Function to setup activity toolbar with title and back button
     private fun setupToolbar() {
         val mainToolbar = binding.toolbarLogin
         mainToolbar.title = getString(R.string.welcome_msg)
@@ -89,6 +90,7 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
+    //Function to handle view components when login button is clicked
     private fun isLoginIn(isLogin: Boolean) {
         binding.progressBarLogin.visibility = if (isLogin) View.VISIBLE else View.GONE
         binding.buttonLogin.isClickable = !isLogin

@@ -15,11 +15,12 @@ import com.saraha.paws.databinding.FragmentProfileBinding
 import com.squareup.picasso.Picasso
 
 class ProfileFragment : Fragment() {
-
+    //View model and binding lateinit property
     private lateinit var viewModel: ProfileViewModel
     lateinit var binding: FragmentProfileBinding
+    //Variables that will hold intent values
     lateinit var user: User
-
+    //Shared preference helper class object
     val sharedPref = AppSharedPreference()
 
     override fun onCreateView(
@@ -33,7 +34,7 @@ class ProfileFragment : Fragment() {
         setHasOptionsMenu(true)
 
         checkIfAdmin()
-
+        //redirect to add charity activity which is only visible to an Admin user
         binding.fabCreateCharity.setOnClickListener {
             val intent = Intent(this.context, AddEditCharityActivity::class.java)
             intent.putExtra("type", "Add")
@@ -52,6 +53,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    //reload user info on resume
     override fun onResume() {
         super.onResume()
         user = viewModel.getUserInfo()

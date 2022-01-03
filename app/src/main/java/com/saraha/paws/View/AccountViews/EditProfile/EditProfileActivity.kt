@@ -19,14 +19,17 @@ import com.saraha.paws.databinding.ActivityEditProfileBinding
 import com.squareup.picasso.Picasso
 
 class EditProfileActivity : AppCompatActivity() {
-
+    //View model and binding lateinit property
+    val viewModel: EditProfileViewModel by viewModels()
     lateinit var binding: ActivityEditProfileBinding
+    //Variables that will hold intent values
     lateinit var user: User
+    //Variables that hold dropdown menu content and image data from activity for result
     lateinit var list: List<String>
     lateinit var imgData: Uri
+    //Variable is true if all textfields have validated and are correct
     var isUserValid = true
-    val viewModel: EditProfileViewModel by viewModels()
-
+    //Shared preference helper class object
     val sharedPref = AppSharedPreference()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +48,7 @@ class EditProfileActivity : AppCompatActivity() {
 
         onFieldFocus()
 
+        //intent to open photo and gallary for image selectoin
         binding.fabUploadNewImage.setOnClickListener {
             val takePictureIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(takePictureIntent, 2)
@@ -57,7 +61,7 @@ class EditProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-
+    //Function to setup activity toolbar with title and back button
     private fun setupToolbar() {
         val mainToolbar = binding.toolbarEditProfile
         mainToolbar.title = "Edit Profile"

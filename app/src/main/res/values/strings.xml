@@ -99,5 +99,8 @@
     <string name="view_error_general">Could not view this content. Please try again later.</string>
     <string name="address_error">Could not get address</string>
     <string name="donation_msg">Rescued animals need you help</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="zero">0</string>
 
 </resources>

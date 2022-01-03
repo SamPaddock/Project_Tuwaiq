@@ -29,7 +29,7 @@ import com.saraha.paws.databinding.FragmentAddEditAnimalPage1Binding
 import com.squareup.picasso.Picasso
 
 class AddEditAnimalPage1Fragment : Fragment() {
-
+    //View model and binding lateinit property
     private lateinit var viewModel: AddEditAnimalViewModel
     lateinit var binding: FragmentAddEditAnimalPage1Binding
 
@@ -51,6 +51,7 @@ class AddEditAnimalPage1Fragment : Fragment() {
 
         selectPhoto()
 
+        //Open map activity with pending results from activity
         binding.imageViewAddLocation.setOnClickListener {
             val intent = Intent(this.requireContext(), MapsActivity::class.java)
             startActivityForResult(intent, 5)

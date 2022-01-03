@@ -20,10 +20,10 @@ import com.saraha.paws.View.CharityViews.AddEditCharity.AddEditCharityActivity
 import com.squareup.picasso.Picasso
 
 class AddEditCharityPage1Fragment : Fragment() {
-
+    //View model and binding lateinit property
     private lateinit var viewModel: AddEditCharityViewModel
     lateinit var binding: FragmentAddEditCharityPage1Binding
-
+    //image data lateinit property
     lateinit var imgData: Uri
 
     override fun onCreateView(

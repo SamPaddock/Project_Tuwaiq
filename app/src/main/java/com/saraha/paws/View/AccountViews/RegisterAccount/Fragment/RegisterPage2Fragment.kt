@@ -16,9 +16,10 @@ import com.saraha.paws.View.AccountViews.RegisterAccount.RegisterViewModel
 import com.saraha.paws.databinding.FragmentRegisterPage2Binding
 
 class RegisterPage2Fragment : Fragment() {
-
+    //View model and binding lateinit property
     private lateinit var viewModel: RegisterViewModel
     lateinit var binding: FragmentRegisterPage2Binding
+    //list that holds the dropdown menu items
     lateinit var list: List<String>
 
     override fun onCreateView(

@@ -57,35 +57,35 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_facebook" />
+            app:srcCompat="@drawable/a_facebook" />
 
         <ImageView
             android:id="@+id/imageViewInstaLink"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_instagram" />
+            app:srcCompat="@drawable/a_instagram" />
 
         <ImageView
             android:id="@+id/imageViewWhatsappLink"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_whatsapp" />
+            app:srcCompat="@drawable/a_whatsapp" />
 
         <ImageView
             android:id="@+id/imageViewMail"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_gmail" />
+            app:srcCompat="@drawable/a_email" />
 
         <ImageView
             android:id="@+id/imageViewMaps"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_googlemaps" />
+            app:srcCompat="@drawable/a_placeholder" />
     </LinearLayout>
 
     <LinearLayout

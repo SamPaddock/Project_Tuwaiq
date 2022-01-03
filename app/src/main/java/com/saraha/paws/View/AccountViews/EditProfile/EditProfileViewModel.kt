@@ -10,7 +10,7 @@ import com.saraha.paws.Util.AppSharedPreference
 import java.util.HashMap
 
 class EditProfileViewModel: ViewModel() {
-
+    //Shared preference helper class object
     val sharedPref = AppSharedPreference()
 
     //Variable to get liveData response from Firebase
@@ -44,6 +44,7 @@ class EditProfileViewModel: ViewModel() {
         }
     }
 
+    //Function to saved user info in shared preference
     fun setSharedPreference(user: User){
         sharedPref.write("uName", user.name)
         sharedPref.write("eName", user.email)

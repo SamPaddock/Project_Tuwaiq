@@ -20,7 +20,7 @@ import com.saraha.paws.View.AccountViews.RegisterAccount.Fragment.RegisterPage2F
 import com.saraha.paws.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
-
+    //View model and binding lateinit property
     private val viewModel: RegisterViewModel by viewModels()
     private lateinit var binding: ActivityRegisterBinding
 
@@ -55,6 +55,7 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    //Function to setup activity toolbar with title and back button
     private fun setupToolbar() {
         val mainToolbar = binding.toolbarRegister
         mainToolbar.title = getString(R.string.create_account_msg)
@@ -86,6 +87,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    //Function to handle view components when register button is clicked
     private fun isCreatingAccount(isCreating: Boolean) {
         binding.progressBarCreateAccount.visibility = if (isCreating) View.VISIBLE else View.GONE
         binding.buttonCreateAccount.isClickable = !isCreating
@@ -105,6 +107,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    //Function to handle exception thrown from Firebase response
     private fun handleSignUpException(e: Exception){
         try {
             throw e

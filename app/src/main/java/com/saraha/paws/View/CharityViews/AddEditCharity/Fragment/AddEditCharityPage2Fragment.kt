@@ -26,7 +26,7 @@ import com.saraha.paws.databinding.FragmentAddEditCharityPage2Binding
 
 
 class AddEditCharityPage2Fragment : Fragment() {
-
+    //View model and binding lateinit property
     private lateinit var viewModel: AddEditCharityViewModel
     lateinit var binding: FragmentAddEditCharityPage2Binding
 
@@ -44,6 +44,7 @@ class AddEditCharityPage2Fragment : Fragment() {
 
         onFieldFocus()
 
+        //Open map activity with pending results from activity
         binding.imageViewAddCharityLocation.setOnClickListener {
             val intent = Intent(this.requireContext(), MapsActivity::class.java)
             startActivityForResult(intent, 5)

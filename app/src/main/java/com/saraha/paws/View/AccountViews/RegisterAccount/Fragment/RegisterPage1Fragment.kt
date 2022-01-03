@@ -15,7 +15,7 @@ import com.saraha.paws.View.AccountViews.RegisterAccount.RegisterViewModel
 import com.saraha.paws.databinding.FragmentRegisterPage1Binding
 
 class RegisterPage1Fragment : Fragment() {
-
+    //View model and binding lateinit property
     private lateinit var viewModel: RegisterViewModel
     lateinit var binding: FragmentRegisterPage1Binding
 

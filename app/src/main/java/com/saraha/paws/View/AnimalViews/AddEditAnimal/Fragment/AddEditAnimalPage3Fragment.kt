@@ -15,7 +15,7 @@ import com.saraha.paws.View.AnimalViews.AddEditAnimal.AddEditAnimalViewModel
 import com.saraha.paws.databinding.FragmentAddEditAnimalPage3Binding
 
 class AddEditAnimalPage3Fragment : Fragment() {
-
+    //View model and binding lateinit property
     private lateinit var viewModel: AddEditAnimalViewModel
     lateinit var binding: FragmentAddEditAnimalPage3Binding
 
