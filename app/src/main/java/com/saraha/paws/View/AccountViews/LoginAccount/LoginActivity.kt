@@ -8,13 +8,12 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.saraha.paws.R
 import com.saraha.paws.Util.FirebaseExceptionMsg
 import com.saraha.paws.Util.toast
-import com.saraha.paws.View.Home.HomeActivity
+import com.saraha.paws.View.Home.Home.HomeActivity
 import com.saraha.paws.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -73,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
             isLoginIn(false)
             if (it.first && it.second == null){
                 binding.textViewLoginWarning.setText("")
-                this.startActivity(Intent(this,HomeActivity::class.java))
+                this.startActivity(Intent(this, HomeActivity::class.java))
                 this.finish()
             } else {
                 try {

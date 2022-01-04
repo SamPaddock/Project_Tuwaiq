@@ -10,7 +10,7 @@ import com.saraha.paws.R
 import com.saraha.paws.Util.AppSharedPreference
 import com.saraha.paws.View.CharityViews.AddEditCharity.AddEditCharityActivity
 import com.saraha.paws.View.AccountViews.EditProfile.EditProfileActivity
-import com.saraha.paws.View.Home.HomeActivity
+import com.saraha.paws.View.Home.Home.HomeActivity
 import com.saraha.paws.databinding.FragmentProfileBinding
 import com.squareup.picasso.Picasso
 

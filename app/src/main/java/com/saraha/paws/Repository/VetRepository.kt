@@ -21,27 +21,27 @@ class VetRepository {
         dbFirestore!!.firestoreSettings = settings
     }
 
-    fun getAll(): LiveData<List<Vendor>> {
+    fun getAll(): LiveData<Pair<List<Vendor>?, Exception?>> {
         if (dbFirestore == null) createDBFirestore()
 
-        val liveDataAnimal = MutableLiveData<List<Vendor>>()
+        val liveDataVet = MutableLiveData<Pair<List<Vendor>?, Exception?>>()
 
-        dbFirestore?.collection("Animals")?.get()?.addOnCompleteListener {snapshot ->
+        dbFirestore?.collection("Vets")?.get()?.addOnCompleteListener {snapshot ->
             if (snapshot.isSuccessful && snapshot.result != null) {
-                val listOfAnimals = mutableListOf<Vendor>()
-                for (animal in snapshot.result!!) {
-                    if (animal.data.isNotEmpty()){
-                        val name = animal.get("name") as String
-                        //val dbAnimal =
-                        //listOfAnimals.add(dbAnimal)
+                val listOfVets = mutableListOf<Vendor>()
+                for (vet in snapshot.result!!) {
+                    if (vet.data.isNotEmpty()){
+                        val name = vet.get("name") as String
+                        //val dbVet =
+                        //listOfVets.add(dbVet)
                     }
                 }
-                liveDataAnimal.postValue(listOfAnimals)
+                liveDataVet.postValue(Pair(listOfVets, null))
             }
         }?.addOnFailureListener {
-            Log.d(ContentValues.TAG,"CharityRepository: - getAllCharities: - : ${it.message}")
+            liveDataVet.postValue(Pair(null, it))
         }
 
-        return liveDataAnimal
+        return liveDataVet
     }
 }

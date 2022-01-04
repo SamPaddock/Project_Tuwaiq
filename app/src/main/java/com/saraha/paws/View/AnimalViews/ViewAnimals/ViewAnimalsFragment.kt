@@ -1,9 +1,7 @@
 package com.saraha.paws.View.AnimalViews.ViewAnimals
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.ArrayAdapter
@@ -14,7 +12,7 @@ import com.saraha.paws.Model.Animal
 import com.saraha.paws.R
 import com.saraha.paws.Util.Helper
 import com.saraha.paws.View.AnimalViews.AddEditAnimal.AddEditAnimalActivity
-import com.saraha.paws.View.Home.HomeActivity
+import com.saraha.paws.View.Home.Home.HomeActivity
 import com.saraha.paws.databinding.FragmentViewAnimalsBinding
 
 class ViewAnimalsFragment : Fragment() {
@@ -55,15 +53,17 @@ class ViewAnimalsFragment : Fragment() {
 
     //Function for an toolbar content and handler
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.recycler_view_menu,menu)
-        menu.findItem(R.id.filter_item_menu)?.setOnMenuItemClickListener {
-            var isFilterVisible = binding.constraintLayoutFilterContent.visibility
-            if (isFilterVisible == View.VISIBLE) {
-                binding.constraintLayoutFilterContent.visibility = View.GONE
-            } else {
-                binding.constraintLayoutFilterContent.visibility = View.VISIBLE
+        if (arguments?.getString("tag") == null && arguments?.getString("tag") != "adoption"){
+            inflater.inflate(R.menu.recycler_view_menu,menu)
+            menu.findItem(R.id.filter_item_menu)?.setOnMenuItemClickListener {
+                val isFilterVisible = binding.constraintLayoutFilterContent.visibility
+                if (isFilterVisible == View.VISIBLE) {
+                    binding.constraintLayoutFilterContent.visibility = View.GONE
+                } else {
+                    binding.constraintLayoutFilterContent.visibility = View.VISIBLE
+                }
+                true
             }
-            true
         }
         super.onCreateOptionsMenu(menu,inflater)
     }
@@ -71,9 +71,14 @@ class ViewAnimalsFragment : Fragment() {
     //Function to get all animals from Firestore
     private fun getAllAnimals(){
         viewModel.getAllAnimalsFromFirebase()
-        viewModel.listOfAnimalsLiveData.observe(viewLifecycleOwner){
-            if (it.isNotEmpty()){
-                animal = it
+        viewModel.listOfAnimalsLiveData.observe(viewLifecycleOwner){ list ->
+            if (list.isNotEmpty()){
+                if (arguments?.getString("tag") != null){
+                    animal = list.filter { it.states == "For Adoption"}
+                } else {
+                    animal = list
+                }
+
                 setRecyclerViewWithData(animal)
             }
         }

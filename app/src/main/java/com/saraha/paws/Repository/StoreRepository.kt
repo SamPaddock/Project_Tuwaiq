@@ -8,6 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.saraha.paws.Model.Product
 import com.saraha.paws.Model.Vendor
 
 class StoreRepository {
@@ -21,27 +22,27 @@ class StoreRepository {
         dbFirestore!!.firestoreSettings = settings
     }
 
-    fun getAll(): LiveData<List<Vendor>> {
+    fun getAll(): LiveData<Pair<List<Vendor>?, Exception?>> {
         if (dbFirestore == null) createDBFirestore()
 
-        val liveDataAnimal = MutableLiveData<List<Vendor>>()
+        val liveDataStore = MutableLiveData<Pair<List<Vendor>?, Exception?>>()
 
-        dbFirestore?.collection("Animals")?.get()?.addOnCompleteListener {snapshot ->
+        dbFirestore?.collection("Store")?.get()?.addOnCompleteListener {snapshot ->
             if (snapshot.isSuccessful && snapshot.result != null) {
-                val listOfAnimals = mutableListOf<Vendor>()
-                for (animal in snapshot.result!!) {
-                    if (animal.data.isNotEmpty()){
-                        val name = animal.get("name") as String
-                        //val dbAnimal =
-                        //listOfAnimals.add(dbAnimal)
+                val listOfStores = mutableListOf<Vendor>()
+                for (store in snapshot.result!!) {
+                    if (store.data.isNotEmpty()){
+                        val name = store.get("name") as String
+                        //val dbStore =
+                        //listOfStores.add(dbStore)
                     }
                 }
-                liveDataAnimal.postValue(listOfAnimals)
+                liveDataStore.postValue(Pair(listOfStores, null))
             }
         }?.addOnFailureListener {
-            Log.d(ContentValues.TAG,"CharityRepository: - getAllCharities: - : ${it.message}")
+            liveDataStore.postValue(Pair(null, it))
         }
 
-        return liveDataAnimal
+        return liveDataStore
     }
 }

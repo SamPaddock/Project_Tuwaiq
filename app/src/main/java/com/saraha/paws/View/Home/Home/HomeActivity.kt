@@ -1,9 +1,8 @@
-package com.saraha.paws.View.Home
+package com.saraha.paws.View.Home.Home
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -20,12 +19,12 @@ import com.mikepenz.materialdrawer.widget.AccountHeaderView
 import com.mikepenz.materialdrawer.widget.MaterialDrawerSliderView
 import com.saraha.paws.R
 import com.saraha.paws.Util.AppSharedPreference
-import com.saraha.paws.Util.NetworkStatus
 import com.saraha.paws.View.SplashView.MainSplash.SplashActivity
 import com.saraha.paws.View.AccountViews.Profile.ProfileFragment
 import com.saraha.paws.View.ShowFacts.DisplayFactsFragment
 import com.saraha.paws.View.AnimalViews.ViewAnimals.ViewAnimalsFragment
 import com.saraha.paws.View.CharityViews.ViewCharities.ViewCharitiesFragment
+import com.saraha.paws.View.Home.HomeServices.HomeServicesFragment
 import com.saraha.paws.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
@@ -36,6 +35,7 @@ class HomeActivity : AppCompatActivity() {
     val sharedPref = AppSharedPreference()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
 
@@ -78,7 +78,7 @@ class HomeActivity : AppCompatActivity() {
         mainSlider.onDrawerItemClickListener = { _, drawerItem, _ ->
             when(drawerItem.identifier){
                 0.toLong() -> {
-                    displayFragment(ViewAnimalsFragment())
+                    displayFragment(HomeServicesFragment())
                     mainToolbar.title = "Rescues"
                 }
                 1.toLong() -> {
@@ -95,7 +95,7 @@ class HomeActivity : AppCompatActivity() {
                 }
                 7.toLong() -> signOutFromAccount()
                 else -> {
-                    displayFragment(ViewAnimalsFragment())
+                    displayFragment(HomeServicesFragment())
                     mainToolbar.title = "Rescues"
                 }
             }

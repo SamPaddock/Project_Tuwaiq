@@ -12,7 +12,7 @@ import com.saraha.paws.Model.Facts.CatFacts
 import com.saraha.paws.Util.AppSharedPreference
 import com.saraha.paws.Util.SharedConst
 import com.saraha.paws.Util.toast
-import com.saraha.paws.View.Home.HomeActivity
+import com.saraha.paws.View.Home.Home.HomeActivity
 import com.saraha.paws.databinding.FragmentDisplayFactsBinding
 import java.util.*
 import android.app.AlarmManager

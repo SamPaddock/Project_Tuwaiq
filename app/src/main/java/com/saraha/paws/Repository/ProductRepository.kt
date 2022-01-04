@@ -21,25 +21,26 @@ class ProductRepository {
         dbFirestore!!.firestoreSettings = settings
     }
 
-    fun getAll(): LiveData<List<Product>> {
+    fun getAll(collection: String, documentID: String): LiveData<Pair<List<Product>?, Exception?>> {
         if (dbFirestore == null) createDBFirestore()
 
-        val liveDataProduct = MutableLiveData<List<Product>>()
+        val liveDataProduct = MutableLiveData<Pair<List<Product>?, Exception?>>()
 
-        dbFirestore?.collection("Animals")?.get()?.addOnCompleteListener {snapshot ->
+        dbFirestore?.collection(collection)?.document(documentID)
+            ?.collection("Product")?.get()?.addOnCompleteListener {snapshot ->
             if (snapshot.isSuccessful && snapshot.result != null) {
                 val listOfProducts = mutableListOf<Product>()
-                for (animal in snapshot.result!!) {
-                    if (animal.data.isNotEmpty()){
-                        val name = animal.get("name") as String
+                for (product in snapshot.result!!) {
+                    if (product.data.isNotEmpty()){
+                        val name = product.get("name") as String
                         //val dbProduct =
-                        //listOfProducts.add(dbAnimal)
+                        //listOfProducts.add(dbProduct)
                     }
                 }
-                liveDataProduct.postValue(listOfProducts)
+                liveDataProduct.postValue(Pair(listOfProducts, null))
             }
         }?.addOnFailureListener {
-            Log.d(ContentValues.TAG,"CharityRepository: - getAllCharities: - : ${it.message}")
+                liveDataProduct.postValue(Pair(null, it))
         }
 
         return liveDataProduct

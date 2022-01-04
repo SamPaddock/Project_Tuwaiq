@@ -1,15 +1,12 @@
 package com.saraha.paws.View.SplashView.MainSplash
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import com.google.firebase.auth.ktx.auth
@@ -17,7 +14,7 @@ import com.google.firebase.ktx.Firebase
 import com.saraha.paws.R
 import com.saraha.paws.Util.*
 import com.saraha.paws.Util.Helper.Companion.appPermissionList
-import com.saraha.paws.View.Home.HomeActivity
+import com.saraha.paws.View.Home.Home.HomeActivity
 import com.saraha.paws.View.SplashView.Splash.MainActivity
 import com.saraha.paws.databinding.ActivityMainBinding
 

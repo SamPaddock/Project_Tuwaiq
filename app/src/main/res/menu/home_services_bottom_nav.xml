@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/page_rescues_2"
+        android:enabled="true"
+        android:icon="@drawable/a_house"
+        android:title="@string/resuces_home"/>
+    <item
+        android:id="@+id/page_vets"
+        android:enabled="true"
+        android:icon="@drawable/a_vet"
+        android:title="@string/vet_home"/>
+    <item
+        android:id="@+id/page_stores"
+        android:enabled="true"
+        android:icon="@drawable/a_shop"
+        android:title="@string/store_home"/>
+</menu>

@@ -1,7 +1,5 @@
-package com.saraha.paws.View.Home
+package com.saraha.paws.View.Home.Home
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.saraha.paws.Model.User

@@ -73,7 +73,7 @@
             android:name=".View.AnimalViews.AddEditAnimal.AddEditAnimalActivity"
             android:exported="true" />
         <activity
-            android:name=".View.Home.HomeActivity"
+            android:name=".View.Home.Home.HomeActivity"
             android:exported="true" />
         <activity
             android:name=".View.AccountViews.RegisterAccount.RegisterActivity"

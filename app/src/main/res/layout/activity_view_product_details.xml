@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageViewDisplayProductPhoto"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/grey_4"
@@ -65,7 +65,7 @@
                 app:cardCornerRadius="25dp">
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/imageViewMinusQualtity"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -74,7 +74,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textViewDisplayProductQuantity"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -90,7 +90,7 @@
                 app:cardCornerRadius="25dp">
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/imageViewPlusQuantity"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@color/blue"
@@ -203,27 +203,60 @@
                             tools:ignore="TouchTargetSizeCheck" />
                     </LinearLayout>
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/linearLayout6"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="16dp"
-                        android:orientation="horizontal">
+                        android:layout_margin="16dp">
+
+                        <ImageView
+                            android:id="@+id/imageViewProductStoreName"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/store_name" />
 
                         <TextView
                             android:id="@+id/textViewDisplayProductSeller"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
                             android:text="@string/test_string"
-                            android:textAppearance="@style/body_4n_style" />
-                    </LinearLayout>
+                            android:textAppearance="@style/body_4n_style"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageViewProductStoreName"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <TextView
-                        android:id="@+id/textViewDisplayProductDescription"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:text="@string/lorem_ipsum" />
+                        android:layout_height="match_parent"
+                        android:layout_margin="16dp">
+
+                        <ImageView
+                            android:id="@+id/imageViewProductDescription"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0"
+                            app:srcCompat="@drawable/info" />
+
+                        <TextView
+                            android:id="@+id/textViewDisplayProductDescription"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="@string/lorem_ipsum"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageViewProductDescription"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </LinearLayout>
             </ScrollView>

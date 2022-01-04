@@ -8,13 +8,12 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.google.firebase.FirebaseNetworkException
-import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.kofigyan.stateprogressbar.StateProgressBar
 import com.saraha.paws.Model.User
 import com.saraha.paws.R
 import com.saraha.paws.Util.FirebaseExceptionMsg
 import com.saraha.paws.Util.toast
-import com.saraha.paws.View.Home.HomeActivity
+import com.saraha.paws.View.Home.Home.HomeActivity
 import com.saraha.paws.View.AccountViews.RegisterAccount.Fragment.RegisterPage1Fragment
 import com.saraha.paws.View.AccountViews.RegisterAccount.Fragment.RegisterPage2Fragment
 import com.saraha.paws.databinding.ActivityRegisterBinding
