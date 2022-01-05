@@ -1,14 +1,11 @@
 package com.saraha.paws.Repository
 
-import android.content.ContentValues
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.saraha.paws.Model.Product
 import com.saraha.paws.Model.Vendor
 
 class StoreRepository {
@@ -17,8 +14,7 @@ class StoreRepository {
 
     fun createDBFirestore(){
         dbFirestore = Firebase.firestore
-        val settings = FirebaseFirestoreSettings.Builder()
-            .setPersistenceEnabled(true).build()
+        val settings = FirebaseFirestoreSettings.Builder().setPersistenceEnabled(true).build()
         dbFirestore!!.firestoreSettings = settings
     }
 
@@ -33,8 +29,17 @@ class StoreRepository {
                 for (store in snapshot.result!!) {
                     if (store.data.isNotEmpty()){
                         val name = store.get("name") as String
-                        //val dbStore =
-                        //listOfStores.add(dbStore)
+                        val about = store.get("about") as String
+                        val latitude = store.get("latitude") as Double
+                        val longitude = store.get("longitude") as Double
+                        val link = store.get("link") as String
+                        val phone = store.get("phone") as String
+                        val email = store.get("email") as String
+                        val type = store.get("type") as String
+                        val photo = store.get("photo") as String
+                        val dbStore = Vendor(store.id, name, about, latitude, longitude, link,
+                            phone, email, type, photo)
+                        listOfStores.add(dbStore)
                     }
                 }
                 liveDataStore.postValue(Pair(listOfStores, null))

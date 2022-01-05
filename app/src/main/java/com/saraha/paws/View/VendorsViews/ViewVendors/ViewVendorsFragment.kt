@@ -1,24 +1,21 @@
 package com.saraha.paws.View.VendorsViews.ViewVendors
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.saraha.paws.Model.Animal
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.saraha.paws.Model.Vendor
-import com.saraha.paws.R
-import com.saraha.paws.View.AnimalViews.ViewAnimals.AnimalViewAdapter
-import com.saraha.paws.View.AnimalViews.ViewAnimals.ViewAnimalsViewModel
-import com.saraha.paws.databinding.FragmentViewAnimalsBinding
 import com.saraha.paws.databinding.FragmentViewVendorsBinding
 
 class ViewVendorsFragment : Fragment() {
 
     //View model and binding lateinit property
-    private lateinit var viewModel: ViewVendorsViewModel
+    private val viewModel: ViewVendorsViewModel by viewModels()
     lateinit var binding: FragmentViewVendorsBinding
 
     //list of animals and recycler view adapter lateinit property
@@ -28,12 +25,11 @@ class ViewVendorsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentViewVendorsBinding.inflate(inflater, container, false)
 
         val tag = arguments?.getString("tag")
-        if (tag == "vet") getVetData()
-        else if (tag == "store") getStoreData()
+        if (tag == "vets") getVetData() else if (tag == "stores") getStoreData()
 
         return binding.root
     }
@@ -55,8 +51,7 @@ class ViewVendorsFragment : Fragment() {
     //Function to set data into recyclerview
     private fun  setRecyclerViewWithData(list: List<Vendor>?) {
         val recyclerView = binding.recyclerViewvendor
-        recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        GridLayoutManager(this.context,2)
+        recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
         adapter = VendorViewAdapter(this.requireContext(),list!!)
         recyclerView.adapter = adapter
     }

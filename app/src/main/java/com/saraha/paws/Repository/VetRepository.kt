@@ -1,7 +1,5 @@
 package com.saraha.paws.Repository
 
-import android.content.ContentValues
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
@@ -16,8 +14,7 @@ class VetRepository {
 
     fun createDBFirestore(){
         dbFirestore = Firebase.firestore
-        val settings = FirebaseFirestoreSettings.Builder()
-            .setPersistenceEnabled(true).build()
+        val settings = FirebaseFirestoreSettings.Builder().setPersistenceEnabled(true).build()
         dbFirestore!!.firestoreSettings = settings
     }
 
@@ -32,8 +29,17 @@ class VetRepository {
                 for (vet in snapshot.result!!) {
                     if (vet.data.isNotEmpty()){
                         val name = vet.get("name") as String
-                        //val dbVet =
-                        //listOfVets.add(dbVet)
+                        val about = vet.get("about") as String
+                        val latitude = vet.get("latitude") as Double
+                        val longitude = vet.get("longitude") as Double
+                        val link = vet.get("link") as String
+                        val phone = vet.get("phone") as String
+                        val email = vet.get("email") as String
+                        val type = vet.get("type") as String
+                        val photo = vet.get("photo") as String
+                        val dbVet = Vendor(vet.id, name, about, latitude, longitude, link,
+                            phone, email, type, photo)
+                        listOfVets.add(dbVet)
                     }
                 }
                 liveDataVet.postValue(Pair(listOfVets, null))

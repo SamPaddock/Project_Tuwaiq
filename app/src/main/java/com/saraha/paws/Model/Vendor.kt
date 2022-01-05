@@ -1,5 +1,7 @@
 package com.saraha.paws.Model
 
+import java.io.Serializable
+
 class Vendor (
     var vid: String,
     var name: String,
@@ -14,7 +16,7 @@ class Vendor (
     var facebookUri: String? = null,
     var instagramUri: String? = null,
     var twitterUriUri: String? = null
-        )
+        ): Serializable
 {
     fun serviceType(): List<String>{
         return listOf("Vet", "Store")

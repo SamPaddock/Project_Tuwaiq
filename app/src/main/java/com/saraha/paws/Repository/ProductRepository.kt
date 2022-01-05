@@ -33,8 +33,15 @@ class ProductRepository {
                 for (product in snapshot.result!!) {
                     if (product.data.isNotEmpty()){
                         val name = product.get("name") as String
-                        //val dbProduct =
-                        //listOfProducts.add(dbProduct)
+                        val description = product.get("description") as String
+                        val weight = (product.get("weight") ?: 0.0) as Double
+                        val price = (product.get("price") ?: 0.0) as Double
+                        val quantity = (product.get("quantity") ?: 0) as Int
+                        val category = product.get("category") as String
+                        val type = product.get("type") as String
+                        val dbProduct = Product(product.id, documentID, name, description, weight,
+                            price, quantity, category, type)
+                        listOfProducts.add(dbProduct)
                     }
                 }
                 liveDataProduct.postValue(Pair(listOfProducts, null))
