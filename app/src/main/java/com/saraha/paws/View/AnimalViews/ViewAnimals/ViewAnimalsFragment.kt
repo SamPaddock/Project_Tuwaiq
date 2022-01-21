@@ -53,17 +53,15 @@ class ViewAnimalsFragment : Fragment() {
 
     //Function for an toolbar content and handler
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        if (arguments?.getString("tag") == null && arguments?.getString("tag") != "adoption"){
-            inflater.inflate(R.menu.recycler_view_menu,menu)
-            menu.findItem(R.id.filter_item_menu)?.setOnMenuItemClickListener {
-                val isFilterVisible = binding.constraintLayoutFilterContent.visibility
-                if (isFilterVisible == View.VISIBLE) {
-                    binding.constraintLayoutFilterContent.visibility = View.GONE
-                } else {
-                    binding.constraintLayoutFilterContent.visibility = View.VISIBLE
-                }
-                true
+        inflater.inflate(R.menu.recycler_view_menu,menu)
+        menu.findItem(R.id.filter_item_menu)?.setOnMenuItemClickListener {
+            val isFilterVisible = binding.constraintLayoutFilterContent.visibility
+            if (isFilterVisible == View.VISIBLE) {
+                binding.constraintLayoutFilterContent.visibility = View.GONE
+            } else {
+                binding.constraintLayoutFilterContent.visibility = View.VISIBLE
             }
+            true
         }
         super.onCreateOptionsMenu(menu,inflater)
     }
@@ -73,11 +71,7 @@ class ViewAnimalsFragment : Fragment() {
         viewModel.getAllAnimalsFromFirebase()
         viewModel.listOfAnimalsLiveData.observe(viewLifecycleOwner){ list ->
             if (list.isNotEmpty()){
-                if (arguments?.getString("tag") != null){
-                    animal = list.filter { it.states == "For Adoption"}
-                } else {
-                    animal = list
-                }
+                animal = list
 
                 setRecyclerViewWithData(animal)
             }
@@ -91,6 +85,10 @@ class ViewAnimalsFragment : Fragment() {
             GridLayoutManager(this.context,2)
         adapter = AnimalViewAdapter(this.context!!,animals!!)
         recyclerView.adapter = adapter
+
+        if (arguments?.getString("tag") == null){
+            adapter.filter.filter("All")
+        }
     }
 
     //Function to set data into recyclerview

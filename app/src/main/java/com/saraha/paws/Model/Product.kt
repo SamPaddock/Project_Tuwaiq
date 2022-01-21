@@ -11,6 +11,7 @@ class Product (
     var price: Double,
     var quantity: Int? = null,
     var category: String,
+    var photo: String,
     var type: String
         ): Serializable
 {

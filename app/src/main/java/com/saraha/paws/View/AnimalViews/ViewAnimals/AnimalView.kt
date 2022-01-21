@@ -50,7 +50,10 @@ class AnimalViewAdapter(var context: Context, var data: List<Animal>) :
                 val charSearch = constraint.toString()
                 if (charSearch.isEmpty()) {
                     animalFilterList = data as ArrayList<Animal>
-                } else {
+                } else if (charSearch.equals("All")){
+                    animalFilterList = data as ArrayList<Animal>
+                }
+                else {
                     val resultList = ArrayList<Animal>()
                     for (row in animalFilterList) {
                         if (row.type.lowercase().contains(constraint.toString().lowercase())){

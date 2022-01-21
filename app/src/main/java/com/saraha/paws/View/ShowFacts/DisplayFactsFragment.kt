@@ -2,9 +2,6 @@ package com.saraha.paws.View.ShowFacts
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.saraha.paws.Database.DatabaseClient
@@ -21,6 +18,7 @@ import android.app.PendingIntent
 import android.content.Context
 
 import android.content.Intent
+import android.view.*
 import com.saraha.paws.Service.MyFactNotificationReceiver
 
 
@@ -39,6 +37,8 @@ class DisplayFactsFragment : Fragment() {
 
         viewModel = ViewModelProvider(requireActivity() as HomeActivity)[DisplayFactsViewModel::class.java]
 
+        setHasOptionsMenu(true)
+
         //init database object
         viewModel.dbClient = DatabaseClient(requireActivity().applicationContext)
         viewModel.db = viewModel.dbClient?.getInstance(requireActivity().applicationContext)?.getAppDatabase()
@@ -48,6 +48,12 @@ class DisplayFactsFragment : Fragment() {
         setNotification()
 
         return binding.root
+    }
+
+    //Function for an toolbar content and handler
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        super.onCreateOptionsMenu(menu,inflater)
     }
 
     //Function to handle response of Data statues from viewModel

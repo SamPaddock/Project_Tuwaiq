@@ -1,9 +1,7 @@
 package com.saraha.paws.View.VendorsViews.ViewVendors
 
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -13,10 +11,9 @@ import com.saraha.paws.Util.getCurrentLocation
 import com.saraha.paws.Util.loadImage
 import com.saraha.paws.View.VendorsViews.ViewVendorDetails.ViewVendorDetailsActivity
 import com.saraha.paws.databinding.ListItemVendorBinding
-import kotlin.math.round
 
-class VendorViewAdapter(var context: Context, var data: List<Vendor>) :
-    RecyclerView.Adapter<VendorViewHolder>() {
+class VendorViewAdapter(var context: Context, var data: List<Vendor>)
+    : RecyclerView.Adapter<VendorViewHolder>() {
 
     override fun getItemCount() = data.size
 

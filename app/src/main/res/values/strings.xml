@@ -104,5 +104,8 @@
     <string name="zero">0</string>
     <string name="store_home">Store</string>
     <string name="vet_home">Vet</string>
+    <string name="signout_title">Signing out</string>
+    <string name="signout_msg">Are you sure you want to sign out?</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

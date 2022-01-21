@@ -30,6 +30,7 @@ class VetRepository {
                     if (vet.data.isNotEmpty()){
                         val name = vet.get("name") as String
                         val about = vet.get("about") as String
+                        val branch = vet.get("branch") as String
                         val latitude = vet.get("latitude") as Double
                         val longitude = vet.get("longitude") as Double
                         val link = vet.get("link") as String
@@ -37,7 +38,7 @@ class VetRepository {
                         val email = vet.get("email") as String
                         val type = vet.get("type") as String
                         val photo = vet.get("photo") as String
-                        val dbVet = Vendor(vet.id, name, about, latitude, longitude, link,
+                        val dbVet = Vendor(vet.id, name, branch, about, latitude, longitude, link,
                             phone, email, type, photo)
                         listOfVets.add(dbVet)
                     }

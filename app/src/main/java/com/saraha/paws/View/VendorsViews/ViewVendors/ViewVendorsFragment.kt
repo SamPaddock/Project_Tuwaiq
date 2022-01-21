@@ -18,7 +18,7 @@ class ViewVendorsFragment : Fragment() {
     private val viewModel: ViewVendorsViewModel by viewModels()
     lateinit var binding: FragmentViewVendorsBinding
 
-    //list of animals and recycler view adapter lateinit property
+    //list of vendors and recycler view adapter lateinit property
     lateinit var lists: List<Vendor>
     lateinit var adapter: VendorViewAdapter
 

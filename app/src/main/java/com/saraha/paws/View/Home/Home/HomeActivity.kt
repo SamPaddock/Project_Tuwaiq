@@ -1,9 +1,11 @@
 package com.saraha.paws.View.Home.Home
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.ktx.auth
@@ -14,11 +16,13 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.descriptionText
 import com.mikepenz.materialdrawer.model.interfaces.iconRes
+import com.mikepenz.materialdrawer.model.interfaces.iconUrl
 import com.mikepenz.materialdrawer.model.interfaces.nameRes
 import com.mikepenz.materialdrawer.widget.AccountHeaderView
 import com.mikepenz.materialdrawer.widget.MaterialDrawerSliderView
 import com.saraha.paws.R
 import com.saraha.paws.Util.AppSharedPreference
+import com.saraha.paws.Util.loadImage
 import com.saraha.paws.View.SplashView.MainSplash.SplashActivity
 import com.saraha.paws.View.AccountViews.Profile.ProfileFragment
 import com.saraha.paws.View.ShowFacts.DisplayFactsFragment
@@ -124,9 +128,6 @@ class HomeActivity : AppCompatActivity() {
         val itemFacts = SecondaryDrawerItem().apply {
             nameRes = R.string.fun_fact_home; iconRes = R.drawable.home_facts_icon; identifier = 3
         }
-//        val itemAlbum = SecondaryDrawerItem().apply {
-//            nameRes = R.string.photo_album_home; iconRes = R.drawable.ic_album_24; identifier = 4
-//        }
         val itemSignOut = SecondaryDrawerItem().apply {
             nameRes = R.string.sign_out_home; iconRes = R.drawable.home_signout_icon; identifier = 7
         }
@@ -144,6 +145,8 @@ class HomeActivity : AppCompatActivity() {
     private fun mainSliderHeader(mainSlider: MaterialDrawerSliderView, savedInstanceState: Bundle?){
         val currentUser = Firebase.auth.currentUser
         mainSlider.headerView = AccountHeaderView(this).apply {
+            //profileImagesVisible = false
+
             attachToSliderView(mainSlider) // attach to the slider
             addProfiles(
                 ProfileDrawerItem().apply {
@@ -160,9 +163,14 @@ class HomeActivity : AppCompatActivity() {
 
     //Function to signOut of application
     private fun signOutFromAccount(){
-        Firebase.auth.signOut()
-        startActivity(Intent(this, SplashActivity::class.java))
-        finish()
+        AlertDialog.Builder(this).setTitle(getString(R.string.signout_title))
+            .setMessage(getString(R.string.signout_msg))
+            .setPositiveButton(getString(R.string.sign_out_home)){ d, i ->
+                Firebase.auth.signOut()
+                startActivity(Intent(this, SplashActivity::class.java))
+                finish()
+            }.setNegativeButton(getString(R.string.cancel)){ d, i -> }.show()
+
     }
 
     //Function to replace a fragment view

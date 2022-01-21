@@ -29,6 +29,7 @@ class StoreRepository {
                 for (store in snapshot.result!!) {
                     if (store.data.isNotEmpty()){
                         val name = store.get("name") as String
+                        val branch = store.get("branch") as String
                         val about = store.get("about") as String
                         val latitude = store.get("latitude") as Double
                         val longitude = store.get("longitude") as Double
@@ -37,7 +38,7 @@ class StoreRepository {
                         val email = store.get("email") as String
                         val type = store.get("type") as String
                         val photo = store.get("photo") as String
-                        val dbStore = Vendor(store.id, name, about, latitude, longitude, link,
+                        val dbStore = Vendor(store.id, name, branch, about, latitude, longitude, link,
                             phone, email, type, photo)
                         listOfStores.add(dbStore)
                     }

@@ -5,6 +5,7 @@ import java.io.Serializable
 class Vendor (
     var vid: String,
     var name: String,
+    var branch: String,
     var about: String,
     var latitude: Double,
     var longitude: Double,

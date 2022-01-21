@@ -1,6 +1,7 @@
 package com.saraha.paws.Repository
 
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -28,6 +29,7 @@ class ProductRepository {
 
         dbFirestore?.collection(collection)?.document(documentID)
             ?.collection("Product")?.get()?.addOnCompleteListener {snapshot ->
+                Log.d(TAG,"ProductRepository: - getAll: - : ${snapshot.result}")
             if (snapshot.isSuccessful && snapshot.result != null) {
                 val listOfProducts = mutableListOf<Product>()
                 for (product in snapshot.result!!) {
@@ -38,9 +40,10 @@ class ProductRepository {
                         val price = (product.get("price") ?: 0.0) as Double
                         val quantity = (product.get("quantity") ?: 0) as Int
                         val category = product.get("category") as String
+                        val photo = product.get("photo") as String
                         val type = product.get("type") as String
                         val dbProduct = Product(product.id, documentID, name, description, weight,
-                            price, quantity, category, type)
+                            price, quantity, category, photo, type)
                         listOfProducts.add(dbProduct)
                     }
                 }

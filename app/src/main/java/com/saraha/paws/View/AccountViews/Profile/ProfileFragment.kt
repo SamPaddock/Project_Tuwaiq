@@ -62,6 +62,7 @@ class ProfileFragment : Fragment() {
 
     //Function for an toolbar content and handler
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
         inflater.inflate(R.menu.edit_menu_item,menu)
         menu.findItem(R.id.edit_item_1)?.setOnMenuItemClickListener {
             val intent = Intent(activity, EditProfileActivity::class.java)
