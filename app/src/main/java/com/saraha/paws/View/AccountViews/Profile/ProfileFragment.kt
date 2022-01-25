@@ -21,7 +21,7 @@ class ProfileFragment : Fragment() {
     //Variables that will hold intent values
     lateinit var user: User
     //Shared preference helper class object
-    val sharedPref = AppSharedPreference()
+    val sharedPref = AppSharedPreference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

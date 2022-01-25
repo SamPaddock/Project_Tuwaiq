@@ -84,4 +84,19 @@
     <string name="incorrect_mobile">should be between 9 to 12 digits</string>
     <string name="incorrect_link">The link is not in the correct format</string>
     <string name="mismatch_text">Does not match password</string>
+
+    <string name="location_error">Could not show location</string>
+    <string name="welcome_msg">Welcome Back</string>
+    <string name="create_account_msg">Create Account</string>
+    <string name="create">Create</string>
+    <string name="view_error_general">Could not view this content. Please try again later.</string>
+    <string name="address_error">Could not get address</string>
+    <string name="donation_msg">Rescued animals need you help</string>
+    <string name="zero">0</string>
+    <string name="store_home">Store</string>
+    <string name="vet_home">Vet</string>
+    <string name="signout_title">Signing out</string>
+    <string name="signout_msg">Are you sure you want to sign out?</string>
+    <string name="cancel">Cancel</string>
+    <string name="default_distance">Over 100km</string>
 </resources>

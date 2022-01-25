@@ -25,15 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project_Tuwaiq"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".View.VendorsViews.ViewProduct.ViewProductDetailsActivity"
-            android:exported="true" />
-        <activity
-            android:name=".View.VendorsViews.ViewVendorDetails.ViewVendorDetailsActivity"
-            android:exported="true" />
-        <activity
-            android:name=".View.VendorsViews.ViewVendorsActivity"
-            android:exported="true" />
+
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -50,13 +42,25 @@
         <service
             android:name=".Service.MyFactNotificationService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="your.app.domain.NotificationService" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
 
         <receiver
             android:name=".Service.MyFactNotificationReceiver"
             android:enabled="true"
             android:exported="false" />
 
+        <activity
+            android:name=".View.VendorsViews.ViewProduct.ViewProductDetailsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".View.VendorsViews.ViewVendorDetails.ViewVendorDetailsActivity"
+            android:exported="true" />
         <activity
             android:name=".View.AccountViews.EditProfile.EditProfileActivity"
             android:exported="true" />

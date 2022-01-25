@@ -21,7 +21,7 @@ class ViewAnimalDetailsActivity : AppCompatActivity() {
     lateinit var binding: ActivityViewAnimalDetailsBinding
     lateinit var animal: Animal
     //Shared preference helper class object
-    val sharedPref = AppSharedPreference()
+    val sharedPref = AppSharedPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

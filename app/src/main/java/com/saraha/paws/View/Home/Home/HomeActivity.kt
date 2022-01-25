@@ -36,7 +36,7 @@ class HomeActivity : AppCompatActivity() {
     private val viewModel: HomeViewModel by viewModels()
     lateinit var binding: ActivityHomeBinding
 
-    val sharedPref = AppSharedPreference()
+    val sharedPref = AppSharedPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -52,11 +52,11 @@ class HomeActivity : AppCompatActivity() {
 
     //Function to get user information from Firestore and save in SharedPref
     private fun getUserInformation(){
-        viewModel.getUserDataFromFirebase()
+        viewModel.getUserDataFromFirebase(this)
 
         viewModel.livedataUser.observe(this){
             if (it.name.isNotEmpty()){
-                it.photoUrl?.let { photo -> sharedPref.write("pName", photo) }
+                it.photoUrl?.let { photo -> sharedPref.write( "pName", photo)}
             }
         }
     }

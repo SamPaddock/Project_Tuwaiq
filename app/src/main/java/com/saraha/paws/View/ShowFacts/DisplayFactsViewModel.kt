@@ -31,7 +31,7 @@ class DisplayFactsViewModel: ViewModel() {
     //Database and shared preference variables
     var dbClient: DatabaseClient? = null
     var db: AppDatabase? = null
-    val sharedPref = AppSharedPreference()
+    val sharedPref = AppSharedPreference
 
     //Variable to get liveData response from Api
     val factsLiveData = MutableLiveData<Pair<CatFacts?,DataStatus>>()

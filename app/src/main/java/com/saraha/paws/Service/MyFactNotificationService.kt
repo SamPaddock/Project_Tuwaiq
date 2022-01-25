@@ -66,5 +66,9 @@ class MyFactNotificationService : Service() {
         with(NotificationManagerCompat.from(this)) {
             notify(1, builder.build())
         }
+
+//        if (Build.VERSION.SDK_INT >= 26) {
+//            startForeground(1, builder.build())
+//        }
     }
 }

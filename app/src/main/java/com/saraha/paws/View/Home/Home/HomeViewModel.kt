@@ -1,5 +1,6 @@
 package com.saraha.paws.View.Home.Home
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.saraha.paws.Model.User
@@ -8,13 +9,13 @@ import com.saraha.paws.Util.AppSharedPreference
 
 class HomeViewModel: ViewModel() {
     //Shared preference helper class object
-    val sharedPref = AppSharedPreference()
+    val sharedPref = AppSharedPreference
 
     //Variable to get liveData response from Firebase
     val livedataUser = MutableLiveData<User>()
 
     //Function to handle firebase repository response to retrieving user data
-    fun getUserDataFromFirebase(){
+    fun getUserDataFromFirebase(context: Context){
         UserRepository().getUserAccount().observeForever {
             val user = it.first
             if (user != null && it.first?.email?.isNotEmpty() == true){

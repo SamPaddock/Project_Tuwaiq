@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.model.LatLng
 import com.saraha.paws.Model.Vendor
+import com.saraha.paws.R
 import com.saraha.paws.Util.getCurrentLocation
 import com.saraha.paws.Util.loadImage
 import com.saraha.paws.View.VendorsViews.ViewVendorDetails.ViewVendorDetailsActivity
@@ -37,7 +38,7 @@ class VendorViewAdapter(var context: Context, var data: List<Vendor>)
                 val roundedDistance = String.format("%.2f", it/1000).toDouble()
                 "$roundedDistance km"
             }
-            else ""
+            else context.getString(R.string.default_distance)
             holder.binding.textViewVendurDistance.setText(distance)
         }
 

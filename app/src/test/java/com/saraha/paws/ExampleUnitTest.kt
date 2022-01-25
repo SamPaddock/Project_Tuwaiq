@@ -39,12 +39,16 @@ class ExampleUnitTest {
         assertTrue(emailVerification("sam@gmail.com"))
         assertTrue(emailVerification("sam@google.com"))
         assertFalse(emailVerification("sam@google"))
+        assertFalse(emailVerification("sam.com"))
+        assertFalse(emailVerification("sam"))
     }
 
     @Test
     fun passwordVerification_isCorrect(){
-        assertTrue(UserHelper().passwordValidation("1234",null).second)
-        assertTrue(UserHelper().passwordValidation("abed",null).second)
-        assertFalse(UserHelper().passwordValidation("abed","asdf").second)
+        assertTrue(UserHelper().passwordValidation("12345678",null).second)
+        assertTrue(UserHelper().passwordValidation("abed1234",null).second)
+        assertFalse(UserHelper().passwordValidation("abed12",null).second)
+        assertTrue(UserHelper().passwordValidation("abed","abed").second)
+        assertFalse(UserHelper().passwordValidation("abed1234","asdf1254").second)
     }
 }

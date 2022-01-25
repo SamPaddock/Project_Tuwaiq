@@ -11,6 +11,7 @@ import android.view.Menu
 import androidx.activity.viewModels
 import com.google.android.gms.maps.model.LatLng
 import com.saraha.paws.Util.AppSharedPreference
+import com.saraha.paws.Util.Helper
 import com.saraha.paws.Util.loadImage
 import com.saraha.paws.Util.toast
 import com.saraha.paws.View.CharityViews.AddEditCharity.AddEditCharityActivity
@@ -23,7 +24,7 @@ class ViewCharityDetailActivity : AppCompatActivity() {
     lateinit var binding: ActivityViewCharityDetailBinding
     lateinit var charity: Charity
     //Shared preference helper class object
-    val sharedPref = AppSharedPreference()
+    val sharedPref = AppSharedPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

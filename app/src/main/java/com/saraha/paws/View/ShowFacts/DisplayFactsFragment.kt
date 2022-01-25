@@ -27,7 +27,7 @@ class DisplayFactsFragment : Fragment() {
     private lateinit var viewModel: DisplayFactsViewModel
     lateinit var binding: FragmentDisplayFactsBinding
     //Shared preference helper class object
-    val sharedPref = AppSharedPreference()
+    val sharedPref = AppSharedPreference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -104,7 +104,7 @@ class DisplayFactsFragment : Fragment() {
         if (alarmUp){
             val alarmManager = context!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), (
-                    1000 * 60 * 60 * 24).toLong(), pendingIntent)
+                    1000 * 60 * 3).toLong(), pendingIntent)
         }
 
     }

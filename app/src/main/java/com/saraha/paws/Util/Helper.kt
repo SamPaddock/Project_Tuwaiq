@@ -1,6 +1,14 @@
 package com.saraha.paws.Util
 
 import android.Manifest
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.maps.model.LatLng
+import com.saraha.paws.Model.Charity
+import com.saraha.paws.R
+import java.lang.Exception
 
 class Helper {
 
@@ -20,6 +28,10 @@ class Helper {
         return listOf("All", "Cat", "Dog", "Bird", "Aqua", "Rabbit", "Farm Animal", "Other")
     }
 
-
+    //Function to handle to link icon click
+    fun openLink(context: Context, link: String){
+        // create an Intent to open a weblink
+        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(link)))
+    }
 
 }

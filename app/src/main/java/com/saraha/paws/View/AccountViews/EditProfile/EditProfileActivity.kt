@@ -30,7 +30,7 @@ class EditProfileActivity : AppCompatActivity() {
     //Variable is true if all textfields have validated and are correct
     var isUserValid = true
     //Shared preference helper class object
-    val sharedPref = AppSharedPreference()
+    val sharedPref = AppSharedPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,7 +102,7 @@ class EditProfileActivity : AppCompatActivity() {
             binding.layoutEditView.visibility = View.GONE
             binding.buttonSaveProfileEdit.isClickable = true
             if (it.first){
-                viewModel.setSharedPreference(user)
+                viewModel.setSharedPreference(this, user)
                 this.toast(getString(R.string.successful_edit_user))
             } else {
                 this.toast(getString(R.string.failure_edit_user))

@@ -21,7 +21,7 @@ class AddEditAnimalActivity : AppCompatActivity() {
     private val viewModel: AddEditAnimalViewModel by viewModels()
     lateinit var binding: ActivityAddEditAnimalBinding
     //Shared preference helper class object
-    val sharedPref = AppSharedPreference()
+    val sharedPref = AppSharedPreference
     //Variables that will hold intent values
     private var actionType = ""
     var animal = Animal()

@@ -10,7 +10,7 @@ import com.saraha.paws.Util.AppSharedPreference
 
 class ProfileViewModel: ViewModel() {
     //Shared preference helper class object
-    val sharedPref = AppSharedPreference()
+    val sharedPref = AppSharedPreference
 
     //Function to get user info from shared preference and return user object
     fun getUserInfo() = User(Firebase.auth.currentUser?.uid, sharedPref.read("pName",""),
